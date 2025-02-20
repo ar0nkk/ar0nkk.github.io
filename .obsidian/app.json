@@ -1,0 +1,12 @@
+{
+  "userIgnoreFilters": [
+    "node_modules/",
+    "public/",
+    "scaffolds/",
+    "themes/"
+  ],
+  "promptDelete": false,
+  "livePreview": false,
+  "readableLineLength": true,
+  "strictLineBreaks": true
+}

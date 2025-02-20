@@ -1,0 +1,50 @@
+- class_name: 开启创造力
+  creativity_list:
+    - name: Anaconda
+      color: "#fff"
+      icon: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/icons/anaconda.png
+    - name: Java
+      color: "#000000"
+      icon: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/java.png
+    - name: Matlab
+      color: "#091669"
+      icon: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/matlab.png
+    - name: deeplearning
+      color: "#3CABF4"
+      icon: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/deeplearn.png
+    - name: Linux
+      color: "#3B76D5"
+      icon: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/linux.png
+    - name: Obsidian
+      color: "#fff"
+      icon: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/obsidian.png
+    - name: Python
+      color: "#fff"
+      icon: https://bu.dusays.com/2023/04/09/643293b1230f7.png
+    - name: Tex
+      color: "#FFDF51"
+      icon: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/tex.png
+    - name: VScode
+      color: "#0B033C"
+      icon: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/vscode.png
+    - name: AI
+      color: "#E5FDFF"
+      icon: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/AI.png
+    - name: React
+      color: "#F3F3F4"
+      icon: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/react.png
+    - name: cuda
+      color: "#051307"
+      icon: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/cuda.png
+    - name: QQmusic
+      color: "#45D387"
+      icon: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/QQmusic.png
+    - name: Ubuntu
+      color: "#dd4814"
+      icon: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/Ubuntu.png
+    - name: Git
+      color: "#df5b40"
+      icon: https://bu.dusays.com/2023/04/09/643293b10ccdd.webp
+    - name: Steam
+      color: "#FFFFFF"
+      icon: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/steam.png

@@ -1,0 +1,249 @@
+{
+  "main": {
+    "id": "917ac2644866c624",
+    "type": "split",
+    "children": [
+      {
+        "id": "09b806fa8095efcf",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "36bbc1c9ba8a1b64",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "source/_posts/Essence of linear algebra.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "Essence of linear algebra"
+            }
+          }
+        ]
+      },
+      {
+        "id": "980543697f065169",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4bc6ee1ca774bdf2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "source/_posts/Essence of linear algebra.md",
+                "mode": "preview",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "Essence of linear algebra"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "0e4fdcb9a4ceeeec",
+    "type": "split",
+    "children": [
+      {
+        "id": "b4f9123b2c854c56",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cc009d0612296d09",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "d3d1bdfdb736c190",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "92cd01b6cbe1e2ab",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "2e0a6e37257157d7",
+    "type": "split",
+    "children": [
+      {
+        "id": "80e1a9ee5ad3af6f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "824dabcead2a05cd",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "source/about/index.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "index 的反向链接列表"
+            }
+          },
+          {
+            "id": "6128bcb0804b4de9",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "source/album/index.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "index 的出链列表"
+            }
+          },
+          {
+            "id": "39d1a8b42c17aebf",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "b9bdb917463256c4",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "source/album/index.md"
+              },
+              "icon": "lucide-list",
+              "title": "index 的大纲"
+            }
+          },
+          {
+            "id": "9cc36258d3abccac",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "36bbc1c9ba8a1b64",
+  "lastOpenFiles": [
+    "public/img/siteicon/32.png",
+    "public/img/comment_bg.png",
+    "public/img/siteicon",
+    "public/img",
+    "public/404.html",
+    "public/algolia.html",
+    "public/archives/index.html",
+    "public/BingSiteAuth.xml",
+    "public/categories/index.html",
+    "public/categories/Notes/index.html",
+    "public/categories/Summaries/index.html",
+    "public/CNAME",
+    "public/img/pics/daily/微信图片_20250213131512.jpg",
+    "public/img/pics/daily/微信图片_20250213131459.jpg",
+    "public/img/pics/daily/微信图片_20250213100413.jpg",
+    "public/img/pics/daily/微信图片_20250213100409.jpg",
+    "public/img/pics/daily/微信图片_20250213100405.jpg",
+    "public/img/pics/daily/微信图片_20250213100354.jpg",
+    "public/img/pics/daily/微信图片_20250213100357.jpg",
+    "public/img/pics/daily/微信图片_20250213100400.jpg",
+    "public/img/pics/daily/微信图片_20250213100350.jpg",
+    "source/_posts/大二上学期回顾与计划.md",
+    "source/_posts/Essence of linear algebra.md",
+    "node_modules/hexo-asset-image/node_modules/htmlparser2/node_modules/domutils/readme.md",
+    "node_modules/hexo-asset-image/node_modules/string_decoder/README.md",
+    "node_modules/hexo-asset-image/node_modules/cheerio/History.md",
+    "node_modules/hexo-asset-image/node_modules/cheerio/Readme.md",
+    "node_modules/hexo-asset-image/node_modules/domelementtype/readme.md",
+    "node_modules/hexo-asset-image/node_modules/domhandler/readme.md",
+    "node_modules/hexo-asset-image/node_modules/htmlparser2/node_modules/entities/readme.md",
+    "node_modules/hexo-asset-image/node_modules/readable-stream/README.md",
+    "node_modules/hexo-asset-image/node_modules/domutils/readme.md",
+    "node_modules/hexo-asset-image/node_modules/css-what/readme.md",
+    "node_modules/hexo-asset-image/node_modules/cheerio/CONTRIBUTING.md",
+    "node_modules/hexo-asset-image/node_modules/entities/readme.md",
+    "node_modules/hexo-asset-image/node_modules/lodash/README.md",
+    "node_modules/hexo-asset-image/node_modules/htmlparser2/README.md",
+    "node_modules/hexo-asset-image/node_modules/css-select/README.md",
+    "node_modules/hexo-asset-image/node_modules/isarray/README.md",
+    "source/_posts/hello-world.md",
+    "[README.md",
+    "source/about/index.md",
+    "source/link/index-1.md",
+    "source/album/index.md",
+    "node_modules/hexo-generator-baidu-sitemap/node_modules/readdirp/node_modules/readable-stream/doc/wg-meetings/2015-01-30.md",
+    "node_modules/hexo-generator-baidu-sitemap/node_modules/readdirp/node_modules/string_decoder/README.md"
+  ]
+}

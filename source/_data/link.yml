@@ -1,0 +1,21 @@
+- class_name: 推荐博客
+  flink_style: telescopic
+  hundredSuffix: ""
+  link_list:
+    - name: 基础算法
+      link: https://xyz-summer.github.io/posts/b7e144d1.html
+      avatar: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/xyz.jpg
+      descr: 基础算法、数据结构、图论及其C++实现
+      siteshot: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/xyzAlgorithms.jpg
+      color: vip
+      tag: 算法
+
+- class_name: 好友
+  flink_style: anzhiyu
+  hundredSuffix: ""
+  link_list:
+    - name: XYZ-summer
+      link: https://xyz-summer.github.io/
+      avatar: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/xyz.jpg
+      descr: 记录生活，记录学习，记录成长
+      recommend: true

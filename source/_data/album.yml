@@ -1,0 +1,261 @@
+- class_name: 我所走过的
+  path_name: /scenery
+  type: 2
+  description: 这是世界原本的样貌。
+  cover: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240909-135652.JPG
+  top_background: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240914-200524.JPG
+  rowHeight: 220
+  limit: 10
+  lazyload: true
+  btnLazyload: false
+  url: false
+  top_link: /album
+  top_btn_text: 返回
+  album_list:
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240909-140725.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240908-193527.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240908-195107.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240908-195503.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240908-200511.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240909-135652.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240909-135835.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240909-150332.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240909-193420.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240909-202615.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240910-154123.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240910-154918.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240910-155618.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240910-173145.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240910-193523.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240911-202925.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240911-204708.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240912-114537.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240912-121433.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240912-170450.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240912-172514.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240912-173957.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240912-174209.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240913-090441.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240913-094811.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240913-100528.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240913-110207.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240913-110409.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240913-110828.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240913-130448.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240913-130613.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240913-135445.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240913-135647.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240914-194635.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240914-194708.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240914-195705.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240914-200524.JPG
+    - date: 
+      content: 
+      address: 
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/xinjiang/20240914-202523.JPG
+
+- class_name: Daily
+  path_name: /dailyPhoto
+  type: 1
+  description: 
+  top_link: /album
+  top_btn_text: 返回
+  top_background: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/daily/微信图片_20250213100346.jpg
+  cover: https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/daily/微信图片_20250213100413.jpg
+  album_list:
+    - date: 
+      content: 宜宾李庄
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/daily/微信图片_20250213100413.jpg
+    - date: 
+      content: 好凶的猫
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/daily/微信图片_20250213100409.jpg
+    - date: 
+      content: 金沙江边烧烤
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/daily/微信图片_20250213100405.jpg
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/daily/微信图片_20250213100400.jpg        
+    - date: 
+      content: 2025
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/daily/微信图片_20250213100357.jpg
+    - date: 
+      content: 程及美术馆
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/daily/微信图片_20250213100354.jpg
+    - date: 
+      content: 迪士尼
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/daily/微信图片_20250213100350.jpg
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/daily/微信图片_20250213100346.jpg
+    - date: 
+      content: 交大徐汇
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/daily/微信图片_20250213100342.jpg
+    - date: 
+      content: 即使是给小朋友织围巾也不用编织神器吗……哈基织，你这家伙……
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/daily/微信图片_20250213100339.jpg
+    - date: 
+      content: 川崎帅，911也有模有样
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/daily/微信图片_20250213100309.jpg
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/daily/微信图片_20250213100304.jpg
+    - date: 
+      content: 车站的大创标语
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/daily/微信图片_20250213131459.jpg
+    - date: 
+      content: 月光球场
+      image:
+        - https://cdn.jsdelivr.net/gh/kl3inman/imgs@main/pics/daily/微信图片_20250213131512.jpg
