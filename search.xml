@@ -150,6 +150,22 @@ still can paste from the (non volatile) <strong>yank register</strong>
       </tags>
   </entry>
   <entry>
+    <title>Vocabulary</title>
+    <url>/2025/03/13/Vocabulary/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="robotics">Robotics</h2>
+<p>| holonomic | 完整的 | | chassis | 底盘 | | instantaneous | 瞬时的 |
+| instantiate | 实例化 | | benchmarking | 基准测试 | | renderer | 渲染器
+| | offscreen | 后台的 | | snippet | 片段 | | lateral | 横向的 | |
+trajectory | 轨迹 | | RL | 强化学习 |</p>
+]]></content>
+      <categories>
+        <category>Notes</category>
+      </categories>
+      <tags>
+        <tag>Robotics</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Summary-1</title>
     <url>/2025/03/04/Summary-1/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="done">Done</h2>
@@ -186,23 +202,23 @@ of Linear Algebra</a> 回顾了一遍线代并写了 notes.</li>
   <entry>
     <title>大二上学期回顾与计划</title>
     <url>/2025/02/14/%E5%A4%A7%E4%BA%8C%E4%B8%8A%E5%AD%A6%E6%9C%9F%E5%9B%9E%E9%A1%BE%E4%B8%8E%E8%AE%A1%E5%88%92/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>转眼间即将进入大二下学期。大二上可以说是非常忙碌的一学期，下面我将总结自己忙碌一学期的结果，分析这些“忙碌”是否有价值，并找出可以改进的地方。</p>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>转眼间即将进入大二下学期。下面我将总结自己忙碌一学期的结果，分析这些“忙碌”是否有价值，并找出可以改进的地方。</p>
 <span id="more"></span>
 
 <h2 id="目标完成情况">目标完成情况</h2>
 <ol type="1">
 <li>经过一学期学习，我对大学最有效学习方法的认知有所改变。在大学的第一年里，我一直将高中时期的致胜法宝奉为圭臬，然而我发现高考体系的学习方法只适用于一部分学科，例如数学分析和概率统计这类基础课程。但是对于算法分析和凸优化这类专业性较强的课程，仅仅通过完成作业和课后阅读的方法也能取得良好的学习效果，这种效果不仅只体现在考试成绩中，更体现在技能和知识层面的提升，例如在算法课中提高了代码能力。</li>
-<li>学科成绩方面，我认为只有概率统计发挥失常，其他学科成绩都基本上达到了我的预期。对于概率统计的失利，除了试题难度大的客观因素外，我认为自己的确不够重视，这进一步导致了平时学习和复习时间分配的不合理。总体来说，本学期学习成绩有比较明显的进步。</li>
+<li>学科成绩方面，我认为只有概率统计发挥失常，其他学科成绩都基本上达到了我的预期。对于概率统计的失利，除了试题难度大的客观因素外，我认为自己的确不够重视，这进一步导致了平时学习和复习时间分配的不合理。不过总体来说，本学期学习成绩有一定进步。</li>
 <li>由于过了六级和没有英语课，本学期背单词和听英语没有大一坚持的好。好在寒假重新养成了每天学习英语的习惯。</li>
 <li>除临近期末的一个月以外，健身锻炼坚持的很好。</li>
 <li>睡前阅读没有坚持下来。综合各方面因素，我不认为自己大二下能养成这个习惯，因此暂时搁置该目标。</li>
-<li>数模竞赛没有获奖，但我认为自己已经尽了全力，并且提升了自己的能力，尤其是对优化理论和一些启发式算法有更深入的理解，熟悉了部分算法的代码实现。</li>
+<li>数模竞赛没有获奖（燃尽了），不过提升了自己的能力，尤其是对优化理论和一些启发式算法有更深入的理解，熟悉了部分算法的代码实现。</li>
 </ol>
 <h2 id="其他收获">其他收获</h2>
 <ol type="1">
 <li>加入叶南阳老师带领的具身智能科研小组，着手物理仿真相关工作。</li>
 <li>学习了前端开发相关知识，搭建了自己的个人博客网站，以后将作为我存放笔记、个人思考和反思回顾的地方。</li>
-<li>认识到很多优秀的人，和他们交流以后，对自己想要的东西有了新的认识。阅读一些论文以后，确定自己是对机器人比较感兴趣，今后应该会努力朝着这方向发展。</li>
+<li>认识到很多优秀的人，和他们交流以后，对自己想要的东西有了新的认识。阅读一些论文后，确定自己是对机器人比较感兴趣，今后应该会努力朝着这方向发展。</li>
 </ol>
 <h2 id="下学期计划">下学期计划</h2>
 <ol type="1">
@@ -222,12 +238,6 @@ of Linear Algebra</a> 回顾了一遍线代并写了 notes.</li>
       </tags>
   </entry>
   <entry>
-    <title>tags</title>
-    <url>/tags/index.html</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css">
-]]></content>
-  </entry>
-  <entry>
     <title>categories</title>
     <url>/categories/index.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css">
@@ -238,11 +248,12 @@ of Linear Algebra</a> 回顾了一遍线代并写了 notes.</li>
     <url>/about/index.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- Check Mark Button：◻️✅ -->
 
-<p>你好！我是Aronkk<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Aron取自登山者[Aron Ralston](https://en.wikipedia.org/wiki/Aron_Ralston)；kk取自我的名字。
+<p>你好！我是
+Aronkk<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Aron取自登山者 [Aron Ralston](https://en.wikipedia.org/wiki/Aron_Ralston)；kk取自我的名字。
 ">[1]</span></a></sup>，来自四川宜宾，现就读于<strong>上海交通大学</strong>2023级本科<strong>人工智能</strong>试点班<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="“从长江头到长江尾”即来源于此🤗。">[2]</span></a></sup>，很高兴认识你。</p>
 <hr>
-<p>这里是我记笔记✏️的地方，我会将自己学到的东西和一些思考💡记录下来，帮助自己进步，同时也许会帮助到你。另外，我也会在这里记录一些自己的生活。</p>
-<p>我对机器人(Robotics)和数学建模比较感兴趣，目前在和几位同学做具身智能和物理仿真相关的研究。平时我喜欢打篮球🏀、跑步健身、打游戏，有空会开两把本能cs🔫。听歌以R&amp;B和各类摇滚为主，其他类型的音乐也会听。</p>
+<p>这里是我记笔记✏️的地方，我会将自己学到的东西和一些思考💡记录下来，帮助自己进步，同时也许会帮助到你。</p>
+<p>我对机器人（Robotics）和数学建模比较感兴趣，目前在和几位同学做具身智能和物理仿真相关的研究。平时我喜欢打篮球🏀、跑步健身、打游戏，<del>有空会开两把本能cs🔫</del>（戒断期）。听歌以R&amp;B和各类摇滚为主，其他类型的音乐也会听。</p>
 <p>如果你：</p>
 <ul>
 <li>和我有相同的兴趣爱好</li>
@@ -253,16 +264,21 @@ of Linear Algebra</a> 回顾了一遍线代并写了 notes.</li>
 <p>都可以点下面的图标添加我的好友。如果你有任何问题想和我交流，也可以直接给我发邮件：<code>1315720885@sjtu.edu.cn</code>，我会尽快回复。</p>
 <p><strong>来者犹可追！</strong></p>
 <hr>
-<h3 id="todo-list">TODO List</h3>
+<h2 id="previous-feishu-notes需登录">Previous Feishu
+Notes（需登录）</h2>
+<ul>
+<li><a href="https://oqeugnhgvt9.feishu.cn/wiki/TrmbwRDG7ipvpGk2gatcWgNWnJb">大学物理（二）</a></li>
+<li><a href="https://oqeugnhgvt9.feishu.cn/wiki/WCgewkrCZizZmpk3MnvcwepSnhq">信号与系统</a></li>
+</ul>
+<h2 id="todo-list">TODO List</h2>
 <ul>
 <li><a href="https://www.bilibili.com/video/BV1ys411472E/?spm_id_from=333.788.videopod.episodes&amp;vd_source=a03e87aa22c41ec60f8fbd1dc803e1cb">Essence
 of Linear Algebra</a> ✅</li>
 <li><a href="https://notes.sjtu.edu.cn/s/uJ3YFCJfX">随机过程的概率论基础
 - CodiMD</a></li>
-<li>西瓜书</li>
+<li>Wetermelon book</li>
 <li><a href="https://composingprograms.netlify.app/1/1">CS61A_cn</a></li>
-<li><a href="https://csdiy.wiki/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/N2T/">Coursera:
-Nand2Tetris (Computer Architecture)</a> (with textbook)</li>
+<li><a href="https://csdiy.wiki/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/CS61C/">CS61C</a></li>
 <li><a href="https://www.bilibili.com/video/BV1JV411t7ow/?vd_source=a03e87aa22c41ec60f8fbd1dc803e1cb">Computer
 Networks: Top-Down</a> (with textbook)</li>
 <li><a href="https://www.deeplearningbook.org/">Deep Learning</a></li>
@@ -271,7 +287,7 @@ Networks: Top-Down</a> (with textbook)</li>
 <li><a href="https://aitour.site/tools/Pytorch/">Pytorch -
 aiTour</a></li>
 </ul>
-<p>The following are optional.</p>
+<p>The following are secondary.</p>
 <ul>
 <li><a href="https://missing-semester-cn.github.io/">MIT-Missing-Semester</a>
 <a href="https://www.bilibili.com/video/BV1Eo4y1d7KZ/?spm_id_from=333.788.top_right_bar_window_custom_collection.content.click&amp;vd_source=a03e87aa22c41ec60f8fbd1dc803e1cb">(video
@@ -279,14 +295,20 @@ here)</a></li>
 <li>给收藏的网站做分享和评测（面向计算机专业）</li>
 <li><a href="https://www.eecs70.org/">CS 70 Spring 2025 (Discrete
 Mathematics and Probability Theory)</a></li>
-<li>Learn RISC-V from <a href="https://www.bilibili.com/video/BV17b42177VG?spm_id_from=333.788.videopod.sections&amp;vd_source=0645a76390602d5640c372c2f44d99e1">CS61C_bilibili</a>
-(without hw)</li>
+<li><a href="https://csdiy.wiki/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/N2T/">Coursera:
+Nand2Tetris (Computer Architecture)</a> (with textbook)</li>
 <li><a href="https://www.bilibili.com/video/BV1Kt411h7Ep/?spm_id_from=333.337.search-card.all.click&amp;vd_source=a03e87aa22c41ec60f8fbd1dc803e1cb">耶鲁大学：博弈论</a></li>
 <li>OS: <a href="https://space.bilibili.com/202224425/lists/2237004?type=season">南京大学
 “操作系统：设计与实现” (蒋炎岩)</a> (Prerequisites: Computer
 Architecture)</li>
 </ul>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Aron取自登山者<a href="https://en.wikipedia.org/wiki/Aron_Ralston">Aron Ralston</a>；kk取自我的名字。<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">“从长江头到长江尾”即来源于此🤗。<a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Aron取自登山者 <a href="https://en.wikipedia.org/wiki/Aron_Ralston">Aron Ralston</a>；kk取自我的名字。<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">“从长江头到长江尾”即来源于此🤗。<a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div>
+]]></content>
+  </entry>
+  <entry>
+    <title>tags</title>
+    <url>/tags/index.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css">
 ]]></content>
   </entry>
 </search>
