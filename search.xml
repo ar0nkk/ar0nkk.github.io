@@ -64,125 +64,6 @@ generality.（普适的代价是抽象）</p></li>
       </tags>
   </entry>
   <entry>
-    <title>大二上学期回顾与计划</title>
-    <url>/2025/02/14/%E5%A4%A7%E4%BA%8C%E4%B8%8A%E5%AD%A6%E6%9C%9F%E5%9B%9E%E9%A1%BE%E4%B8%8E%E8%AE%A1%E5%88%92/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>转眼间即将进入大二下学期。下面我将总结自己忙碌一学期的结果，分析这些“忙碌”是否有价值，并找出可以改进的地方。</p>
-<span id="more"></span>
-
-<h2 id="目标完成情况">目标完成情况</h2>
-<ol type="1">
-<li>经过一学期学习，我对大学最有效学习方法的认知有所改变。在大学的第一年里，我一直将高中时期的致胜法宝奉为圭臬，然而我发现高考体系的学习方法只适用于一部分学科，例如数学分析和概率统计这类基础课程。但是对于算法分析和凸优化这类专业性较强的课程，仅仅通过完成作业和课后阅读的方法也能取得良好的学习效果，这种效果不仅只体现在考试成绩中，更体现在技能和知识层面的提升，例如在算法课中提高了代码能力。</li>
-<li>学科成绩方面，我认为只有概率统计发挥失常，其他学科成绩都基本上达到了我的预期。对于概率统计的失利，除了试题难度大的客观因素外，我认为自己的确不够重视，这进一步导致了平时学习和复习时间分配的不合理。不过总体来说，本学期学习成绩有一定进步。</li>
-<li>由于过了六级和没有英语课，本学期背单词和听英语没有大一坚持的好。好在寒假重新养成了每天学习英语的习惯。</li>
-<li>除临近期末的一个月以外，健身锻炼坚持的很好。</li>
-<li>睡前阅读没有坚持下来。综合各方面因素，我不认为自己大二下能养成这个习惯，因此暂时搁置该目标。</li>
-<li>数模竞赛没有获奖（燃尽了），不过提升了自己的能力，尤其是对优化理论和一些启发式算法有更深入的理解，熟悉了部分算法的代码实现。</li>
-</ol>
-<h2 id="其他收获">其他收获</h2>
-<ol type="1">
-<li>加入叶南阳老师带领的具身智能科研小组，着手物理仿真相关工作。</li>
-<li>学习了前端开发相关知识，搭建了自己的个人博客网站，以后将作为我存放笔记、个人思考和反思回顾的地方。</li>
-<li>认识到很多优秀的人，和他们交流以后，对自己想要的东西有了新的认识。阅读一些论文后，确定自己是对机器人比较感兴趣，今后应该会努力朝着这方向发展。</li>
-</ol>
-<h2 id="下学期计划">下学期计划</h2>
-<ol type="1">
-<li>每两周至少写一次总结与反思，回顾过去两周的学习状态和达成的目标，反思不足，提出改进方案。上一学期时常因为不知道自己在做什么或者达不到想要的效果而感到焦虑，希望定期的总结能够改善这一点。</li>
-<li>养成良好作息，11点半睡觉，无早八也尽量在8点前起床，不为写代码和看论文之外的事情熬夜，包括赶ddl。</li>
-<li>坚持学英语和运动健身。</li>
-<li>尝试以下科研/专业课学习路线：从国外高效广泛认可和使用的影印版英文教科书开始搭建知识体系，然后过渡到综述性论文，再到某篇具体的专业论文<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[README | SurviveSJTUManual](https://survivesjtu.gitbook.io/survivesjtumanual)">[1]</span></a></sup>。</li>
-</ol>
-<p>2025座右铭：沉淀、分享、成长！</p>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://survivesjtu.gitbook.io/survivesjtumanual">README | SurviveSJTUManual</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>
-]]></content>
-      <categories>
-        <category>Summaries</category>
-      </categories>
-      <tags>
-        <tag>2025</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vocabulary</title>
-    <url>/2025/03/13/Vocabulary/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="robotics">Robotics</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">terms</th>
-<th style="text-align: center;">释义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">holonomic</td>
-<td style="text-align: center;">完整的</td>
-</tr>
-<tr>
-<td style="text-align: center;">chassis</td>
-<td style="text-align: center;">底盘</td>
-</tr>
-<tr>
-<td style="text-align: center;">instantaneous</td>
-<td style="text-align: center;">瞬时的</td>
-</tr>
-<tr>
-<td style="text-align: center;">instantiate</td>
-<td style="text-align: center;">实例化</td>
-</tr>
-<tr>
-<td style="text-align: center;">benchmarking</td>
-<td style="text-align: center;">基准测试</td>
-</tr>
-<tr>
-<td style="text-align: center;">renderer</td>
-<td style="text-align: center;">渲染器</td>
-</tr>
-<tr>
-<td style="text-align: center;">offscreen</td>
-<td style="text-align: center;">后台的</td>
-</tr>
-<tr>
-<td style="text-align: center;">snippet</td>
-<td style="text-align: center;">片段</td>
-</tr>
-<tr>
-<td style="text-align: center;">lateral</td>
-<td style="text-align: center;">横向的</td>
-</tr>
-<tr>
-<td style="text-align: center;">trajectory</td>
-<td style="text-align: center;">轨迹</td>
-</tr>
-<tr>
-<td style="text-align: center;">RL</td>
-<td style="text-align: center;">强化学习</td>
-</tr>
-</tbody>
-</table>
-<h2 id="computer-networks">Computer Networks</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">terms</th>
-<th style="text-align: center;">释义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">protocol</td>
-<td style="text-align: center;">协议</td>
-</tr>
-</tbody>
-</table>
-]]></content>
-      <categories>
-        <category>Notes</category>
-      </categories>
-      <tags>
-        <tag>Robotics</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Notes of The Missing Semester</title>
     <url>/2025/02/24/Missing-semester/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
@@ -269,14 +150,111 @@ still can paste from the (non volatile) <strong>yank register</strong>
       </tags>
   </entry>
   <entry>
+    <title>Vocabulary</title>
+    <url>/2025/03/13/Vocabulary/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="robotics">Robotics</h2>
+<span id="more"></span>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">terms</th>
+<th style="text-align: center;">释义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">holonomic</td>
+<td style="text-align: center;">完整的</td>
+</tr>
+<tr>
+<td style="text-align: center;">chassis</td>
+<td style="text-align: center;">底盘</td>
+</tr>
+<tr>
+<td style="text-align: center;">instantaneous</td>
+<td style="text-align: center;">瞬时的</td>
+</tr>
+<tr>
+<td style="text-align: center;">instantiate</td>
+<td style="text-align: center;">实例化</td>
+</tr>
+<tr>
+<td style="text-align: center;">benchmarking</td>
+<td style="text-align: center;">基准测试</td>
+</tr>
+<tr>
+<td style="text-align: center;">renderer</td>
+<td style="text-align: center;">渲染器</td>
+</tr>
+<tr>
+<td style="text-align: center;">offscreen</td>
+<td style="text-align: center;">后台的</td>
+</tr>
+<tr>
+<td style="text-align: center;">snippet</td>
+<td style="text-align: center;">片段</td>
+</tr>
+<tr>
+<td style="text-align: center;">lateral</td>
+<td style="text-align: center;">横向的</td>
+</tr>
+<tr>
+<td style="text-align: center;">trajectory</td>
+<td style="text-align: center;">轨迹</td>
+</tr>
+<tr>
+<td style="text-align: center;">RL</td>
+<td style="text-align: center;">强化学习</td>
+</tr>
+</tbody>
+</table>
+<h2 id="computer-networks">Computer Networks</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">terms</th>
+<th style="text-align: center;">释义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">protocol</td>
+<td style="text-align: center;">协议</td>
+</tr>
+<tr>
+<td style="text-align: center;">DSL(AM)</td>
+<td style="text-align: center;">数字用户线（接入复用器）</td>
+</tr>
+<tr>
+<td style="text-align: center;">LAN</td>
+<td style="text-align: center;">局域网</td>
+</tr>
+<tr>
+<td style="text-align: center;">HFC(Hybrid Fiber Coax)</td>
+<td style="text-align: center;">混合光纤同轴电缆</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+      <categories>
+        <category>Notes</category>
+      </categories>
+      <tags>
+        <tag>Robotics</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Summary-1</title>
     <url>/2025/03/04/Summary-1/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="done">Done</h2>
-<span id="more"></span>
-
 <ul>
 <li>忽觉线代基础之不扎实，于是花两天看完 3b1b 的 <a href="https://www.bilibili.com/video/BV1ys411472E/?spm_id_from=333.788.videopod.episodes&amp;vd_source=a03e87aa22c41ec60f8fbd1dc803e1cb">Essence
 of Linear Algebra</a> 回顾了一遍线代并写了 notes.</li>
+</ul>
+<span id="more"></span>
+
+<ul>
 <li>完成大物和 Mobile Robotics 的作业。</li>
 <li>对 blog 修修补补。</li>
 <li>自学 Vim，浅补了一下 Shell 脚本。</li>
@@ -294,6 +272,44 @@ of Linear Algebra</a> 回顾了一遍线代并写了 notes.</li>
 和计体作业。</li>
 <li>按 TODO 的顺序继续学。</li>
 </ul>
+]]></content>
+      <categories>
+        <category>Summaries</category>
+      </categories>
+      <tags>
+        <tag>2025</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>大二上学期回顾与计划</title>
+    <url>/2025/02/14/%E5%A4%A7%E4%BA%8C%E4%B8%8A%E5%AD%A6%E6%9C%9F%E5%9B%9E%E9%A1%BE%E4%B8%8E%E8%AE%A1%E5%88%92/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>转眼间即将进入大二下学期。下面我将总结自己忙碌一学期的结果，分析这些“忙碌”是否有价值，并找出可以改进的地方。</p>
+<span id="more"></span>
+
+<h2 id="目标完成情况">目标完成情况</h2>
+<ol type="1">
+<li>经过一学期学习，我对大学最有效学习方法的认知有所改变。在大学的第一年里，我一直将高中时期的致胜法宝奉为圭臬，然而我发现高考体系的学习方法只适用于一部分学科，例如数学分析和概率统计这类基础课程。但是对于算法分析和凸优化这类专业性较强的课程，仅仅通过完成作业和课后阅读的方法也能取得良好的学习效果，这种效果不仅只体现在考试成绩中，更体现在技能和知识层面的提升，例如在算法课中提高了代码能力。</li>
+<li>学科成绩方面，我认为只有概率统计发挥失常，其他学科成绩都基本上达到了我的预期。对于概率统计的失利，除了试题难度大的客观因素外，我认为自己的确不够重视，这进一步导致了平时学习和复习时间分配的不合理。不过总体来说，本学期学习成绩有一定进步。</li>
+<li>由于过了六级和没有英语课，本学期背单词和听英语没有大一坚持的好。好在寒假重新养成了每天学习英语的习惯。</li>
+<li>除临近期末的一个月以外，健身锻炼坚持的很好。</li>
+<li>睡前阅读没有坚持下来。综合各方面因素，我不认为自己大二下能养成这个习惯，因此暂时搁置该目标。</li>
+<li>数模竞赛没有获奖（燃尽了），不过提升了自己的能力，尤其是对优化理论和一些启发式算法有更深入的理解，熟悉了部分算法的代码实现。</li>
+</ol>
+<h2 id="其他收获">其他收获</h2>
+<ol type="1">
+<li>加入叶南阳老师带领的具身智能科研小组，着手物理仿真相关工作。</li>
+<li>学习了前端开发相关知识，搭建了自己的个人博客网站，以后将作为我存放笔记、个人思考和反思回顾的地方。</li>
+<li>认识到很多优秀的人，和他们交流以后，对自己想要的东西有了新的认识。阅读一些论文后，确定自己是对机器人比较感兴趣，今后应该会努力朝着这方向发展。</li>
+</ol>
+<h2 id="下学期计划">下学期计划</h2>
+<ol type="1">
+<li>每两周至少写一次总结与反思，回顾过去两周的学习状态和达成的目标，反思不足，提出改进方案。上一学期时常因为不知道自己在做什么或者达不到想要的效果而感到焦虑，希望定期的总结能够改善这一点。</li>
+<li>养成良好作息，11点半睡觉，无早八也尽量在8点前起床，不为写代码和看论文之外的事情熬夜，包括赶ddl。</li>
+<li>坚持学英语和运动健身。</li>
+<li>尝试以下科研/专业课学习路线：从国外高效广泛认可和使用的影印版英文教科书开始搭建知识体系，然后过渡到综述性论文，再到某篇具体的专业论文<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[README | SurviveSJTUManual](https://survivesjtu.gitbook.io/survivesjtumanual)">[1]</span></a></sup>。</li>
+</ol>
+<p>2025座右铭：沉淀、分享、成长！</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://survivesjtu.gitbook.io/survivesjtumanual">README | SurviveSJTUManual</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>
 ]]></content>
       <categories>
         <category>Summaries</category>
@@ -335,7 +351,7 @@ Notes（需登录）</h2>
 of Linear Algebra</a> ✅</li>
 <li><a href="https://notes.sjtu.edu.cn/s/uJ3YFCJfX">随机过程的概率论基础
 - CodiMD</a></li>
-<li>Wetermelon book</li>
+<li>Watermelon_book</li>
 <li><a href="https://composingprograms.netlify.app/1/1">CS61A_cn</a></li>
 <li><a href="https://csdiy.wiki/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/CS61C/">CS61C</a></li>
 <li><a href="https://www.bilibili.com/video/BV1JV411t7ow/?vd_source=a03e87aa22c41ec60f8fbd1dc803e1cb">Computer
@@ -365,14 +381,14 @@ Architecture)</li>
 ]]></content>
   </entry>
   <entry>
-    <title>tags</title>
-    <url>/tags/index.html</url>
+    <title>categories</title>
+    <url>/categories/index.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css">
 ]]></content>
   </entry>
   <entry>
-    <title>categories</title>
-    <url>/categories/index.html</url>
+    <title>tags</title>
+    <url>/tags/index.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css">
 ]]></content>
   </entry>
