@@ -30,7 +30,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://aronkk.top/images/redefine-og.webp">
 <meta property="article:published_time" content="2025-03-20T14:55:22.000Z">
-<meta property="article:modified_time" content="2025-03-27T13:19:11.366Z">
+<meta property="article:modified_time" content="2025-03-31T08:04:27.392Z">
 <meta property="article:author" content="Aronkk">
 <meta property="article:tag" content="Computer Architecture">
 <meta name="twitter:card" content="summary">
@@ -449,15 +449,15 @@ mjx-container[display="true"] + br {
 
         <div class="statistics flex justify-around my-2.5">
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">9</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">8</div>
         <div class="label text-third-text-color text-sm">标签</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">2</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
         <div class="label text-third-text-color text-sm">分类</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">7</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">5</div>
         <div class="label text-third-text-color text-sm">文章</div>
     </a>
 </div>
@@ -506,8 +506,8 @@ mjx-container[display="true"] + br {
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-03-27 21:19:11</span>
-            <span class="mobile">2025-03-27 21:19:11</span>
+            <span class="desktop">2025-03-31 16:04:27</span>
+            <span class="mobile">2025-03-31 16:04:27</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -545,7 +545,7 @@ mjx-container[display="true"] + br {
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>201 字</span>
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>293 字</span>
         </span>
     
     
@@ -596,7 +596,19 @@ LEA（加载有效地址）访问了 register 但不更新 cc</p>
 </blockquote>
 <ul>
 <li>PCoffset9 中的 PC 是下一条指令的地址</li>
+<li>TRAP 指令和 JMP 指令的区别：
+<ol type="1">
+<li>TRAP 类似于函数调用，执行完 OS 代码后会跳转回来</li>
+<li>TRAP 对地址做了封装，用户寄存器只能通过相应编号调用功能（例如
+x21）</li>
+</ol></li>
 </ul>
+<h1 id="4-assembly-programming">4. Assembly Programming</h1>
+<ul>
+<li>二进制移位操作：乘2左移，除2右移</li>
+<li>R0[7:0] is for trap codes IN, OUT and GETC</li>
+</ul>
+<h1 id="5-io-and-trap">5. I/O and Trap</h1>
 
 		</div>
 
@@ -644,7 +656,7 @@ LEA（加载有效地址）访问了 register 但不更新 cc</p>
 		<div class="toc-title">目录</div>
 		<div class="page-title">Computer Architecture</div>
 		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-digital-logic"><span class="nav-text">1. Digital Logic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-computer-organization-and-isa"><span class="nav-text">2. Computer Organization and
-ISA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-lc-3"><span class="nav-text">3. LC-3</span></a></li></ol>
+ISA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-lc-3"><span class="nav-text">3. LC-3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-assembly-programming"><span class="nav-text">4. Assembly Programming</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-io-and-trap"><span class="nav-text">5. I&#x2F;O and Trap</span></a></li></ol>
 
 	</div>
 </div>
@@ -671,11 +683,11 @@ ISA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        共撰写了 7 篇文章
+                        共撰写了 5 篇文章
                     </span>
                     
                         <span>
-                            共 2.1k 字
+                            共 1.9k 字
                         </span>
                     
                 </p>

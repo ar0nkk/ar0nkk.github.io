@@ -30,7 +30,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://aronkk.top/images/redefine-og.webp">
 <meta property="article:published_time" content="2025-02-24T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-20T14:58:18.720Z">
+<meta property="article:modified_time" content="2025-03-30T14:54:27.743Z">
 <meta property="article:author" content="Aronkk">
 <meta property="article:tag" content="Shell">
 <meta property="article:tag" content="Vim">
@@ -451,15 +451,15 @@ mjx-container[display="true"] + br {
 
         <div class="statistics flex justify-around my-2.5">
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">9</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">8</div>
         <div class="label text-third-text-color text-sm">标签</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">2</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
         <div class="label text-third-text-color text-sm">分类</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">7</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">5</div>
         <div class="label text-third-text-color text-sm">文章</div>
     </a>
 </div>
@@ -508,8 +508,8 @@ mjx-container[display="true"] + br {
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-03-20 22:58:18</span>
-            <span class="mobile">2025-03-20 22:58:18</span>
+            <span class="desktop">2025-03-30 22:54:27</span>
+            <span class="mobile">2025-03-30 22:54:27</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -581,13 +581,13 @@ mjx-container[display="true"] + br {
 </blockquote>
 <h1 id="1-shell">1. Shell</h1>
 <ul>
-<li><code>touch</code> command to create or modify a file.
-（碰到就更新时间戳，非常生动形象）</li>
+<li><code>touch</code> command to create or modify a
+file（碰到就更新时间戳，非常生动形象）</li>
 <li><code>!!</code>
 表示完整的上一条命令，包括参数。当你因为权限不足执行命令失败时，可以使用
-<code>sudo !!</code> 再尝试一次。</li>
-<li>同一行的多个命令可以用 <code>;</code> 分隔。</li>
-<li><code>Ctrl-d</code> 退出 Shell.</li>
+<code>sudo !!</code> 再尝试一次</li>
+<li>同一行的多个命令可以用 <code>;</code> 分隔</li>
+<li><code>Ctrl-d</code> 退出 Shell</li>
 </ul>
 <h1 id="2-vim-in-vscode">2. Vim in VSCode</h1>
 <h2 id="21-解决-windows-切换到-normal-mode-时输入法为中文的问题">2.1.
@@ -602,14 +602,14 @@ mjx-container[display="true"] + br {
 <ul>
 <li><strong><code>y</code>（复制）</strong>：<br>
 复制的内容会存入 <code>"0</code>（复制专用寄存器）和
-<code>""</code>（无名寄存器）。</li>
+<code>""</code>（无名寄存器）</li>
 <li><strong><code>c</code>（修改）、<code>d</code>（删除）、<code>x</code>（删除字符）</strong>：<br>
 删除/修改的内容会存入 <code>""</code>（无名寄存器）和
-<code>"1-9</code>（数字寄存器，按操作顺序覆盖）。<br>
+<code>"1-9</code>（数字寄存器，按操作顺序覆盖）
 例如：第一次删除的内容存入 <code>"1</code>，第二次删除存入
 <code>"1</code>（原 <code>"1</code> 内容移到
-<code>"2</code>，依此类推）。</li>
-<li>用 <code>:reg</code> 调试寄存器状态。</li>
+<code>"2</code>，依此类推）</li>
+<li>用 <code>:reg</code> 调试寄存器状态</li>
 </ul>
 </blockquote>
 <h3 id="221-vscode-内置方法">2.2.1. VSCode 内置方法：</h3>
@@ -639,22 +639,21 @@ still can paste from the (non volatile) <strong>yank register</strong>
 </blockquote>
 <h2 id="23-批量注释">2.3. 批量注释</h2>
 <ol type="1">
-<li><code>Ctrl-v</code> 或 <code>V</code> 选中注释内容。</li>
-<li>按 <code>I</code> 在行首插入 <code>#</code> 或
-<code>//</code>。</li>
+<li><code>Ctrl-v</code> 或 <code>V</code> 选中注释内容</li>
+<li>按 <code>I</code> 在行首插入 <code>#</code> 或 <code>//</code></li>
 </ol>
 <h2 id="24-其他技巧">2.4. 其他技巧</h2>
 <ul>
 <li><code>Ctrl-o</code> 只执行一次 <em>normal</em> mode
-下的操作，然后返回 <em>insert</em> mode.</li>
-<li><code>~</code> 切换大小写。</li>
-<li><code>.</code> 重复上一次命令。</li>
+下的操作，然后返回 <em>insert</em> mode</li>
+<li><code>~</code> 切换大小写</li>
+<li><code>.</code> 重复上一次命令</li>
 </ul>
 <h1 id="3-hexo">3. Hexo</h1>
 <ul>
-<li><code>git clone</code> 失败时尝试把校园网换成手机热点。</li>
+<li><code>git clone</code> 失败时尝试把校园网换成手机热点</li>
 <li>禁用 <code>console</code> 打印日志：更改
-<code>themes\redefine\scripts\events\welcome.js</code> 文件。</li>
+<code>themes\redefine\scripts\events\welcome.js</code> 文件</li>
 </ul>
 
 		</div>
@@ -685,12 +684,12 @@ still can paste from the (non volatile) <strong>yank register</strong>
 		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
 			
 			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-				<a class="prev" rel="prev" href="/2025/03/02/summaries/Spring2025/Summary-1/">
+				<a class="prev" rel="prev" href="/2025/03/13/notes/Vocabulary/">
 					<span class="left arrow-icon flex justify-center items-center">
 						<i class="fa-solid fa-chevron-left"></i>
 					</span>
 					<span class="title flex justify-center items-center">
-						<span class="post-nav-title-item">Summary-1</span>
+						<span class="post-nav-title-item">Vocabulary</span>
 						<span class="post-nav-item">上一篇</span>
 					</span>
 				</a>
@@ -752,11 +751,11 @@ Stack Overflow:</span></a></li></ol></li><li class="nav-item nav-level-2"><a cla
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        共撰写了 7 篇文章
+                        共撰写了 5 篇文章
                     </span>
                     
                         <span>
-                            共 2.1k 字
+                            共 1.9k 字
                         </span>
                     
                 </p>
