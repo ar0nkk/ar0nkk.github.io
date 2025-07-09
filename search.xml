@@ -66,352 +66,6 @@ generality（普适的代价是抽象）</p></li>
       </tags>
   </entry>
   <entry>
-    <title>Notes of the Missing Semester</title>
-    <url>/2025/02/25/notes/Missing-Semester/</url>
-    <content><![CDATA[<blockquote>
-<p>大部分内容可以在<a class="link" href="https://missing-semester-cn.github.io/">中文讲义<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>中查询到，本文只放一些自己认为有意思的东西。</p>
-</blockquote>
-<blockquote>
-<p><code>A</code> = <code>Shift-a</code></p>
-</blockquote>
-<blockquote>
-<p><a class="link" href="https://www.zhaixue.cc/vim/vim-move.html">vim
-指令速查<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
-</blockquote>
-<h1 id="shell">Shell</h1>
-<ul>
-<li><code>touch</code> command to create or modify a
-file（碰到就更新时间戳，非常生动形象）</li>
-<li><code>!!</code>
-表示完整的上一条命令，包括参数。当你因为权限不足执行命令失败时，可以使用
-<code>sudo !!</code> 再尝试一次</li>
-<li>同一行的多个命令可以用 <code>;</code> 分隔</li>
-<li><code>Ctrl-d</code> 退出 Shell</li>
-</ul>
-<h1 id="vim-in-vscode">Vim in VSCode</h1>
-<h2 id="解决-windows-切换到-normal-mode-时输入法为中文的问题">解决
-windows 切换到 <em>normal</em> mode 时输入法为中文的问题：</h2>
-<p>安装 <a class="link" href="https://github.com/daipeihust/im-select/blob/master/README_CN.md">im-select<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>
-到 C:/im-select/，然后在 setting json 中添加：</p>
-<div class="code-container" data-rel="Json"><figure class="iseeu highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">"vim.autoSwitchInputMethod.enable"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">"vim.autoSwitchInputMethod.defaultIM"</span><span class="punctuation">:</span> <span class="string">"1033"</span><span class="punctuation">,</span> # 需要在输入法为英文时运行 im-select.exe 获得相应的输入法代码</span><br><span class="line"><span class="attr">"vim.autoSwitchInputMethod.obtainIMCmd"</span><span class="punctuation">:</span> <span class="string">"C:\\im-select\\im-select.exe"</span><span class="punctuation">,</span> </span><br><span class="line"><span class="attr">"vim.autoSwitchInputMethod.switchIMCmd"</span><span class="punctuation">:</span> <span class="string">"C:\\im-select\\im-select.exe {im}"</span></span><br></pre></td></tr></table></figure></div>
-
-<h2 id="删除内容而不保存到剪贴板">删除内容而不保存到剪贴板</h2>
-<blockquote>
-<p>关于寄存器 (register)：</p>
-<ul>
-<li><strong><code>y</code>（复制）</strong>：<br>
-复制的内容会存入 <code>"0</code>（复制专用寄存器）和
-<code>""</code>（无名寄存器）</li>
-<li><strong><code>c</code>（修改）、<code>d</code>（删除）、<code>x</code>（删除字符）</strong>：<br>
-删除/修改的内容会存入 <code>""</code>（无名寄存器）和
-<code>"1-9</code>（数字寄存器，按操作顺序覆盖）
-例如：第一次删除的内容存入 <code>"1</code>，第二次删除存入
-<code>"1</code>（原 <code>"1</code> 内容移到
-<code>"2</code>，依此类推）</li>
-<li>用 <code>:reg</code> 调试寄存器状态</li>
-</ul>
-</blockquote>
-<h3 id="vscode-内置方法">VSCode 内置方法：</h3>
-<p><strong>删除整行</strong>：</p>
-  <div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl-K</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>删除光标右侧内容</strong>：</p>
-  <div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl-Delete</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>删除光标左侧内容</strong>：</p>
-  <div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl-Backspace</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="使用-black-hole-register-_">使用 black hole register
-<code>"_</code></h3>
-<p>例如使用 <code>"_dd</code> 舍弃 <code>dd</code> 的内容。</p>
-<h3 id="another-trick-from-stack-overflow">Another trick from <em>Stack
-Overflow</em>:</h3>
-<p>When you enter the line back with the <code>p</code> command you are
-pasting the contents of the (volatile) <strong>default register</strong>
-<code>""</code>, which has been overwritten by <code>dd</code>. But you
-still can paste from the (non volatile) <strong>yank register</strong>
-<code>"0</code>, which won’t be overwritten by the delete command
-<code>dd</code>.</p>
-<blockquote>
-<p>Note that <code>Ctrl-v</code> in <em>insert</em> mode and
-<code>p</code> in <em>normal</em> mode have different buffers.</p>
-</blockquote>
-<h2 id="批量注释">批量注释</h2>
-<ol type="1">
-<li><code>Ctrl-v</code> 或 <code>V</code> 选中注释内容</li>
-<li>按 <code>I</code> 在行首插入 <code>#</code> 或 <code>//</code></li>
-</ol>
-<h2 id="其他技巧">其他技巧</h2>
-<ul>
-<li><code>Ctrl-o</code> 只执行一次 <em>normal</em> mode
-下的操作，然后返回 <em>insert</em> mode</li>
-<li><code>~</code> 切换大小写</li>
-<li><code>.</code> 重复上一次命令</li>
-</ul>
-<h1 id="hexo">Hexo</h1>
-<ul>
-<li><code>git clone</code> 失败时尝试把校园网换成手机热点</li>
-<li>禁用 <code>console</code> 打印日志：更改
-<code>themes\redefine\scripts\events\welcome.js</code> 文件</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Notes</category>
-      </categories>
-      <tags>
-        <tag>Shell</tag>
-        <tag>Vim</tag>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Computer Architecture</title>
-    <url>/2025/03/20/notes/Computer-Architecture/</url>
-    <content><![CDATA[<h1 id="digital-logic">Digital Logic</h1>
-<ul>
-<li>n-type: connect to GND, turn on (with 1) to pull down to 0</li>
-<li>p-type: connect to +2.9V, turn on (with 0) to pull up to 1</li>
-<li>不用 CMOS，仅用 n-type 或 p-type（用电阻代替另一端）就能实现单个 NOT
-Gate，但是电阻的电流热效应是不可忽略的，并且电阻充放电需要时间</li>
-<li>Floating Point 参考 <a class="link" href="https://kinnariyamamatanha.github.io/notes/cs61c/3-floating-point/">Kinnari
-的笔记<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-</ul>
-<h1 id="computer-organization-and-isa">Computer Organization and
-ISA</h1>
-<ul>
-<li>Von Neumann Model: <img lazyload="" src="/images/loading.svg" data-src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/Computer-Architecture/Von-Neumann-Model.jpg" alt="Von Neumann Model"></li>
-<li>关于控制指令：
-<ul>
-<li>jumps are unconditional – they always change the PC</li>
-<li>branches are conditional – they change the PC only if some condition
-is true (e.g., the result of an ADD is zero)</li>
-</ul></li>
-</ul>
-<h1 id="lc-3">LC-3</h1>
-<ul>
-<li>当通用寄存器 (R0~R7) 写入数据时更新 condition code NZP（以下简称
-cc）</li>
-</ul>
-<blockquote>
-<p>ℹ️ 在<a class="link" href="https://archive.org/details/introduction-to-computing-systems-from-bits-gates-to-c-beyond-yale-patt-z-library">第三版教材<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>中，规定
-LEA（加载有效地址）访问了 register 但不更新 cc</p>
-</blockquote>
-<ul>
-<li>PCoffset9 中的 PC 是下一条指令的地址</li>
-<li>TRAP 指令和 JMP 指令的区别：
-<ol type="1">
-<li>TRAP 类似于函数调用，执行完 OS 代码后会跳转回来</li>
-<li>TRAP 对地址做了封装，用户寄存器只能通过相应编号调用功能（例如
-x21）</li>
-</ol></li>
-</ul>
-<h1 id="assembly-programming">Assembly Programming</h1>
-<ul>
-<li>二进制移位操作：乘2左移，除2右移</li>
-<li>R0[7:0] is for trap codes IN, OUT and GETC</li>
-<li>伪操作（pseudo-operations，点开头）只用于汇编，程序汇编后不占用内存空间（注意分辨
-<code>HALT</code> 和 <code>.END</code>）</li>
-</ul>
-<h1 id="io-and-trap">I/O and Trap</h1>
-]]></content>
-      <categories>
-        <category>Notes</category>
-      </categories>
-      <tags>
-        <tag>Computer Architecture</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vocabulary</title>
-    <url>/2025/03/13/notes/Vocabulary/</url>
-    <content><![CDATA[<h2 id="robotics">Robotics</h2>
-<span id="more"></span>
-
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Robotics</th>
-<th style="text-align: center;">机器人学</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">holonomic</td>
-<td style="text-align: center;">完整的</td>
-</tr>
-<tr>
-<td style="text-align: center;">chassis</td>
-<td style="text-align: center;">底盘</td>
-</tr>
-<tr>
-<td style="text-align: center;">instantaneous</td>
-<td style="text-align: center;">瞬时的</td>
-</tr>
-<tr>
-<td style="text-align: center;">instantiate</td>
-<td style="text-align: center;">实例化</td>
-</tr>
-<tr>
-<td style="text-align: center;">benchmarking</td>
-<td style="text-align: center;">基准测试</td>
-</tr>
-<tr>
-<td style="text-align: center;">renderer</td>
-<td style="text-align: center;">渲染器</td>
-</tr>
-<tr>
-<td style="text-align: center;">offscreen</td>
-<td style="text-align: center;">后台的</td>
-</tr>
-<tr>
-<td style="text-align: center;">snippet</td>
-<td style="text-align: center;">片段</td>
-</tr>
-<tr>
-<td style="text-align: center;">lateral</td>
-<td style="text-align: center;">横向的</td>
-</tr>
-<tr>
-<td style="text-align: center;">trajectory</td>
-<td style="text-align: center;">轨迹</td>
-</tr>
-<tr>
-<td style="text-align: center;">RL</td>
-<td style="text-align: center;">强化学习</td>
-</tr>
-<tr>
-<td style="text-align: center;">DOF</td>
-<td style="text-align: center;">自由度</td>
-</tr>
-<tr>
-<td style="text-align: center;">Maneuverability</td>
-<td style="text-align: center;">机动性</td>
-</tr>
-</tbody>
-</table>
-<h2 id="computer-networks">Computer Networks</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Computer Networks</th>
-<th style="text-align: center;">计算机网络</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">protocol</td>
-<td style="text-align: center;">协议</td>
-</tr>
-<tr>
-<td style="text-align: center;">DSL(AM)</td>
-<td style="text-align: center;">数字用户线（接入复用器）</td>
-</tr>
-<tr>
-<td style="text-align: center;">LAN</td>
-<td style="text-align: center;">局域网</td>
-</tr>
-<tr>
-<td style="text-align: center;">HFC(Hybrid Fiber Coax)</td>
-<td style="text-align: center;">混合光纤同轴电缆</td>
-</tr>
-<tr>
-<td style="text-align: center;">HyperText Transfer Protocol(HTTP)</td>
-<td style="text-align: center;">超文本传输协议</td>
-</tr>
-<tr>
-<td style="text-align: center;">Content Distribution Network(CDN)</td>
-<td style="text-align: center;">内容分发网络</td>
-</tr>
-</tbody>
-</table>
-<h2 id="physics">Physics</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Physics</th>
-<th style="text-align: center;">物理</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">proton</td>
-<td style="text-align: center;">质子</td>
-</tr>
-<tr>
-<td style="text-align: center;">neutron</td>
-<td style="text-align: center;">中子</td>
-</tr>
-</tbody>
-</table>
-<h2 id="computer-architecture">Computer Architecture</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Computer Architecture</th>
-<th style="text-align: center;">计算机体系结构</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">mantissa</td>
-<td style="text-align: center;">尾码(fraction)</td>
-</tr>
-<tr>
-<td style="text-align: center;">MUX</td>
-<td style="text-align: center;">选择器</td>
-</tr>
-<tr>
-<td style="text-align: center;">volatile</td>
-<td style="text-align: center;">易丢失的</td>
-</tr>
-<tr>
-<td style="text-align: center;">ALU (Arithmetic and Logic Unit)</td>
-<td style="text-align: center;">算术逻辑单元</td>
-</tr>
-<tr>
-<td style="text-align: center;">increment/decrement</td>
-<td style="text-align: center;">增/减</td>
-</tr>
-<tr>
-<td style="text-align: center;">assembler</td>
-<td style="text-align: center;">汇编器</td>
-</tr>
-<tr>
-<td style="text-align: center;">hexadecimal</td>
-<td style="text-align: center;">十六进制</td>
-</tr>
-<tr>
-<td style="text-align: center;">ISR</td>
-<td style="text-align: center;">Interrupt Service Routine</td>
-</tr>
-</tbody>
-</table>
-<h2 id="sp">SP</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Stochastic Process</th>
-<th style="text-align: center;">随机过程</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">greatest common divisor, gcd</td>
-<td style="text-align: center;">最大公约数</td>
-</tr>
-</tbody>
-</table>
-]]></content>
-      <categories>
-        <category>Notes</category>
-      </categories>
-      <tags>
-        <tag>Robotics</tag>
-        <tag>Computer Networks</tag>
-        <tag>物理</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>量子力学笔记</title>
     <url>/2025/03/17/notes/Quantum-Physics/</url>
     <content><![CDATA[<h1 id="tips">Tips</h1>
@@ -540,6 +194,279 @@ x21）</li>
       </tags>
   </entry>
   <entry>
+    <title>Computer Architecture</title>
+    <url>/2025/03/20/notes/Computer-Architecture/</url>
+    <content><![CDATA[<h1 id="digital-logic">Digital Logic</h1>
+<ul>
+<li>n-type: connect to GND, turn on (with 1) to pull down to 0</li>
+<li>p-type: connect to +2.9V, turn on (with 0) to pull up to 1</li>
+<li>不用 CMOS，仅用 n-type 或 p-type（用电阻代替另一端）就能实现单个 NOT
+Gate，但是电阻的电流热效应是不可忽略的，并且电阻充放电需要时间</li>
+<li>Floating Point 参考 <a class="link" href="https://kinnariyamamatanha.github.io/notes/cs61c/3-floating-point/">Kinnari
+的笔记<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h1 id="computer-organization-and-isa">Computer Organization and
+ISA</h1>
+<ul>
+<li>Von Neumann Model: <img lazyload="" src="/images/loading.svg" data-src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/Computer-Architecture/Von-Neumann-Model.jpg" alt="Von Neumann Model"></li>
+<li>关于控制指令：
+<ul>
+<li>jumps are unconditional – they always change the PC</li>
+<li>branches are conditional – they change the PC only if some condition
+is true (e.g., the result of an ADD is zero)</li>
+</ul></li>
+</ul>
+<h1 id="lc-3">LC-3</h1>
+<ul>
+<li>当通用寄存器 (R0~R7) 写入数据时更新 condition code NZP（以下简称
+cc）</li>
+</ul>
+<blockquote>
+<p>ℹ️ 在<a class="link" href="https://archive.org/details/introduction-to-computing-systems-from-bits-gates-to-c-beyond-yale-patt-z-library">第三版教材<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>中，规定
+LEA（加载有效地址）访问了 register 但不更新 cc</p>
+</blockquote>
+<ul>
+<li>PCoffset9 中的 PC 是下一条指令的地址</li>
+<li>TRAP 指令和 JMP 指令的区别：
+<ol type="1">
+<li>TRAP 类似于函数调用，执行完 OS 代码后会跳转回来</li>
+<li>TRAP 对地址做了封装，用户寄存器只能通过相应编号调用功能（例如
+x21）</li>
+</ol></li>
+</ul>
+<h1 id="assembly-programming">Assembly Programming</h1>
+<ul>
+<li>二进制移位操作：乘2左移，除2右移</li>
+<li>R0[7:0] is for trap codes IN, OUT and GETC</li>
+<li>伪操作（pseudo-operations，点开头）只用于汇编，程序汇编后不占用内存空间（注意分辨
+<code>HALT</code> 和 <code>.END</code>）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Notes</category>
+      </categories>
+      <tags>
+        <tag>Computer Architecture</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mobile Robotics</title>
+    <url>/2025/05/12/notes/Mobile-Robotics/</url>
+    <content><![CDATA[<h1 id="考纲分析">考纲分析</h1>
+<h2 id="part-1">Part 1</h2>
+<h3 id="legged--aerial">Legged &amp; Aerial</h3>
+<ul>
+<li>腿式机器人
+<ul>
+<li>点接触静步，至少需要4条腿；若同时移动两条腿则总共需要6条腿</li>
+<li>步态是指机器人的每条腿按一定的顺序和轨迹的运动过程（the distinct
+sequence of lift and release events of the individual legs）</li>
+<li>k 条腿机器人步态数 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="13.622ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 6021 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g><g data-mml-node="mo" transform="translate(1165.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mo" transform="translate(2221.6,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mn" transform="translate(2610.6,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="mi" transform="translate(3110.6,0)"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g><g data-mml-node="mo" transform="translate(3853.8,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mn" transform="translate(4854,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(5354,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mo" transform="translate(5743,0)"><path data-c="21" d="M78 661Q78 682 96 699T138 716T180 700T199 661Q199 654 179 432T158 206Q156 198 139 198Q121 198 119 206Q118 209 98 431T78 661ZM79 61Q79 89 97 105T141 121Q164 119 181 104T198 61Q198 31 181 16T139 1Q114 1 97 16T79 61Z"></path></g></g></g></svg></mjx-container></span></li>
+<li>能耗大于轮式机器人</li>
+</ul></li>
+<li>空中机器人有比空气轻（LTA）和比空气重（HTA）两种</li>
+</ul>
+<h3 id="运动学--wheeled">运动学 &amp; Wheeled</h3>
+<ul>
+<li>运动学是物理学的一个分支，在经典力学中发展起来，描述点、物体和物体系统的运动，而不考虑导致它们运动的力</li>
+<li>运动学坐标：Global 下标为 I，Local 下标为 R</li>
+<li>常见轮子种类与应用
+<ul>
+<li>标准轮：广泛应用于自行车、汽车等交通工具</li>
+<li>小脚轮：常用于需要轻便、快速移动的设备，如电动车、滑板车、购物车</li>
+<li>瑞典轮：常用于全向移动机器人，如天王星（Uranus）机器人</li>
+<li>球形轮：早期鼠标的重要部件之一。在机器人领域，球形轮可用于构建全向运动系统</li>
+</ul></li>
+<li>标准轮约束方程 <img lazyload="" src="/images/loading.svg" data-src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/Mobile-Robotics/constraint.png" alt="constr"></li>
+</ul>
+<blockquote>
+<p>⚠ 注意此处沿机器人方向建立全局坐标系</p>
+</blockquote>
+<ul>
+<li>旋转矩阵 R 将 global motion 映射到 local motion</li>
+</ul>
+<h3 id="机动度">机动度</h3>
+<ul>
+<li>移动机器人三种基本特性：Maneuverability(机动度)=Steerability(可操纵度)+Mobility(可移动度)</li>
+<li>可移动度：通过控制轮子的速度可以实现的移动自由度，可用瞬时旋转中心（ICR）判断</li>
+<li>可操纵度：有几个/几组能自由转向的轮子</li>
+</ul>
+<h3 id="传感器">传感器</h3>
+<ul>
+<li>传感器分类：
+<ul>
+<li>Proprioceptive/exteroceptive（本体感受/外部感受）</li>
+<li>Passive/active（无源/有源）</li>
+</ul></li>
+<li>常见无源：红外、压电</li>
+<li>激光传感器与相机优劣势分析
+<ul>
+<li>激光：精度高，响应快，抗干扰能力强，但对物体表面特性敏感，测量范围有限，价格较高</li>
+<li>相机：能获取丰富的视觉信息，价格较低，但测量精度低，易受环境光影响，数据处理算法复杂</li>
+</ul></li>
+<li>传感器基本特性：分辨率，线性度，带宽，灵敏度，交叉灵敏度，误差，准确性，精确度，系统误差，随机误差</li>
+<li>常见测距仪及其原理：
+<ul>
+<li>光学编码器：通过脉冲频率确定旋转速度</li>
+<li>指南针：地磁场</li>
+<li>陀螺仪：角动量守恒</li>
+<li>加速度计：牛顿定律+电容</li>
+<li>IMUs（惯性测量单元）：集成加速度计、陀螺仪等传感器</li>
+<li>GPS：卫星信号定位</li>
+</ul></li>
+<li>直线提取特征的三个主要问题：
+<ul>
+<li>有几条线？</li>
+<li>哪些点属于哪条线？</li>
+<li>给定属于一条直线的点，如何估计直线参数？</li>
+</ul></li>
+<li>主要提取方法：分裂-合并法（对初始划分敏感，计算量大），直线回归法（对异常值敏感），增量法（误差积累），期望最大化（EM），霍夫变换（基于投票），随机抽样一致性（RANSAC）</li>
+</ul>
+<h2 id="part-2">Part 2</h2>
+<h3 id="地图表示与构建">地图表示与构建</h3>
+<ul>
+<li>常见的四种表示方法：
+<ul>
+<li>点云，存储要求高</li>
+<li>栅格，可用 AStar
+规划路径，可用四/八叉树（面向二/三维空间）降低存储空间</li>
+<li>特征，几何特征明显</li>
+<li>拓扑，点+线，路径规划快，但节点稀疏，可能导致定位错误</li>
+</ul></li>
+<li>定位问题分类：位置跟踪、全局定位（初始位置未知）、绑架机器人问题（极端相似）</li>
+<li>位置更新的2个步骤：预测更新（本体感知推断）、感知更新（外部感知矫正）</li>
+</ul>
+<h3 id="规划和导航">规划和导航</h3>
+<ul>
+<li>导航方式：
+<ul>
+<li>有人工标识的固定路径导引</li>
+<li>有人工标识的无固定路径导引</li>
+<li>无标识导引的自然无轨导航</li>
+</ul></li>
+<li>导航问题分解：
+<ul>
+<li>路径规划</li>
+<li>避障规划</li>
+<li>轨迹生成</li>
+</ul></li>
+<li>势场法问题：存在局部最小，容易产生振荡和死锁。产生原因：某个位置吸引力和排斥力相互抵消，合力为零</li>
+<li>RRT优点：概率完备，快速扩展</li>
+<li>RRT缺点：计算量大，路径曲折</li>
+<li>AStar缺点：占用大量内存，无法处理动态地图</li>
+<li>向量直方图法：根据环境详细栅格地图构建机器人坐标系下障碍物概率直方图，根据概率直方图评估选择最优运动方向，可以有效避免势场法的局部极小值问题</li>
+<li>轨迹规划：给定路径与约束，生成一组控制序列</li>
+<li>机器人导航所需技术：感知，建图，定位，路径规划，控制</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Notes</category>
+      </categories>
+      <tags>
+        <tag>Mobile</tag>
+        <tag>Robotics</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Notes of the Missing Semester</title>
+    <url>/2025/02/25/notes/Missing-Semester/</url>
+    <content><![CDATA[<blockquote>
+<p>大部分内容可以在<a class="link" href="https://missing-semester-cn.github.io/">中文讲义<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>中查询到，本文只放一些自己认为有意思的东西。</p>
+</blockquote>
+<blockquote>
+<p><code>A</code> = <code>Shift-a</code></p>
+</blockquote>
+<blockquote>
+<p><a class="link" href="https://www.zhaixue.cc/vim/vim-move.html">vim
+指令速查<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+</blockquote>
+<h1 id="shell">Shell</h1>
+<ul>
+<li><code>touch</code> command to create or modify a
+file（碰到就更新时间戳，非常生动形象）</li>
+<li><code>!!</code>
+表示完整的上一条命令，包括参数。当你因为权限不足执行命令失败时，可以使用
+<code>sudo !!</code> 再尝试一次</li>
+<li>同一行的多个命令可以用 <code>;</code> 分隔</li>
+<li><code>Ctrl-d</code> 退出 Shell</li>
+</ul>
+<h1 id="vim-in-vscode">Vim in VSCode</h1>
+<h2 id="解决-windows-切换到-normal-mode-时输入法为中文的问题">解决
+windows 切换到 <em>normal</em> mode 时输入法为中文的问题：</h2>
+<p>安装 <a class="link" href="https://github.com/daipeihust/im-select/blob/master/README_CN.md">im-select<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>
+到 C:/im-select/，然后在 setting json 中添加：</p>
+<div class="code-container" data-rel="Json"><figure class="iseeu highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">"vim.autoSwitchInputMethod.enable"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">"vim.autoSwitchInputMethod.defaultIM"</span><span class="punctuation">:</span> <span class="string">"1033"</span><span class="punctuation">,</span> # 需要在输入法为英文时运行 im-select.exe 获得相应的输入法代码</span><br><span class="line"><span class="attr">"vim.autoSwitchInputMethod.obtainIMCmd"</span><span class="punctuation">:</span> <span class="string">"C:\\im-select\\im-select.exe"</span><span class="punctuation">,</span> </span><br><span class="line"><span class="attr">"vim.autoSwitchInputMethod.switchIMCmd"</span><span class="punctuation">:</span> <span class="string">"C:\\im-select\\im-select.exe {im}"</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="删除内容而不保存到剪贴板">删除内容而不保存到剪贴板</h2>
+<blockquote>
+<p>关于寄存器 (register)：</p>
+<ul>
+<li><strong><code>y</code>（复制）</strong>：<br>
+复制的内容会存入 <code>"0</code>（复制专用寄存器）和
+<code>""</code>（无名寄存器）</li>
+<li><strong><code>c</code>（修改）、<code>d</code>（删除）、<code>x</code>（删除字符）</strong>：<br>
+删除/修改的内容会存入 <code>""</code>（无名寄存器）和
+<code>"1-9</code>（数字寄存器，按操作顺序覆盖）
+例如：第一次删除的内容存入 <code>"1</code>，第二次删除存入
+<code>"1</code>（原 <code>"1</code> 内容移到
+<code>"2</code>，依此类推）</li>
+<li>用 <code>:reg</code> 调试寄存器状态</li>
+</ul>
+</blockquote>
+<h3 id="vscode-内置方法">VSCode 内置方法：</h3>
+<p><strong>删除整行</strong>：</p>
+  <div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl-K</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>删除光标右侧内容</strong>：</p>
+  <div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl-Delete</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>删除光标左侧内容</strong>：</p>
+  <div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl-Backspace</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="使用-black-hole-register-_">使用 black hole register
+<code>"_</code></h3>
+<p>例如使用 <code>"_dd</code> 舍弃 <code>dd</code> 的内容。</p>
+<h3 id="another-trick-from-stack-overflow">Another trick from <em>Stack
+Overflow</em>:</h3>
+<p>When you enter the line back with the <code>p</code> command you are
+pasting the contents of the (volatile) <strong>default register</strong>
+<code>""</code>, which has been overwritten by <code>dd</code>. But you
+still can paste from the (non volatile) <strong>yank register</strong>
+<code>"0</code>, which won’t be overwritten by the delete command
+<code>dd</code>.</p>
+<blockquote>
+<p>Note that <code>Ctrl-v</code> in <em>insert</em> mode and
+<code>p</code> in <em>normal</em> mode have different buffers.</p>
+</blockquote>
+<h2 id="批量注释">批量注释</h2>
+<ol type="1">
+<li><code>Ctrl-v</code> 或 <code>V</code> 选中注释内容</li>
+<li>按 <code>I</code> 在行首插入 <code>#</code> 或 <code>//</code></li>
+</ol>
+<h2 id="其他技巧">其他技巧</h2>
+<ul>
+<li><code>Ctrl-o</code> 只执行一次 <em>normal</em> mode
+下的操作，然后返回 <em>insert</em> mode</li>
+<li><code>~</code> 切换大小写</li>
+<li><code>.</code> 重复上一次命令</li>
+</ul>
+<h1 id="hexo">Hexo</h1>
+<ul>
+<li><code>git clone</code> 失败时尝试把校园网换成手机热点</li>
+<li>禁用 <code>console</code> 打印日志：更改
+<code>themes\redefine\scripts\events\welcome.js</code> 文件</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Notes</category>
+      </categories>
+      <tags>
+        <tag>Shell</tag>
+        <tag>Vim</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title></title>
     <url>/README.html</url>
     <content><![CDATA[<h1 id="welcome-to-aronkks-site">Welcome to Aronkk’s site!</h1>
@@ -549,19 +476,36 @@ x21）</li>
 ]]></content>
   </entry>
   <entry>
+    <title>分类</title>
+    <url>/categories/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
+    <title>相册</title>
+    <url>/masonry/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
+    <title>标签</title>
+    <url>/tags/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
     <title>About</title>
     <url>/about/index.html</url>
     <content><![CDATA[<!-- Check Mark Button：◻️✅ -->
 
-<p>你好！我是 Aronkk<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>，来自四川，现就读于<strong>上海交通大学</strong>2023级本科<strong>人工智能</strong>试点班<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>，很高兴认识你。</p>
+<p>你好！我是 Aronkk<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>，来自<strong>四川宜宾</strong>，现就读于<strong>上海交通大学</strong>2023级本科<strong>人工智能</strong>试点班<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>，很高兴认识你。</p>
 <hr>
 <p>这里是我记笔记✏️的地方，我会将自己学到的东西和一些思考💡记录下来，帮助自己进步，同时也许会帮助到你。</p>
-<p>我对机器人（Robotics）和数学建模比较感兴趣，目前在和几位同学做具身智能和物理仿真相关的研究。平时我喜欢打篮球🏀、跑步健身、打游戏，<del>有空会开两把本能cs🔫</del>（戒断期）。听歌以R&amp;B和各类摇滚为主，其他类型的音乐也会听，你可以点击首页左侧的
+<p>我对具身智能（Robotics）和数学建模比较感兴趣，平时我喜欢打篮球🏀、跑步健身、打游戏，<del>有空会开两把本能cs🔫</del>。听歌以R&amp;B和各类摇滚为主（例如陶喆、OneRepublic），你可以点击首页左侧的
 Music 播放我的歌单。</p>
 <p>如果你：</p>
 <ul>
 <li>和我有相同的兴趣爱好</li>
-<li>希望找个人一起运动或学习</li>
 <li>想和我交个朋友</li>
 <li>有组队参加竞赛的想法</li>
 </ul>
@@ -591,6 +535,8 @@ Networks: Top-Down<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light ali
 <li>图论与网络流算法实践</li>
 <li><a class="link" href="https://aitour.site/tools/Pytorch/">Pytorch -
 aiTour<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link" href="https://zh.d2l.ai/chapter_preface/index.html">DL<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+<li><a class="link" href="https://www.bilibili.com/video/BV1sd4y167NS/?spm_id_from=333.337.search-card.all.click&amp;vd_source=a03e87aa22c41ec60f8fbd1dc803e1cb">【强化学习的数学原理】课程<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
 </ul>
 <p>The following are secondary.</p>
 <ul>
@@ -613,24 +559,6 @@ Ralston<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top
 <li id="fn2"><p>“从长江头到长江尾”即来源于此🤗。<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
-]]></content>
-  </entry>
-  <entry>
-    <title>标签</title>
-    <url>/tags/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
-    <title>相册</title>
-    <url>/masonry/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
-    <title>分类</title>
-    <url>/categories/index.html</url>
-    <content><![CDATA[
 ]]></content>
   </entry>
   <entry>
