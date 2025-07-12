@@ -5,9 +5,24 @@
     <url>/2025/07/12/log/Summer2025/</url>
     <content><![CDATA[<h2 id="进展记录">进展记录</h2>
 <ul>
-<li>已阅读 ACT 论文 Section 3，搞清楚 chunking 思路</li>
-<li>仿真环境 imitation_episodes.py 成功运行</li>
-<li>通过 keyboard teleop 模块采集了 20 条 demonstration</li>
+<li>梳理了论文 <a class="link" href="https://arxiv.org/abs/2303.04137">Diffusion
+Policy<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> 的内容</li>
+<li>在模拟环境中跑通了 ACT 训练双爪机器人递方块的流程，细节如下：
+<ol type="1">
+<li>运行<code>record_sim_episodes.py</code>生成50条脚本化数据：
+ <div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">python3 record_sim_episodes.py \</span><br><span class="line">--task_name sim_transfer_cube_scripted \</span><br><span class="line">--dataset_dir data/ \</span><br><span class="line">--num_episodes 50</span><br></pre></td></tr></table></figure></div>
+</li>
+<li>训练与测试：
+ <div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Transfer Cube task</span><br><span class="line">python3 imitate_episodes.py \</span><br><span class="line">--task_name sim_transfer_cube_scripted \</span><br><span class="line">--ckpt_dir data/sim_ckpt/ \</span><br><span class="line">--policy_class ACT --kl_weight 10 --chunk_size 100 --hidden_dim 512 --batch_size 8 --dim_feedforward 3200 \</span><br><span class="line">--num_epochs 2000  --lr 1e-5 \</span><br><span class="line">--seed 0</span><br><span class="line">--temporal_agg</span><br></pre></td></tr></table></figure></div>
+
+测试结果如下：<img lazyload="" src="/images/loading.svg" data-src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/Summer2025/ACT_trans_cube_ensemble.png" alt="test">
+<ul>
+<li><code>--temporal_agg</code>表示启用 temporal ensembling
+(加权平均融合)，可以观察到机器人移动更平滑，卡顿明显减少，成功率比不启用时高出2个点</li>
+<li>测试时只需加上<code>--eval</code>，测试视频存储在<code>data/sim_ckpt/</code>中。观察到只要夹起方块就会被脚本视为成功，即实际成功率低于测试得到的成功率</li>
+<li>在生成训练数据时启用<code>--onscreen_render</code>，发现夹爪行为正常，但训练出的机器人总是倾向于夹取方块底部，导致不能正对接方块的夹爪，具体原因尚不清楚</li>
+</ul></li>
+</ol></li>
 </ul>
 <h2 id="问题记录">问题记录</h2>
 <ul>
@@ -16,8 +31,8 @@
 </ul>
 <h2 id="下周计划">下周计划</h2>
 <ul>
-<li>阅读 ACT 代码中 act/models/chunker.py</li>
-<li>准备调试 imitation_episodes.py 的 chunking 可视化部分</li>
+<li>到学院用4090服务器和上周采集的真实数据训练，看看效果如何</li>
+<li>继续学习后面的论文，补充 LLM 和 ViT 相关基础知识</li>
 </ul>
 ]]></content>
       <categories>
@@ -503,12 +518,6 @@ sequence of lift and release events of the individual legs）</li>
 ]]></content>
   </entry>
   <entry>
-    <title>分类</title>
-    <url>/categories/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
     <title>About</title>
     <url>/about/index.html</url>
     <content><![CDATA[<!-- Check Mark Button：◻️✅ -->
@@ -563,6 +572,12 @@ Architecture)</li>
 Ralston<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>；kk取自我的名字。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
+]]></content>
+  </entry>
+  <entry>
+    <title>分类</title>
+    <url>/categories/index.html</url>
+    <content><![CDATA[
 ]]></content>
   </entry>
   <entry>
