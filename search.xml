@@ -3,9 +3,7 @@
   <entry>
     <title>科研日志</title>
     <url>/2025/07/12/log/Summer2025/</url>
-    <content><![CDATA[<h2 id="本周目标">本周目标</h2>
-<p>复现 ACT 仿真环境，准备采集真实数据</p>
-<h2 id="进展记录">进展记录</h2>
+    <content><![CDATA[<h2 id="进展记录">进展记录</h2>
 <ul>
 <li>已阅读 ACT 论文 Section 3，搞清楚 chunking 思路</li>
 <li>仿真环境 imitation_episodes.py 成功运行</li>
@@ -496,6 +494,21 @@ sequence of lift and release events of the individual legs）</li>
       </tags>
   </entry>
   <entry>
+    <title></title>
+    <url>/README.html</url>
+    <content><![CDATA[<h1 id="welcome-to-aronkks-site">Welcome to Aronkk’s site!</h1>
+<ul>
+<li>See aronkk.top for more.</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>分类</title>
+    <url>/categories/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
     <title>About</title>
     <url>/about/index.html</url>
     <content><![CDATA[<!-- Check Mark Button：◻️✅ -->
@@ -522,7 +535,7 @@ of Linear Algebra<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light alig
 <li><a class="link" href="https://www.bilibili.com/video/BV1JV411t7ow/?vd_source=a03e87aa22c41ec60f8fbd1dc803e1cb">Computer
 Networks: Top-Down<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> (with textbook)✅</li>
 <li><a class="link" href="https://www.bilibili.com/video/BV1iW411d7hd/">CSAPP<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-<li>图论与网络流算法实践</li>
+<li><a class="link" href="https://acm.sjtu.edu.cn/OnlineJudge/course/78/homework?">图论与网络流算法实践<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
 <li><a class="link" href="https://aitour.site/tools/Pytorch/">Pytorch -
 aiTour<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
 <li><a class="link" href="https://zh.d2l.ai/chapter_preface/index.html">DL<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
@@ -550,21 +563,6 @@ Architecture)</li>
 Ralston<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>；kk取自我的名字。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/README.html</url>
-    <content><![CDATA[<h1 id="welcome-to-aronkks-site">Welcome to Aronkk’s site!</h1>
-<ul>
-<li>See aronkk.top for more.</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>分类</title>
-    <url>/categories/index.html</url>
-    <content><![CDATA[
 ]]></content>
   </entry>
   <entry>
