@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Computer Architecture</title>
+    <title>科研日志</title>
+    <url>/2025/07/12/log/Summer2025/</url>
+    <content><![CDATA[<h2 id="本周目标">本周目标</h2>
+<p>复现 ACT 仿真环境，准备采集真实数据</p>
+<h2 id="进展记录">进展记录</h2>
+<ul>
+<li>已阅读 ACT 论文 Section 3，搞清楚 chunking 思路</li>
+<li>仿真环境 imitation_episodes.py 成功运行</li>
+<li>通过 keyboard teleop 模块采集了 20 条 demonstration</li>
+</ul>
+<h2 id="问题记录">问题记录</h2>
+<ul>
+<li>没搞清楚 chunk length 是如何动态确定的</li>
+<li>模型里 transformer 编码 state sequence 的位置在哪？</li>
+</ul>
+<h2 id="下周计划">下周计划</h2>
+<ul>
+<li>阅读 ACT 代码中 act/models/chunker.py</li>
+<li>准备调试 imitation_episodes.py 的 chunking 可视化部分</li>
+</ul>
+]]></content>
+      <categories>
+        <category>log</category>
+      </categories>
+      <tags>
+        <tag>Robotics</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Computer Architecture(CS2651)</title>
     <url>/2025/03/20/notes/Computer-Architecture/</url>
     <content><![CDATA[<h1 id="digital-logic">Digital Logic</h1>
 <ul>
@@ -334,8 +363,8 @@ sequence of lift and release events of the individual legs）</li>
         <category>Notes</category>
       </categories>
       <tags>
-        <tag>Mobile</tag>
         <tag>Robotics</tag>
+        <tag>Mobile</tag>
       </tags>
   </entry>
   <entry>
@@ -467,45 +496,13 @@ sequence of lift and release events of the individual legs）</li>
       </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/README.html</url>
-    <content><![CDATA[<h1 id="welcome-to-aronkks-site">Welcome to Aronkk’s site!</h1>
-<ul>
-<li>See aronkk.top for more.</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>links</title>
-    <url>/links/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
-    <title>相册</title>
-    <url>/masonry/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
     <title>About</title>
     <url>/about/index.html</url>
     <content><![CDATA[<!-- Check Mark Button：◻️✅ -->
 
-<p>你好！我是 Aronkk<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>，来自<strong>四川宜宾</strong>，现就读于<strong>上海交通大学</strong>2023级本科<strong>人工智能</strong>试点班<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>，很高兴认识你。</p>
+<p>你好！我是 Aronkk<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>，就读于上海交通大学，很高兴认识你。</p>
 <hr>
 <p>这里是我记笔记✏️的地方，我会将自己学到的东西和一些思考💡记录下来，帮助自己进步，同时也许会帮助到你。</p>
-<p>我对具身智能（Robotics）和数学建模比较感兴趣，平时我喜欢打篮球🏀、跑步健身、打游戏，<del>有空会开两把本能cs🔫</del>。听歌以R&amp;B和各类摇滚为主（例如陶喆、OneRepublic），你可以点击首页左侧的
-Music 播放我的歌单。</p>
-<p>如果你：</p>
-<ul>
-<li>和我有相同的兴趣爱好</li>
-<li>想和我交个朋友</li>
-<li>有组队参加竞赛的想法</li>
-</ul>
-<p>都可以添加我的
-QQ：<code>1315720885</code>。如果你有任何问题想和我交流，也可以直接给我发邮件：<code>1315720885@sjtu.edu.cn</code>，我会尽快回复。</p>
-<p><strong>来者犹可追！</strong></p>
 <hr>
 <h2 id="previous-feishu-notes需登录">Previous Feishu
 Notes（需登录）</h2>
@@ -551,14 +548,34 @@ Architecture)</li>
 <ol>
 <li id="fn1"><p>Aron取自登山者 <a class="link" href="https://en.wikipedia.org/wiki/Aron_Ralston">Aron
 Ralston<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>；kk取自我的名字。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>“从长江头到长江尾”即来源于此🤗。<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 ]]></content>
   </entry>
   <entry>
+    <title></title>
+    <url>/README.html</url>
+    <content><![CDATA[<h1 id="welcome-to-aronkks-site">Welcome to Aronkk’s site!</h1>
+<ul>
+<li>See aronkk.top for more.</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>分类</title>
     <url>/categories/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
+    <title>links</title>
+    <url>/links/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
+    <title>相册</title>
+    <url>/masonry/index.html</url>
     <content><![CDATA[
 ]]></content>
   </entry>
