@@ -3,7 +3,8 @@
   <entry>
     <title>科研日志</title>
     <url>/2025/07/12/log/Summer2025/</url>
-    <content><![CDATA[<h2 id="进展记录">进展记录</h2>
+    <content><![CDATA[<h1 id="7-12">7-12</h1>
+<h2 id="log">Log</h2>
 <ul>
 <li>梳理了论文 <a class="link" href="https://arxiv.org/abs/2303.04137">Diffusion
 Policy<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> 的内容</li>
@@ -24,15 +25,28 @@ Policy<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top 
 </ul></li>
 </ol></li>
 </ul>
-<h2 id="问题记录">问题记录</h2>
-<ul>
-<li>没搞清楚 chunk length 是如何动态确定的</li>
-<li>模型里 transformer 编码 state sequence 的位置在哪？</li>
-</ul>
-<h2 id="下周计划">下周计划</h2>
+<h2 id="plan">Plan</h2>
 <ul>
 <li>到学院用4090服务器和上周采集的真实数据训练，看看效果如何</li>
 <li>继续学习后面的论文，补充 LLM 和 ViT 相关基础知识</li>
+</ul>
+<h1 id="7-16">7-16</h1>
+<h2 id="log-1">Log</h2>
+<ul>
+<li>周一到学院实验室采集了新的数据（pick_3_object）。考虑到 ACT
+模型的局限性，固定了物体的摆放位置、朝向和拾取顺序，准备先试试训练效果，成功率高再尝试不同摆放位置。总共采了100条数据，还需要做数据对齐等处理</li>
+<li>在启智平台创建实例并并保存了镜像（用于创建新实例时跳过环境搭建）并用
+ACT 训练了2000个
+epoch，在真实单臂机器人上测试发现夹爪会在物体正上方闭合导致抓取失败（这是常见的情况），可能是由数据采集和测试所用的摄像头不同或数据集质量不高导致的</li>
+<li>梳理了 ACT 的代码。其中数据填充对齐代码如下：
+  <div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 由于采集的机器人动作序列等数据长度是随机的，在训练前需要对齐</span><br><span class="line">def user_collate(datas: list, minimum_length=100):</span><br><span class="line">	bs = len(datas)</span><br><span class="line">	</span><br><span class="line">	# 计算每个样本中非填充（有效）动作的长度（False 表示有效数据）</span><br><span class="line">	length_count = [(d[3] == False).sum().item() for d in datas]</span><br><span class="line">	</span><br><span class="line">	# 把所有序列统一 pad 到 max_length</span><br><span class="line">	max_length = max(minimum_length, max(length_count))</span><br><span class="line">	</span><br><span class="line">	# pad_size[i]: 第 i 个样本需要填充多少步</span><br><span class="line">	pad_size = [max_length - i for i in length_count]</span><br><span class="line">	</span><br><span class="line">	# torch.stack()用于将多个n维张量沿着一个新的维度堆叠起来，形成一个n+1维张量</span><br><span class="line">	images = torch.stack([d[0] for d in datas])</span><br><span class="line">	qpos = torch.stack([d[1] for d in datas])</span><br><span class="line">	actions, is_pad = [], []</span><br><span class="line">	for d, l, p in zip(datas, length_count, pad_size):</span><br><span class="line">	curr_action = d[2][: l]</span><br><span class="line">	curr_pad_info = d[3][: l]</span><br><span class="line">	additional_pad_info = torch.ones(p, dtype=curr_pad_info.dtype, device=curr_pad_info.device) # 填充标记</span><br><span class="line">	pad_actions = torch.zeros((p, curr_action.shape[-1]), dtype=curr_action.dtype, device=curr_action.device) # 填充全零动作</span><br><span class="line">	actions.append(torch.concat([curr_action, pad_actions], dim=0))</span><br><span class="line">	is_pad.append(torch.concat([curr_pad_info, additional_pad_info], dim=0))</span><br><span class="line">	actions = torch.stack(actions)</span><br><span class="line">	is_pad = torch.stack(is_pad)</span><br><span class="line">	return images, qpos, actions, is_pad</span><br></pre></td></tr></table></figure></div>
+</li>
+<li>从 Transformer 的实现开始，补充 ViT 相关知识，Transformer
+架构如下：<img lazyload="" src="/images/loading.svg" data-src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/Summer2025/transformer.svg" alt="Transformer"> 详见 <a class="link" href="https://zh.d2l.ai/chapter_attention-mechanisms/transformer.html">d2l-transformer<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h2 id="plan-1">Plan</h2>
+<ul>
+<li>解决 aTrust vpn 的问题，在服务器上处理周一采集的数据</li>
 </ul>
 ]]></content>
       <categories>
@@ -281,6 +295,124 @@ still can paste from the (non volatile) <strong>yank register</strong>
       </tags>
   </entry>
   <entry>
+    <title>Mobile Robotics</title>
+    <url>/2025/05/12/notes/Mobile-Robotics/</url>
+    <content><![CDATA[<h1 id="考纲分析">考纲分析</h1>
+<h2 id="part-1">Part 1</h2>
+<h3 id="legged--aerial">Legged &amp; Aerial</h3>
+<ul>
+<li>腿式机器人
+<ul>
+<li>点接触静步，至少需要4条腿；若同时移动两条腿则总共需要6条腿</li>
+<li>步态是指机器人的每条腿按一定的顺序和轨迹的运动过程（the distinct
+sequence of lift and release events of the individual legs）</li>
+<li>k 条腿机器人步态数 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="13.622ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 6021 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g><g data-mml-node="mo" transform="translate(1165.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mo" transform="translate(2221.6,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mn" transform="translate(2610.6,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="mi" transform="translate(3110.6,0)"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g><g data-mml-node="mo" transform="translate(3853.8,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mn" transform="translate(4854,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(5354,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mo" transform="translate(5743,0)"><path data-c="21" d="M78 661Q78 682 96 699T138 716T180 700T199 661Q199 654 179 432T158 206Q156 198 139 198Q121 198 119 206Q118 209 98 431T78 661ZM79 61Q79 89 97 105T141 121Q164 119 181 104T198 61Q198 31 181 16T139 1Q114 1 97 16T79 61Z"></path></g></g></g></svg></mjx-container></span></li>
+<li>能耗大于轮式机器人</li>
+</ul></li>
+<li>空中机器人有比空气轻（LTA）和比空气重（HTA）两种</li>
+</ul>
+<h3 id="运动学--wheeled">运动学 &amp; Wheeled</h3>
+<ul>
+<li>运动学是物理学的一个分支，在经典力学中发展起来，描述点、物体和物体系统的运动，而不考虑导致它们运动的力</li>
+<li>运动学坐标：Global 下标为 I，Local 下标为 R</li>
+<li>常见轮子种类与应用
+<ul>
+<li>标准轮：广泛应用于自行车、汽车等交通工具</li>
+<li>小脚轮：常用于需要轻便、快速移动的设备，如电动车、滑板车、购物车</li>
+<li>瑞典轮：常用于全向移动机器人，如天王星（Uranus）机器人</li>
+<li>球形轮：早期鼠标的重要部件之一。在机器人领域，球形轮可用于构建全向运动系统</li>
+</ul></li>
+<li>标准轮约束方程 <img lazyload="" src="/images/loading.svg" data-src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/Mobile-Robotics/constraint.png" alt="constr"></li>
+</ul>
+<blockquote>
+<p>⚠ 注意此处沿机器人方向建立全局坐标系</p>
+</blockquote>
+<ul>
+<li>旋转矩阵 R 将 global motion 映射到 local motion</li>
+</ul>
+<h3 id="机动度">机动度</h3>
+<ul>
+<li>移动机器人三种基本特性：Maneuverability(机动度)=Steerability(可操纵度)+Mobility(可移动度)</li>
+<li>可移动度：通过控制轮子的速度可以实现的移动自由度，可用瞬时旋转中心（ICR）判断</li>
+<li>可操纵度：有几个/几组能自由转向的轮子</li>
+</ul>
+<h3 id="传感器">传感器</h3>
+<ul>
+<li>传感器分类：
+<ul>
+<li>Proprioceptive/exteroceptive（本体感受/外部感受）</li>
+<li>Passive/active（无源/有源）</li>
+</ul></li>
+<li>常见无源：红外、压电</li>
+<li>激光传感器与相机优劣势分析
+<ul>
+<li>激光：精度高，响应快，抗干扰能力强，但对物体表面特性敏感，测量范围有限，价格较高</li>
+<li>相机：能获取丰富的视觉信息，价格较低，但测量精度低，易受环境光影响，数据处理算法复杂</li>
+</ul></li>
+<li>传感器基本特性：分辨率，线性度，带宽，灵敏度，交叉灵敏度，误差，准确性，精确度，系统误差，随机误差</li>
+<li>常见测距仪及其原理：
+<ul>
+<li>光学编码器：通过脉冲频率确定旋转速度</li>
+<li>指南针：地磁场</li>
+<li>陀螺仪：角动量守恒</li>
+<li>加速度计：牛顿定律+电容</li>
+<li>IMUs（惯性测量单元）：集成加速度计、陀螺仪等传感器</li>
+<li>GPS：卫星信号定位</li>
+</ul></li>
+<li>直线提取特征的三个主要问题：
+<ul>
+<li>有几条线？</li>
+<li>哪些点属于哪条线？</li>
+<li>给定属于一条直线的点，如何估计直线参数？</li>
+</ul></li>
+<li>主要提取方法：分裂-合并法（对初始划分敏感，计算量大），直线回归法（对异常值敏感），增量法（误差积累），期望最大化（EM），霍夫变换（基于投票），随机抽样一致性（RANSAC）</li>
+</ul>
+<h2 id="part-2">Part 2</h2>
+<h3 id="地图表示与构建">地图表示与构建</h3>
+<ul>
+<li>常见的四种表示方法：
+<ul>
+<li>点云，存储要求高</li>
+<li>栅格，可用 AStar
+规划路径，可用四/八叉树（面向二/三维空间）降低存储空间</li>
+<li>特征，几何特征明显</li>
+<li>拓扑，点+线，路径规划快，但节点稀疏，可能导致定位错误</li>
+</ul></li>
+<li>定位问题分类：位置跟踪、全局定位（初始位置未知）、绑架机器人问题（极端相似）</li>
+<li>位置更新的2个步骤：预测更新（本体感知推断）、感知更新（外部感知矫正）</li>
+</ul>
+<h3 id="规划和导航">规划和导航</h3>
+<ul>
+<li>导航方式：
+<ul>
+<li>有人工标识的固定路径导引</li>
+<li>有人工标识的无固定路径导引</li>
+<li>无标识导引的自然无轨导航</li>
+</ul></li>
+<li>导航问题分解：
+<ul>
+<li>路径规划</li>
+<li>避障规划</li>
+<li>轨迹生成</li>
+</ul></li>
+<li>势场法问题：存在局部最小，容易产生振荡和死锁。产生原因：某个位置吸引力和排斥力相互抵消，合力为零</li>
+<li>RRT优点：概率完备，快速扩展</li>
+<li>RRT缺点：计算量大，路径曲折</li>
+<li>AStar缺点：占用大量内存，无法处理动态地图</li>
+<li>向量直方图法：根据环境详细栅格地图构建机器人坐标系下障碍物概率直方图，根据概率直方图评估选择最优运动方向，可以有效避免势场法的局部极小值问题</li>
+<li>轨迹规划：给定路径与约束，生成一组控制序列</li>
+<li>机器人导航所需技术：感知，建图，定位，路径规划，控制</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Notes</category>
+      </categories>
+      <tags>
+        <tag>Robotics</tag>
+        <tag>Mobile</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>量子力学笔记</title>
     <url>/2025/03/17/notes/Quantum-Physics/</url>
     <content><![CDATA[<h1 id="tips">Tips</h1>
@@ -409,124 +541,6 @@ still can paste from the (non volatile) <strong>yank register</strong>
       </tags>
   </entry>
   <entry>
-    <title>Mobile Robotics</title>
-    <url>/2025/05/12/notes/Mobile-Robotics/</url>
-    <content><![CDATA[<h1 id="考纲分析">考纲分析</h1>
-<h2 id="part-1">Part 1</h2>
-<h3 id="legged--aerial">Legged &amp; Aerial</h3>
-<ul>
-<li>腿式机器人
-<ul>
-<li>点接触静步，至少需要4条腿；若同时移动两条腿则总共需要6条腿</li>
-<li>步态是指机器人的每条腿按一定的顺序和轨迹的运动过程（the distinct
-sequence of lift and release events of the individual legs）</li>
-<li>k 条腿机器人步态数 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="13.622ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 6021 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g><g data-mml-node="mo" transform="translate(1165.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mo" transform="translate(2221.6,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mn" transform="translate(2610.6,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="mi" transform="translate(3110.6,0)"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g><g data-mml-node="mo" transform="translate(3853.8,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mn" transform="translate(4854,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(5354,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mo" transform="translate(5743,0)"><path data-c="21" d="M78 661Q78 682 96 699T138 716T180 700T199 661Q199 654 179 432T158 206Q156 198 139 198Q121 198 119 206Q118 209 98 431T78 661ZM79 61Q79 89 97 105T141 121Q164 119 181 104T198 61Q198 31 181 16T139 1Q114 1 97 16T79 61Z"></path></g></g></g></svg></mjx-container></span></li>
-<li>能耗大于轮式机器人</li>
-</ul></li>
-<li>空中机器人有比空气轻（LTA）和比空气重（HTA）两种</li>
-</ul>
-<h3 id="运动学--wheeled">运动学 &amp; Wheeled</h3>
-<ul>
-<li>运动学是物理学的一个分支，在经典力学中发展起来，描述点、物体和物体系统的运动，而不考虑导致它们运动的力</li>
-<li>运动学坐标：Global 下标为 I，Local 下标为 R</li>
-<li>常见轮子种类与应用
-<ul>
-<li>标准轮：广泛应用于自行车、汽车等交通工具</li>
-<li>小脚轮：常用于需要轻便、快速移动的设备，如电动车、滑板车、购物车</li>
-<li>瑞典轮：常用于全向移动机器人，如天王星（Uranus）机器人</li>
-<li>球形轮：早期鼠标的重要部件之一。在机器人领域，球形轮可用于构建全向运动系统</li>
-</ul></li>
-<li>标准轮约束方程 <img lazyload="" src="/images/loading.svg" data-src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/Mobile-Robotics/constraint.png" alt="constr"></li>
-</ul>
-<blockquote>
-<p>⚠ 注意此处沿机器人方向建立全局坐标系</p>
-</blockquote>
-<ul>
-<li>旋转矩阵 R 将 global motion 映射到 local motion</li>
-</ul>
-<h3 id="机动度">机动度</h3>
-<ul>
-<li>移动机器人三种基本特性：Maneuverability(机动度)=Steerability(可操纵度)+Mobility(可移动度)</li>
-<li>可移动度：通过控制轮子的速度可以实现的移动自由度，可用瞬时旋转中心（ICR）判断</li>
-<li>可操纵度：有几个/几组能自由转向的轮子</li>
-</ul>
-<h3 id="传感器">传感器</h3>
-<ul>
-<li>传感器分类：
-<ul>
-<li>Proprioceptive/exteroceptive（本体感受/外部感受）</li>
-<li>Passive/active（无源/有源）</li>
-</ul></li>
-<li>常见无源：红外、压电</li>
-<li>激光传感器与相机优劣势分析
-<ul>
-<li>激光：精度高，响应快，抗干扰能力强，但对物体表面特性敏感，测量范围有限，价格较高</li>
-<li>相机：能获取丰富的视觉信息，价格较低，但测量精度低，易受环境光影响，数据处理算法复杂</li>
-</ul></li>
-<li>传感器基本特性：分辨率，线性度，带宽，灵敏度，交叉灵敏度，误差，准确性，精确度，系统误差，随机误差</li>
-<li>常见测距仪及其原理：
-<ul>
-<li>光学编码器：通过脉冲频率确定旋转速度</li>
-<li>指南针：地磁场</li>
-<li>陀螺仪：角动量守恒</li>
-<li>加速度计：牛顿定律+电容</li>
-<li>IMUs（惯性测量单元）：集成加速度计、陀螺仪等传感器</li>
-<li>GPS：卫星信号定位</li>
-</ul></li>
-<li>直线提取特征的三个主要问题：
-<ul>
-<li>有几条线？</li>
-<li>哪些点属于哪条线？</li>
-<li>给定属于一条直线的点，如何估计直线参数？</li>
-</ul></li>
-<li>主要提取方法：分裂-合并法（对初始划分敏感，计算量大），直线回归法（对异常值敏感），增量法（误差积累），期望最大化（EM），霍夫变换（基于投票），随机抽样一致性（RANSAC）</li>
-</ul>
-<h2 id="part-2">Part 2</h2>
-<h3 id="地图表示与构建">地图表示与构建</h3>
-<ul>
-<li>常见的四种表示方法：
-<ul>
-<li>点云，存储要求高</li>
-<li>栅格，可用 AStar
-规划路径，可用四/八叉树（面向二/三维空间）降低存储空间</li>
-<li>特征，几何特征明显</li>
-<li>拓扑，点+线，路径规划快，但节点稀疏，可能导致定位错误</li>
-</ul></li>
-<li>定位问题分类：位置跟踪、全局定位（初始位置未知）、绑架机器人问题（极端相似）</li>
-<li>位置更新的2个步骤：预测更新（本体感知推断）、感知更新（外部感知矫正）</li>
-</ul>
-<h3 id="规划和导航">规划和导航</h3>
-<ul>
-<li>导航方式：
-<ul>
-<li>有人工标识的固定路径导引</li>
-<li>有人工标识的无固定路径导引</li>
-<li>无标识导引的自然无轨导航</li>
-</ul></li>
-<li>导航问题分解：
-<ul>
-<li>路径规划</li>
-<li>避障规划</li>
-<li>轨迹生成</li>
-</ul></li>
-<li>势场法问题：存在局部最小，容易产生振荡和死锁。产生原因：某个位置吸引力和排斥力相互抵消，合力为零</li>
-<li>RRT优点：概率完备，快速扩展</li>
-<li>RRT缺点：计算量大，路径曲折</li>
-<li>AStar缺点：占用大量内存，无法处理动态地图</li>
-<li>向量直方图法：根据环境详细栅格地图构建机器人坐标系下障碍物概率直方图，根据概率直方图评估选择最优运动方向，可以有效避免势场法的局部极小值问题</li>
-<li>轨迹规划：给定路径与约束，生成一组控制序列</li>
-<li>机器人导航所需技术：感知，建图，定位，路径规划，控制</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Notes</category>
-      </categories>
-      <tags>
-        <tag>Robotics</tag>
-        <tag>Mobile</tag>
-      </tags>
-  </entry>
-  <entry>
     <title></title>
     <url>/README.html</url>
     <content><![CDATA[<h1 id="welcome-to-aronkks-site">Welcome to Aronkk’s site!</h1>
@@ -593,26 +607,26 @@ Ralston<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top
 ]]></content>
   </entry>
   <entry>
-    <title>相册</title>
-    <url>/masonry/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
     <title>分类</title>
     <url>/categories/index.html</url>
     <content><![CDATA[
 ]]></content>
   </entry>
   <entry>
-    <title>标签</title>
-    <url>/tags/index.html</url>
+    <title>links</title>
+    <url>/links/index.html</url>
     <content><![CDATA[
 ]]></content>
   </entry>
   <entry>
-    <title>links</title>
-    <url>/links/index.html</url>
+    <title>相册</title>
+    <url>/masonry/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
+    <title>标签</title>
+    <url>/tags/index.html</url>
     <content><![CDATA[
 ]]></content>
   </entry>
