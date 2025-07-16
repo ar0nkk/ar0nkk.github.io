@@ -47,6 +47,7 @@ epoch，在真实单臂机器人上测试发现夹爪会在物体正上方闭合
 <h2 id="plan-1">Plan</h2>
 <ul>
 <li>解决 aTrust vpn 的问题，在服务器上处理周一采集的数据</li>
+<li>尝试用 Diffusion Policy 训练一遍，在此基础上梳理代码</li>
 </ul>
 ]]></content>
       <categories>
@@ -541,15 +542,6 @@ sequence of lift and release events of the individual legs）</li>
       </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/README.html</url>
-    <content><![CDATA[<h1 id="welcome-to-aronkks-site">Welcome to Aronkk’s site!</h1>
-<ul>
-<li>See aronkk.top for more.</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>About</title>
     <url>/about/index.html</url>
     <content><![CDATA[<!-- Check Mark Button：◻️✅ -->
@@ -610,6 +602,15 @@ Ralston<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top
     <title>分类</title>
     <url>/categories/index.html</url>
     <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/README.html</url>
+    <content><![CDATA[<h1 id="welcome-to-aronkks-site">Welcome to Aronkk’s site!</h1>
+<ul>
+<li>See aronkk.top for more.</li>
+</ul>
 ]]></content>
   </entry>
   <entry>
