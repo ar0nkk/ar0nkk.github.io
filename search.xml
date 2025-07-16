@@ -35,7 +35,7 @@ Policy<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top 
 <ul>
 <li>周一到学院实验室采集了新的数据（pick_3_object）。考虑到 ACT
 模型的局限性，固定了物体的摆放位置、朝向和拾取顺序，准备先试试训练效果，成功率高再尝试不同摆放位置。总共采了100条数据，还需要做数据对齐等处理</li>
-<li>在启智平台创建实例并并保存了镜像（用于创建新实例时跳过环境搭建）并用
+<li>在启智平台创建实例并保存了镜像（用于创建新实例时跳过环境搭建）并用
 ACT 训练了2000个
 epoch，在真实单臂机器人上测试发现夹爪会在物体正上方闭合导致抓取失败（这是常见的情况），可能是由数据采集和测试所用的摄像头不同或数据集质量不高导致的</li>
 <li>梳理了 ACT 的代码。其中数据填充对齐代码如下：
@@ -542,6 +542,21 @@ sequence of lift and release events of the individual legs）</li>
       </tags>
   </entry>
   <entry>
+    <title></title>
+    <url>/README.html</url>
+    <content><![CDATA[<h1 id="welcome-to-aronkks-site">Welcome to Aronkk’s site!</h1>
+<ul>
+<li>See aronkk.top for more.</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>分类</title>
+    <url>/categories/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
     <title>About</title>
     <url>/about/index.html</url>
     <content><![CDATA[<!-- Check Mark Button：◻️✅ -->
@@ -596,21 +611,6 @@ Architecture)</li>
 Ralston<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>；kk取自我的名字。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
-]]></content>
-  </entry>
-  <entry>
-    <title>分类</title>
-    <url>/categories/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/README.html</url>
-    <content><![CDATA[<h1 id="welcome-to-aronkks-site">Welcome to Aronkk’s site!</h1>
-<ul>
-<li>See aronkk.top for more.</li>
-</ul>
 ]]></content>
   </entry>
   <entry>
