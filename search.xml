@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>科研日志</title>
+    <url>/2025/07/12/log/Summer2025/</url>
+    <content><![CDATA[<h1 id="7-12">7-12</h1>
+<h2 id="log">Log</h2>
+<ul>
+<li>梳理了论文 <a class="link" href="https://arxiv.org/abs/2303.04137">Diffusion
+Policy<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> 的内容</li>
+<li>在模拟环境中跑通了 ACT 训练双爪机器人递方块的流程，细节如下：
+<ol type="1">
+<li>运行 <code>record_sim_episodes.py</code> 生成50条脚本化数据：
+ <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">python3 record_sim_episodes.py \</span><br><span class="line">--task_name sim_transfer_cube_scripted \</span><br><span class="line">--dataset_dir data/ \</span><br><span class="line">--num_episodes 50</span><br></pre></td></tr></table></figure></div>
+</li>
+<li>训练与测试：
+ <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Transfer Cube task</span></span><br><span class="line">python3 imitate_episodes.py \</span><br><span class="line">--task_name sim_transfer_cube_scripted \</span><br><span class="line">--ckpt_dir data/sim_ckpt/ \</span><br><span class="line">--policy_class ACT --kl_weight 10 --chunk_size 100 --hidden_dim 512 --batch_size 8 --dim_feedforward 3200 \</span><br><span class="line">--num_epochs 2000  --lr 1e-5 \</span><br><span class="line">--seed 0</span><br><span class="line">--temporal_agg</span><br></pre></td></tr></table></figure></div>
+
+测试结果如下：<img lazyload="" src="/images/loading.svg" data-src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/Summer2025/ACT_trans_cube_ensemble.png" alt="test">
+<ul>
+<li><code>--temporal_agg</code> 表示启用 temporal ensembling
+(加权平均融合)，可以观察到机器人移动更平滑，卡顿明显减少，成功率比不启用时高出2个点</li>
+<li>测试时只需加上 <code>--eval</code>，测试视频存储在
+<code>data/sim_ckpt/</code>
+中。观察到只要夹起方块就会被脚本视为成功，即实际成功率低于测试得到的成功率</li>
+<li>在生成训练数据时启用
+<code>--onscreen_render</code>，发现夹爪行为正常，但训练出的机器人总是倾向于夹取方块底部，导致不能正对接方块的夹爪，具体原因尚不清楚</li>
+</ul></li>
+</ol></li>
+</ul>
+<h2 id="plan">Plan</h2>
+<ul>
+<li>到学院用4090服务器和上周采集的真实数据训练，看看效果如何</li>
+<li>继续学习后面的论文，补充 LLM 和 ViT 相关基础知识</li>
+</ul>
+<h1 id="7-16">7-16</h1>
+<h2 id="log-1">Log</h2>
+<ul>
+<li>周一到学院实验室采集了新的数据（pick_3_object）。考虑到 ACT
+模型的局限性，固定了物体的摆放位置、朝向和拾取顺序，准备先试试训练效果，成功率高再尝试不同摆放位置。总共采了100条数据</li>
+<li>在启智平台创建实例并保存了镜像（用于创建新实例时跳过环境搭建）并用
+ACT 训练了2000个
+epoch，在真实单臂机器人上测试发现夹爪会在物体正上方闭合导致抓取失败（这是常见的情况），可能是由数据采集和测试所用的摄像头不同或数据集质量不高导致的</li>
+<li>对采集的数据 <code>pick_3_objects_0714</code> 进行处理，并添加属性
+<code>sim</code></li>
+<li>梳理了 ACT 的代码。其中数据填充对齐代码如下：
+  <div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 由于采集的机器人动作序列等数据长度是随机的，在训练前需要对齐</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">user_collate</span>(<span class="params">datas: <span class="built_in">list</span>, minimum_length=<span class="number">100</span></span>):</span><br><span class="line">	bs = <span class="built_in">len</span>(datas)</span><br><span class="line">	</span><br><span class="line">	<span class="comment"># 计算每个样本中非填充（有效）动作的长度（False 表示有效数据）</span></span><br><span class="line">	length_count = [(d[<span class="number">3</span>] == <span class="literal">False</span>).<span class="built_in">sum</span>().item() <span class="keyword">for</span> d <span class="keyword">in</span> datas]</span><br><span class="line">	</span><br><span class="line">	<span class="comment"># 把所有序列统一 pad 到 max_length</span></span><br><span class="line">	max_length = <span class="built_in">max</span>(minimum_length, <span class="built_in">max</span>(length_count))</span><br><span class="line">	</span><br><span class="line">	<span class="comment"># pad_size[i]: 第 i 个样本需要填充多少步</span></span><br><span class="line">	pad_size = [max_length - i <span class="keyword">for</span> i <span class="keyword">in</span> length_count]</span><br><span class="line">	</span><br><span class="line">	<span class="comment"># torch.stack()用于将多个n维张量沿着一个新的维度堆叠起来，形成一个n+1维张量</span></span><br><span class="line">	images = torch.stack([d[<span class="number">0</span>] <span class="keyword">for</span> d <span class="keyword">in</span> datas])</span><br><span class="line">	qpos = torch.stack([d[<span class="number">1</span>] <span class="keyword">for</span> d <span class="keyword">in</span> datas])</span><br><span class="line">	actions, is_pad = [], []</span><br><span class="line">	<span class="keyword">for</span> d, l, p <span class="keyword">in</span> <span class="built_in">zip</span>(datas, length_count, pad_size):</span><br><span class="line">	curr_action = d[<span class="number">2</span>][: l]</span><br><span class="line">	curr_pad_info = d[<span class="number">3</span>][: l]</span><br><span class="line">	additional_pad_info = torch.ones(p, dtype=curr_pad_info.dtype, device=curr_pad_info.device) <span class="comment"># 填充标记</span></span><br><span class="line">	pad_actions = torch.zeros((p, curr_action.shape[-<span class="number">1</span>]), dtype=curr_action.dtype, device=curr_action.device) <span class="comment"># 填充全零动作</span></span><br><span class="line">	actions.append(torch.concat([curr_action, pad_actions], dim=<span class="number">0</span>))</span><br><span class="line">	is_pad.append(torch.concat([curr_pad_info, additional_pad_info], dim=<span class="number">0</span>))</span><br><span class="line">	actions = torch.stack(actions)</span><br><span class="line">	is_pad = torch.stack(is_pad)</span><br><span class="line">	<span class="keyword">return</span> images, qpos, actions, is_pad</span><br></pre></td></tr></table></figure></div>
+</li>
+<li>从 Transformer 的实现开始，补充 ViT 相关基础。Transformer
+架构如下：<img lazyload="" src="/images/loading.svg" data-src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/Summer2025/transformer.png" alt="Transformer"> 详见 <a class="link" href="https://zh.d2l.ai/chapter_attention-mechanisms/transformer.html">d2l-transformer<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
+</ul>
+<h2 id="plan-1">Plan</h2>
+<ul>
+<li>解决 aTrust vpn 的问题，在服务器上处理周一采集的数据并跑通 ACT</li>
+<li>尝试用 Diffusion Policy 训练一遍，在此基础上梳理代码</li>
+</ul>
+]]></content>
+      <categories>
+        <category>log</category>
+      </categories>
+      <tags>
+        <tag>Robotics</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Computer Architecture(CS2651)</title>
     <url>/2025/03/20/notes/Computer-Architecture/</url>
     <content><![CDATA[<h1 id="digital-logic">Digital Logic</h1>
@@ -352,8 +414,8 @@ sequence of lift and release events of the individual legs）</li>
         <category>Notes</category>
       </categories>
       <tags>
-        <tag>Mobile</tag>
         <tag>Robotics</tag>
+        <tag>Mobile</tag>
       </tags>
   </entry>
   <entry>
@@ -485,101 +547,6 @@ sequence of lift and release events of the individual legs）</li>
       </tags>
   </entry>
   <entry>
-    <title>科研日志</title>
-    <url>/2025/07/12/log/Summer2025/</url>
-    <content><![CDATA[<h1 id="7-12">7-12</h1>
-<h2 id="log">Log</h2>
-<ul>
-<li>梳理了论文 <a class="link" href="https://arxiv.org/abs/2303.04137">Diffusion
-Policy<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> 的内容</li>
-<li>在模拟环境中跑通了 ACT 训练双爪机器人递方块的流程，细节如下：
-<ol type="1">
-<li>运行 <code>record_sim_episodes.py</code> 生成50条脚本化数据：
- <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">python3 record_sim_episodes.py \</span><br><span class="line">--task_name sim_transfer_cube_scripted \</span><br><span class="line">--dataset_dir data/ \</span><br><span class="line">--num_episodes 50</span><br></pre></td></tr></table></figure></div>
-</li>
-<li>训练与测试：
- <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Transfer Cube task</span></span><br><span class="line">python3 imitate_episodes.py \</span><br><span class="line">--task_name sim_transfer_cube_scripted \</span><br><span class="line">--ckpt_dir data/sim_ckpt/ \</span><br><span class="line">--policy_class ACT --kl_weight 10 --chunk_size 100 --hidden_dim 512 --batch_size 8 --dim_feedforward 3200 \</span><br><span class="line">--num_epochs 2000  --lr 1e-5 \</span><br><span class="line">--seed 0</span><br><span class="line">--temporal_agg</span><br></pre></td></tr></table></figure></div>
-
-测试结果如下：<img lazyload="" src="/images/loading.svg" data-src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/Summer2025/ACT_trans_cube_ensemble.png" alt="test">
-<ul>
-<li><code>--temporal_agg</code> 表示启用 temporal ensembling
-(加权平均融合)，可以观察到机器人移动更平滑，卡顿明显减少，成功率比不启用时高出2个点</li>
-<li>测试时只需加上 <code>--eval</code>，测试视频存储在
-<code>data/sim_ckpt/</code>
-中。观察到只要夹起方块就会被脚本视为成功，即实际成功率低于测试得到的成功率</li>
-<li>在生成训练数据时启用
-<code>--onscreen_render</code>，发现夹爪行为正常，但训练出的机器人总是倾向于夹取方块底部，导致不能正对接方块的夹爪，具体原因尚不清楚</li>
-</ul></li>
-</ol></li>
-</ul>
-<h2 id="plan">Plan</h2>
-<ul>
-<li>到学院用4090服务器和上周采集的真实数据训练，看看效果如何</li>
-<li>继续学习后面的论文，补充 LLM 和 ViT 相关基础知识</li>
-</ul>
-<h1 id="7-16">7-16</h1>
-<h2 id="log-1">Log</h2>
-<ul>
-<li>周一到学院实验室采集了新的数据（pick_3_object）。考虑到 ACT
-模型的局限性，固定了物体的摆放位置、朝向和拾取顺序，准备先试试训练效果，成功率高再尝试不同摆放位置。总共采了100条数据</li>
-<li>在启智平台创建实例并保存了镜像（用于创建新实例时跳过环境搭建）并用
-ACT 训练了2000个
-epoch，在真实单臂机器人上测试发现夹爪会在物体正上方闭合导致抓取失败（这是常见的情况），可能是由数据采集和测试所用的摄像头不同或数据集质量不高导致的</li>
-<li>对采集的数据 <code>pick_3_objects_0714</code> 进行处理，并添加属性
-<code>sim</code></li>
-<li>梳理了 ACT 的代码。其中数据填充对齐代码如下：
-  <div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 由于采集的机器人动作序列等数据长度是随机的，在训练前需要对齐</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">user_collate</span>(<span class="params">datas: <span class="built_in">list</span>, minimum_length=<span class="number">100</span></span>):</span><br><span class="line">	bs = <span class="built_in">len</span>(datas)</span><br><span class="line">	</span><br><span class="line">	<span class="comment"># 计算每个样本中非填充（有效）动作的长度（False 表示有效数据）</span></span><br><span class="line">	length_count = [(d[<span class="number">3</span>] == <span class="literal">False</span>).<span class="built_in">sum</span>().item() <span class="keyword">for</span> d <span class="keyword">in</span> datas]</span><br><span class="line">	</span><br><span class="line">	<span class="comment"># 把所有序列统一 pad 到 max_length</span></span><br><span class="line">	max_length = <span class="built_in">max</span>(minimum_length, <span class="built_in">max</span>(length_count))</span><br><span class="line">	</span><br><span class="line">	<span class="comment"># pad_size[i]: 第 i 个样本需要填充多少步</span></span><br><span class="line">	pad_size = [max_length - i <span class="keyword">for</span> i <span class="keyword">in</span> length_count]</span><br><span class="line">	</span><br><span class="line">	<span class="comment"># torch.stack()用于将多个n维张量沿着一个新的维度堆叠起来，形成一个n+1维张量</span></span><br><span class="line">	images = torch.stack([d[<span class="number">0</span>] <span class="keyword">for</span> d <span class="keyword">in</span> datas])</span><br><span class="line">	qpos = torch.stack([d[<span class="number">1</span>] <span class="keyword">for</span> d <span class="keyword">in</span> datas])</span><br><span class="line">	actions, is_pad = [], []</span><br><span class="line">	<span class="keyword">for</span> d, l, p <span class="keyword">in</span> <span class="built_in">zip</span>(datas, length_count, pad_size):</span><br><span class="line">	curr_action = d[<span class="number">2</span>][: l]</span><br><span class="line">	curr_pad_info = d[<span class="number">3</span>][: l]</span><br><span class="line">	additional_pad_info = torch.ones(p, dtype=curr_pad_info.dtype, device=curr_pad_info.device) <span class="comment"># 填充标记</span></span><br><span class="line">	pad_actions = torch.zeros((p, curr_action.shape[-<span class="number">1</span>]), dtype=curr_action.dtype, device=curr_action.device) <span class="comment"># 填充全零动作</span></span><br><span class="line">	actions.append(torch.concat([curr_action, pad_actions], dim=<span class="number">0</span>))</span><br><span class="line">	is_pad.append(torch.concat([curr_pad_info, additional_pad_info], dim=<span class="number">0</span>))</span><br><span class="line">	actions = torch.stack(actions)</span><br><span class="line">	is_pad = torch.stack(is_pad)</span><br><span class="line">	<span class="keyword">return</span> images, qpos, actions, is_pad</span><br></pre></td></tr></table></figure></div>
-</li>
-<li>从 Transformer 的实现开始，补充 ViT 相关基础。Transformer
-架构如下：<img lazyload="" src="/images/loading.svg" data-src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/Summer2025/transformer.png" alt="Transformer"> 详见 <a class="link" href="https://zh.d2l.ai/chapter_attention-mechanisms/transformer.html">d2l-transformer<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
-</ul>
-<h2 id="plan-1">Plan</h2>
-<ul>
-<li>解决 aTrust vpn 的问题，在服务器上处理周一采集的数据并跑通 ACT</li>
-<li>尝试用 Diffusion Policy 训练一遍，在此基础上梳理代码</li>
-</ul>
-]]></content>
-      <categories>
-        <category>log</category>
-      </categories>
-      <tags>
-        <tag>Robotics</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>分类</title>
-    <url>/categories/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/README.html</url>
-    <content><![CDATA[<h1 id="welcome-to-aronkks-site">Welcome to Aronkk’s site!</h1>
-<ul>
-<li>See aronkk.top for more.</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>标签</title>
-    <url>/tags/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
-    <title>links</title>
-    <url>/links/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
-    <title>相册</title>
-    <url>/masonry/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
     <title>About</title>
     <url>/about/index.html</url>
     <content><![CDATA[<!-- Check Mark Button：◻️✅ -->
@@ -634,6 +601,39 @@ Architecture)</li>
 Ralston<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>；kk取自我的名字。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
+]]></content>
+  </entry>
+  <entry>
+    <title>分类</title>
+    <url>/categories/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
+    <title>links</title>
+    <url>/links/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/README.html</url>
+    <content><![CDATA[<h1 id="welcome-to-aronkks-site">Welcome to Aronkk’s site!</h1>
+<ul>
+<li>See aronkk.top for more.</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>相册</title>
+    <url>/masonry/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
+    <title>标签</title>
+    <url>/tags/index.html</url>
+    <content><![CDATA[
 ]]></content>
   </entry>
 </search>
