@@ -443,48 +443,56 @@
 
 
 		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-			<h1>Digital Logic</h1>
+			<h1 id="digital-logic">Digital Logic</h1>
 <ul>
 <li>n-type: connect to GND, turn on (with 1) to pull down to 0</li>
 <li>p-type: connect to +2.9V, turn on (with 0) to pull up to 1</li>
-<li>不用 CMOS，仅用 n-type 或 p-type（用电阻代替另一端）就能实现单个 NOT Gate，但是电阻的电流热效应是不可忽略的，并且电阻充放电需要时间</li>
+<li>不用 CMOS，仅用 n-type 或 p-type（用电阻代替另一端）就能实现单个 NOT
+Gate，但是电阻的电流热效应是不可忽略的，并且电阻充放电需要时间</li>
 </ul>
-<h1>Computer Organization and ISA</h1>
+<h1 id="computer-organization-and-isa">Computer Organization and
+ISA</h1>
 <ul>
-<li>Von Neumann Model: <img  
+<li>Von Neumann Model: <img 
+
                      lazyload
                      src="/images/loading.svg"
                      data-src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/Computer-Architecture/Von-Neumann-Model.jpg"
-                      alt="Von Neumann Model"
+                     
+alt="Von Neumann Model" 
                 ></li>
 <li>关于控制指令：
 <ul>
 <li>jumps are unconditional – they always change the PC</li>
-<li>branches are conditional – they change the PC only if some condition is true (e.g., the result of an ADD is zero)</li>
+<li>branches are conditional – they change the PC only if some condition
+is true (e.g., the result of an ADD is zero)</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h1>LC-3</h1>
+<h1 id="lc-3">LC-3</h1>
 <ul>
-<li>当通用寄存器（R0~R7）写入数据时更新 condition code NZP（以下简称 cc）</li>
+<li>当通用寄存器（R0~R7）写入数据时更新 condition code NZP（以下简称
+cc）</li>
 </ul>
 <blockquote>
-<p>ℹ️ 在<a class="link"   target="_blank" rel="noopener" href="https://archive.org/details/introduction-to-computing-systems-from-bits-gates-to-c-beyond-yale-patt-z-library" >第三版教材<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>中，规定 LEA（加载有效地址）访问了 register 但不更新 cc</p>
+<p>ℹ️ 在<a class="link" 
+ target="_blank" rel="noopener" href="https://archive.org/details/introduction-to-computing-systems-from-bits-gates-to-c-beyond-yale-patt-z-library" >第三版教材<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>中，规定
+LEA（加载有效地址）访问了 register 但不更新 cc</p>
 </blockquote>
 <ul>
 <li>PCoffset9 中的 PC 是下一条指令的地址</li>
 <li>TRAP 指令和 JMP 指令的区别：
-<ol>
+<ol type="1">
 <li>TRAP 类似于函数调用，执行完 OS 代码后会跳转回来</li>
-<li>TRAP 对地址做了封装，用户寄存器只能通过相应编号调用功能（例如 x21）</li>
-</ol>
-</li>
+<li>TRAP 对地址做了封装，用户寄存器只能通过相应编号调用功能（例如
+x21）</li>
+</ol></li>
 </ul>
-<h1>Assembly Programming</h1>
+<h1 id="assembly-programming">Assembly Programming</h1>
 <ul>
 <li>二进制移位操作：乘2左移，除2右移</li>
 <li>R0[7:0] is for trap codes IN, OUT and GETC</li>
-<li>伪操作（pseudo-operations，点开头）只用于汇编，程序汇编后不占用内存空间（注意分辨 <code>HALT</code> 和 <code>.END</code>）</li>
+<li>伪操作（pseudo-operations，点开头）只用于汇编，程序汇编后不占用内存空间（注意分辨
+<code>HALT</code> 和 <code>.END</code>）</li>
 </ul>
 
 		</div>
@@ -544,7 +552,8 @@
 	<div class="post-toc">
 		<div class="toc-title">目录</div>
 		<div class="page-title">Computer Architecture(CS2651)</div>
-		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Digital Logic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Computer Organization and ISA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">LC-3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Assembly Programming</span></a></li></ol>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#digital-logic"><span class="nav-number">1.</span> <span class="nav-text">Digital Logic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#computer-organization-and-isa"><span class="nav-number">2.</span> <span class="nav-text">Computer Organization and
+ISA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lc-3"><span class="nav-number">3.</span> <span class="nav-text">LC-3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#assembly-programming"><span class="nav-number">4.</span> <span class="nav-text">Assembly Programming</span></a></li></ol>
 
 	</div>
 </div>

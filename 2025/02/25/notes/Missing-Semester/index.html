@@ -30,7 +30,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://aronkk.top/images/redefine-og.webp">
 <meta property="article:published_time" content="2025-02-24T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-26T11:30:06.241Z">
+<meta property="article:modified_time" content="2025-11-26T11:30:06.000Z">
 <meta property="article:author" content="Aronkk">
 <meta property="article:tag" content="Shell">
 <meta property="article:tag" content="Vim">
@@ -437,7 +437,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>572 字</span>
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>557 字</span>
         </span>
     
     
@@ -458,61 +458,85 @@
 
 		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
 			<blockquote>
-<p>大部分内容可以在<a class="link"   target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/" >中文讲义<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>中查询到，本文只放一些自己认为有意思的东西。</p>
+<p>大部分内容可以在<a class="link" 
+ target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/" >中文讲义<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>中查询到，本文只放一些自己认为有意思的东西。</p>
 </blockquote>
 <blockquote>
 <p><code>A</code> = <code>Shift-a</code></p>
 </blockquote>
 <blockquote>
-<p><a class="link"   target="_blank" rel="noopener" href="https://www.zhaixue.cc/vim/vim-move.html" >vim 指令速查<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.zhaixue.cc/vim/vim-move.html" >vim
+指令速查<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
 </blockquote>
-<h1>Shell</h1>
+<h1 id="shell">Shell</h1>
 <ul>
-<li><code>touch</code> command to create or modify a file（碰到就更新时间戳，非常生动形象）</li>
-<li><code>!!</code> 表示完整的上一条命令，包括参数。当你因为权限不足执行命令失败时，可以使用 <code>sudo !!</code> 再尝试一次</li>
+<li><code>touch</code> command to create or modify a
+file（碰到就更新时间戳，非常生动形象）</li>
+<li><code>!!</code>
+表示完整的上一条命令，包括参数。当你因为权限不足执行命令失败时，可以使用
+<code>sudo !!</code> 再尝试一次</li>
 <li>同一行的多个命令可以用 <code>;</code> 分隔</li>
 <li><code>Ctrl-d</code> 退出 Shell</li>
 </ul>
-<h1>Vim in VSCode</h1>
-<h2 id="解决-windows-切换到-normal-mode-时输入法为中文的问题：">解决 windows 切换到 <em>normal</em> mode 时输入法为中文的问题：</h2>
-<p>安装 <a class="link"   target="_blank" rel="noopener" href="https://github.com/daipeihust/im-select/blob/master/README_CN.md" >im-select<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> 到 C:/im-select/，然后在 setting json 中添加：</p>
+<h1 id="vim-in-vscode">Vim in VSCode</h1>
+<h2 id="解决-windows-切换到-normal-mode-时输入法为中文的问题">解决
+windows 切换到 <em>normal</em> mode 时输入法为中文的问题：</h2>
+<p>安装 <a class="link" 
+ target="_blank" rel="noopener" href="https://github.com/daipeihust/im-select/blob/master/README_CN.md" >im-select<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>
+到 C:/im-select/，然后在 setting json 中添加：</p>
 <div class="code-container" data-rel="Json"><figure class="iseeu highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;vim.autoSwitchInputMethod.enable&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;vim.autoSwitchInputMethod.defaultIM&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1033&quot;</span><span class="punctuation">,</span> # 需要在输入法为英文时运行 im-select.exe 获得相应的输入法代码</span><br><span class="line"><span class="attr">&quot;vim.autoSwitchInputMethod.obtainIMCmd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;C:\\im-select\\im-select.exe&quot;</span><span class="punctuation">,</span> </span><br><span class="line"><span class="attr">&quot;vim.autoSwitchInputMethod.switchIMCmd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;C:\\im-select\\im-select.exe &#123;im&#125;&quot;</span></span><br></pre></td></tr></table></figure></div>
+
 <h2 id="删除内容而不保存到剪贴板">删除内容而不保存到剪贴板</h2>
 <blockquote>
 <p>关于寄存器 (register)：</p>
 <ul>
-<li><strong><code>y</code>（复制）</strong>：<br>
-复制的内容会存入 <code>&quot;0</code>（复制专用寄存器）和 <code>&quot;&quot;</code>（无名寄存器）</li>
-<li><strong><code>c</code>（修改）、<code>d</code>（删除）、<code>x</code>（删除字符）</strong>：<br>
-删除/修改的内容会存入 <code>&quot;&quot;</code>（无名寄存器）和 <code>&quot;1-9</code>（数字寄存器，按操作顺序覆盖）<br>
-例如：第一次删除的内容存入 <code>&quot;1</code>，第二次删除存入 <code>&quot;1</code>（原 <code>&quot;1</code> 内容移到 <code>&quot;2</code>，依此类推）</li>
+<li><strong><code>y</code>（复制）</strong>：<br />
+复制的内容会存入 <code>"0</code>（复制专用寄存器）和
+<code>""</code>（无名寄存器）</li>
+<li><strong><code>c</code>（修改）、<code>d</code>（删除）、<code>x</code>（删除字符）</strong>：<br />
+删除/修改的内容会存入 <code>""</code>（无名寄存器）和
+<code>"1-9</code>（数字寄存器，按操作顺序覆盖）
+例如：第一次删除的内容存入 <code>"1</code>，第二次删除存入
+<code>"1</code>（原 <code>"1</code> 内容移到
+<code>"2</code>，依此类推）</li>
 <li>用 <code>:reg</code> 调试寄存器状态</li>
 </ul>
 </blockquote>
-<h3 id="VSCode-内置方法：">VSCode 内置方法：</h3>
+<h3 id="vscode-内置方法">VSCode 内置方法：</h3>
 <div class="tabs" id="tab-delete"><ul class="nav-tabs"><li class="tab active"><a class="#delete-1">删除整行</a></li><li class="tab"><a class="#delete-2">删除光标右侧内容</a></li><li class="tab"><a class="#delete-3">删除光标左侧内容</a></li></ul><div class="tab-content"><div class="tab-pane active" id="delete-1"><p><code>Ctrl-K</code></p></div><div class="tab-pane" id="delete-2"><p><code>Ctrl-Delete</code></p></div><div class="tab-pane" id="delete-3"><p><code>Ctrl-Backspace</code></p></div></div></div>
-<h3 id="使用-black-hole-register">使用 black hole register <code>&quot;_</code></h3>
-<p>例如使用 <code>&quot;_dd</code> 舍弃 <code>dd</code> 的内容。</p>
-<h3 id="Another-trick-from-Stack-Overflow">Another trick from <em>Stack Overflow</em>:</h3>
-<p>When you enter the line back with the <code>p</code> command you are pasting the contents of the (volatile) <strong>default register</strong> <code>&quot;&quot;</code>, which has been overwritten by <code>dd</code>. But you still can paste from the (non volatile) <strong>yank register</strong> <code>&quot;0</code>, which won’t be overwritten by the delete command <code>dd</code>.</p>
+
+<h3 id="使用-black-hole-register-_">使用 black hole register
+<code>"_</code></h3>
+<p>例如使用 <code>"_dd</code> 舍弃 <code>dd</code> 的内容。</p>
+<h3 id="another-trick-from-stack-overflow">Another trick from <em>Stack
+Overflow</em>:</h3>
+<p>When you enter the line back with the <code>p</code> command you are
+pasting the contents of the (volatile) <strong>default register</strong>
+<code>""</code>, which has been overwritten by <code>dd</code>. But you
+still can paste from the (non volatile) <strong>yank register</strong>
+<code>"0</code>, which won’t be overwritten by the delete command
+<code>dd</code>.</p>
 <blockquote>
-<p>Note that <code>Ctrl-v</code> in <em>insert</em> mode and <code>p</code> in <em>normal</em> mode have different buffers.</p>
+<p>Note that <code>Ctrl-v</code> in <em>insert</em> mode and
+<code>p</code> in <em>normal</em> mode have different buffers.</p>
 </blockquote>
 <h2 id="批量注释">批量注释</h2>
-<ol>
+<ol type="1">
 <li><code>Ctrl-v</code> 或 <code>V</code> 选中注释内容</li>
 <li>按 <code>I</code> 在行首插入 <code>#</code> 或 <code>//</code></li>
 </ol>
 <h2 id="其他技巧">其他技巧</h2>
 <ul>
-<li><code>Ctrl-o</code> 只执行一次 <em>normal</em> mode 下的操作，然后返回 <em>insert</em> mode</li>
+<li><code>Ctrl-o</code> 只执行一次 <em>normal</em> mode
+下的操作，然后返回 <em>insert</em> mode</li>
 <li><code>~</code> 切换大小写</li>
 <li><code>.</code> 重复上一次命令</li>
 </ul>
-<h1>Hexo</h1>
+<h1 id="hexo">Hexo</h1>
 <ul>
 <li><code>git clone</code> 失败时尝试把校园网换成手机热点</li>
-<li>禁用 <code>console</code> 打印日志：更改 <code>themes\redefine\scripts\events\welcome.js</code> 文件</li>
+<li>禁用 <code>console</code> 打印日志：更改
+<code>themes\redefine\scripts\events\welcome.js</code> 文件</li>
 </ul>
 
 		</div>
@@ -580,7 +604,10 @@
 	<div class="post-toc">
 		<div class="toc-title">目录</div>
 		<div class="page-title">Notes of the Missing Semester</div>
-		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Shell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Vim in VSCode</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-windows-%E5%88%87%E6%8D%A2%E5%88%B0-normal-mode-%E6%97%B6%E8%BE%93%E5%85%A5%E6%B3%95%E4%B8%BA%E4%B8%AD%E6%96%87%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">解决 windows 切换到 normal mode 时输入法为中文的问题：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%86%85%E5%AE%B9%E8%80%8C%E4%B8%8D%E4%BF%9D%E5%AD%98%E5%88%B0%E5%89%AA%E8%B4%B4%E6%9D%BF"><span class="nav-number">2.2.</span> <span class="nav-text">删除内容而不保存到剪贴板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VSCode-%E5%86%85%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">2.2.1.</span> <span class="nav-text">VSCode 内置方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-black-hole-register"><span class="nav-number">2.2.2.</span> <span class="nav-text">使用 black hole register &quot;_</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Another-trick-from-Stack-Overflow"><span class="nav-number">2.2.3.</span> <span class="nav-text">Another trick from Stack Overflow:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E6%B3%A8%E9%87%8A"><span class="nav-number">2.3.</span> <span class="nav-text">批量注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%8A%80%E5%B7%A7"><span class="nav-number">2.4.</span> <span class="nav-text">其他技巧</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Hexo</span></a></li></ol>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#shell"><span class="nav-number">1.</span> <span class="nav-text">Shell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vim-in-vscode"><span class="nav-number">2.</span> <span class="nav-text">Vim in VSCode</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-windows-%E5%88%87%E6%8D%A2%E5%88%B0-normal-mode-%E6%97%B6%E8%BE%93%E5%85%A5%E6%B3%95%E4%B8%BA%E4%B8%AD%E6%96%87%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">解决
+windows 切换到 normal mode 时输入法为中文的问题：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%86%85%E5%AE%B9%E8%80%8C%E4%B8%8D%E4%BF%9D%E5%AD%98%E5%88%B0%E5%89%AA%E8%B4%B4%E6%9D%BF"><span class="nav-number">2.2.</span> <span class="nav-text">删除内容而不保存到剪贴板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vscode-%E5%86%85%E7%BD%AE%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.1.</span> <span class="nav-text">VSCode 内置方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-black-hole-register-_"><span class="nav-number">2.2.2.</span> <span class="nav-text">使用 black hole register
+&quot;_</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#another-trick-from-stack-overflow"><span class="nav-number">2.2.3.</span> <span class="nav-text">Another trick from Stack
+Overflow:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E6%B3%A8%E9%87%8A"><span class="nav-number">2.3.</span> <span class="nav-text">批量注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%8A%80%E5%B7%A7"><span class="nav-number">2.4.</span> <span class="nav-text">其他技巧</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo"><span class="nav-number">3.</span> <span class="nav-text">Hexo</span></a></li></ol>
 
 	</div>
 </div>
