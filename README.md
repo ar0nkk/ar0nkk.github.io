@@ -1,2 +1,3 @@
 # Welcome to Aronkk's site!
-- See [https](https://aronkk.top/) for more.
+- See [aronkk.top](https://aronkk.top/) for more.
+
