@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="zh-CN,default">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Aronkk">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://aronkk.top/2026/01/07/notes/computer-vision/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Computer Vision">
+<meta property="og:url" content="https://aronkk.top/2026/01/07/notes/Computer-Vision/index.html">
+<meta property="og:site_name" content="Aronkk">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://aronkk.top/images/redefine-og.webp">
+<meta property="article:published_time" content="2026-01-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-01-07T10:00:46.526Z">
+<meta property="article:author" content="Aronkk">
+<meta property="article:tag" content="CV">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://aronkk.top/images/redefine-og.webp">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/ovatar.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/ovatar.png">
+    <meta name="theme-color" content="#5DE2E7">
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/ovatar.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Computer Vision | Aronkk
+        
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+        <link href="https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css" rel="stylesheet">
+    
+    
+    
+        <link href="https://fontsapi.zeoseven.com/292/main/result.css" rel="stylesheet">
+    
+    
+        <link href="https://fontsapi.zeoseven.com/292/main/result.css" rel="stylesheet">
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"aronkk.top","root":"/","language":["zh-CN","default"],"path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":false},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"simple","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":true,"expand":true,"init_open":true},"copyright":{"enable":false,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#5DE2E7","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":"LXGW WenKai","url":"https://fontsapi.zeoseven.com/292/main/result.css"},"english":{"enable":true,"family":"LXGW WenKai","url":"https://fontsapi.zeoseven.com/292/main/result.css"},"title":{"enable":false,"family":"LXGW WenKai","url":"https://fontsapi.zeoseven.com/292/main/result.css"}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":true},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":false,"id":null},"side_tools":{"gear_rotation":true,"auto_expand":true}},"home_banner":{"enable":false,"style":"fixed","image":{"light":"https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/pics/xinjiang/20240914-195705.JPG","dark":"https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/pics/xinjiang/20240914-195705.JPG"},"title":"Theme Redefine","subtitle":{"text":[],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":true,"family":"LXGW WenKai","url":"https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css"},"social_links":{"enable":true,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"11.4.1"}},"version":"2.8.2","navbar":{"auto_hide":true,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-solid fa-house"},"About":{"path":"/about","icon":"fa-solid fa-user"},"Friends":{"path":"/links","icon":"fa-solid fa-link"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"从长江头到长江尾","show_on_mobile":true,"links":{"Album":{"path":"/masonry/","icon":"fa-solid fa-image"},"Music":{"path":"https://music.shuyuz.com/music/details/13464534071","icon":"fa-solid fa-music"},"Github":{"path":"https://github.com/ar0nkk","icon":"fa-brands fa-github"}}},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":5}},"footerStart":"2025/2/18 00:00:00"};
+    window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    window.data = {"masonry":true};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+                <a class="logo-image h-8 w-8 sm:w-10 sm:h-10 mr-3" href="/">
+                    <img src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/ovatar.png" class="w-full h-full rounded-sm">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                Aronkk
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-solid fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/about"
+                                        >
+                                    <i class="fa-solid fa-user fa-fw"></i>
+                                    关于
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/links"
+                                        >
+                                    <i class="fa-solid fa-link fa-fw"></i>
+                                    友情链接
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-solid fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/about"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-user fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/links"
+                        >
+                            <span>
+                                友情链接
+                            </span>
+                            
+                                <i class="fa-solid fa-link fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/masonry/"
+                        >
+                            <span>Album</span>
+                            <i class="fa-solid fa-image fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           target="_blank" rel="noopener" href="https://music.shuyuz.com/music/details/13464534071"
+                        >
+                            <span>Music</span>
+                            <i class="fa-solid fa-music fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           target="_blank" rel="noopener" href="https://github.com/ar0nkk"
+                        >
+                            <span>Github</span>
+                            <i class="fa-brands fa-github fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">9</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">2</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">8</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">Computer Vision</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/avatar.png">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">Aronkk</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2026-01-07</span>
+        <span class="mobile">2026-01-07</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2026-01-07 18:46</span>
+            <span class="mobile">2026-01-07 18:46</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/Notes/">Notes</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/CV/">CV</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>2.4k 字</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<h2 id="考前注意事项">考前注意事项</h2>
+<ul>
+<li>多选题注意英文单复数</li>
+<li>看作业和小测</li>
+<li>ppt 重点</li>
+<li>视觉词典 k 的选择：k 大了会怎样、小了会怎样</li>
+</ul>
+<hr />
+<h2 id="线性代数知识补充">线性代数知识补充</h2>
+<ul>
+<li><strong>【引理1】</strong> 对于二次型 <span
+class="math inline">\(h^TA^TAh\)</span>，当 <span
+class="math inline">\(h\)</span> 是 <span
+class="math inline">\(A^TA\)</span> 的最小特征值 <span
+class="math inline">\(\lambda_{\min}\)</span>
+对应的特征向量时，二次型取最小值。如果 <span
+class="math inline">\(h\)</span> 是单位向量，则最小值等于 <span
+class="math inline">\(\lambda_{\min}\)</span>。最大值亦然。由于 <span
+class="math inline">\(A^TA\)</span> 是半正定矩阵，<span
+class="math inline">\(\lambda_{\min}\geq 0\)</span>。</li>
+</ul>
+<p>CV 中的矩阵求解通常有两种形式：</p>
+<ul>
+<li><span class="math inline">\(Ax=b\)</span>，利用伪逆求解得到 <span
+class="math inline">\(x=A^+b\)</span>，其中 <span
+class="math inline">\(A^+= (A^TA)^{-1}A^T\)</span></li>
+<li><span class="math inline">\(Ax=0\)</span>，本质是最小化 <span
+class="math inline">\(\|Ax\|^2\)</span>，根据
+<strong>【引理1】</strong>，<span class="math inline">\(x\)</span> 取
+<span class="math inline">\(\lambda_{\min}\)</span>
+对应的特征向量。</li>
+</ul>
+<hr />
+<h2 id="成像原理">成像原理</h2>
+<ul>
+<li><p>物体和相机镜头的距离称为<strong>深度（depth）</strong></p></li>
+<li><p><strong>景深（Depth of Field, DoF）</strong>：Range of object
+distances (𝑜 − 𝑜′) over which the image is “sufficiently well” focused.
+i.e., Range (𝑜 − 𝑜′) for which blur 𝑏 is less than pixel size.</p></li>
+</ul>
+<hr />
+<h2 id="特征检测">特征检测</h2>
+<ul>
+<li><p>特征的特点：repeatability, saliency（显著性）, compactness and
+efficiency, locality（能表示一块局部区域，对干扰鲁棒性强）</p></li>
+<li><p>满足上述条件的特征点：团状区域（<strong>Blobs</strong> as
+Interest Points）</p></li>
+<li><p>边缘检测模块：</p>
+<ul>
+<li>求导检测，在离散的图像中通过差分检测</li>
+<li>元素之和为0（一阶和二阶都是）</li>
+<li>小模块定位准，大模块对噪声鲁棒性强</li>
+</ul></li>
+<li><p>高斯滤波器：</p>
+<ul>
+<li>用于去噪，也可以写成卷积形式，因此可以和求差分写成一个算子，一阶算子称为
+<strong>Derivative of Gaussian</strong>，二阶算子称为 <strong>Laplacian
+of Gaussian</strong>，表示为 <span
+class="math inline">\(\nabla^2n_{\sigma}\)</span> h或 <span
+class="math inline">\(\nabla^2G\)</span></li>
+<li>高斯滤波器对应极值点出现的 <span
+class="math inline">\(\sigma_c\)</span>
+称为<strong>本征尺度</strong>，它和块的大小成正比</li>
+<li>为了使对应极值是全局极值（在所有 <span
+class="math inline">\(\sigma\)</span> 中也是最大），可以在 Laplacian
+上乘一个 <span class="math inline">\(\sigma^2\)</span>，避免 Laplacian
+response 随着 <span class="math inline">\(\sigma\)</span>
+增大而减小（相当于归一化）</li>
+<li><span class="math inline">\(\sigma\)</span> 越大，图像越模糊</li>
+</ul></li>
+<li><p>用不同 <span class="math inline">\(\sigma\)</span>
+的高斯对图像做卷积，构成<strong>尺度空间</strong>（Scale
+Space）</p></li>
+<li><p><strong>Scale-invariant Feature Transform
+(SIFT)</strong>：通过数学建模找出 interesting points 的方法</p>
+<ul>
+<li>方向匹配：选出八个方向中梯度最大的一个作为主方向，通过减小主方向夹角进行匹配</li>
+<li><strong>SIFT Descriptor</strong>: Invariant to Scale, Lighting,
+Brightness</li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="图像变换">图像变换</h2>
+<ul>
+<li><p><img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/CV/Image-wraping.png"
+                     
+alt="Image-wraping" 
+                >前者是值域变换，后者是定义域变换</p></li>
+<li><p>两个<strong>齐次坐标（homogeneous
+coordinates）</strong>（通常写成三元组 <span class="math inline">\((x,
+y,
+z)\)</span>）表示同一点，当且仅当其中一个齐次坐标可由另一个齐次坐标乘上一相同非零常数得取得。齐次坐标的相等用
+<span class="math inline">\(\cong\)</span> 表示。<span
+class="math inline">\(z=0\)</span> 表示无穷远点。原点表示为 <span
+class="math inline">\((0, 0, 1)\)</span></p>
+<ul>
+<li>Any transformation with last row [ 0 0 1 ] we call an
+<em>affine</em> transformation <strong>（仿射变换）</strong></li>
+<li>Any transformation with last row [ g h 1 ] we call an
+<em>projective</em> transformation, or
+<strong>homography（射影变换）</strong></li>
+</ul></li>
+<li><p>照片存在射影变换关系的情况：</p>
+<ul>
+<li>从不同角度拍平面</li>
+<li>相机沿固定轴心旋转拍非平面</li>
+</ul></li>
+<li><p>注意各种几何变换的自由度 DOF <img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/CV/2dtrans.png"
+                     
+alt="2dtrans" 
+                ></p></li>
+<li><p>射影变换一张图像：对离散的目标像素点求逆变换，在原图像上计算插值（例如
+bilinear），保证每个目标点都能被映射到</p></li>
+<li><p>RANSAC（Random Sample Consensus⭐）：随机选一对匹配（s
+samples），对 inliers 计数，选 inliers 最多的模型</p></li>
+</ul>
+<hr />
+<h2 id="相机标定-camera-calibration-and-photogrammetry">相机标定 Camera
+Calibration and Photogrammetry</h2>
+<h3 id="3d-to-2d">3D to 2D</h3>
+<ul>
+<li><p>⭐⭐⭐成像公式： <span class="math display">\[x_i=f
+\frac{x_c}{z_c},\,\, y_i=f \frac{y_c}{z_c}\]</span></p></li>
+<li><p>内参矩阵 Intrinsic Matrix： <span class="math display">\[
+K=\begin{bmatrix}
+f_x &amp; 0 &amp; o_x \\
+0 &amp; f_y &amp; o_y \\
+0 &amp; 0 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<p>那么从相机坐标系到图像坐标系的转换可以写为 <span
+class="math display">\[\tilde{u} = \begin{bmatrix} K | 0 \end{bmatrix}
+\tilde{x}_c = M_{\text{int}} \tilde{x}_c\]</span></p></li>
+<li><p>外参矩阵 Extrinsic Matrix： <span
+class="math display">\[\tilde{x}_c = \begin{bmatrix} R &amp; t \\ 0
+&amp; 1 \end{bmatrix} \tilde{X}_w = M_{\text{ext}}
+\tilde{X}_w\]</span></p>
+<p>其中 <span class="math inline">\(R\)</span> 是3×3的旋转矩阵，<span
+class="math inline">\(t\)</span> 是平移向量</p></li>
+<li><p>综合内外参，相机投影矩阵 Camera Projection Matrix： <span
+class="math display">\[P = M_{\text{int}} M_{\text{ext}} =
+\begin{bmatrix} K &amp; 0 \end{bmatrix} \begin{bmatrix} R &amp; t \\ 0
+&amp; 1 \end{bmatrix} = K [ R | t ]\]</span></p>
+<p>于是有 <span class="math inline">\(\tilde{u} = P
+\tilde{X}_w\)</span></p></li>
+<li></li>
+</ul>
+<h3 id="角点检测">角点检测</h3>
+<ul>
+<li><p>考察像素变化 <span class="math display">\[\begin{aligned}
+E(u,v) &amp;= \sum_{x,y} [I(u+x,v+y) - I(u,v)]^2 \\
+&amp;= \sum_{x,y} \left[ I_x(u,v) x + I_y(u,v) y \right]^2 \\
+&amp;= \begin{bmatrix} x &amp; y \end{bmatrix} H \begin{bmatrix} x \\ y
+\end{bmatrix} \\
+\text{其中 } H &amp;= \sum_{x,y} \begin{bmatrix} I_x^2 &amp; I_x I_y \\
+I_x I_y &amp; I_y^2 \end{bmatrix}\text{ （对应梯度平方）是实对称矩阵}
+\end{aligned}\]</span></p>
+<p>根据 <strong>【引理1】</strong>，角点对应的矩阵 <span
+class="math inline">\(H\)</span> 的最小特征值应该比较大</p></li>
+<li><p>联立方程，通过类似方法求出 <span class="math inline">\(P\)</span>
+的参数后，可以通过<strong>切片 + RQ 分解</strong>求出 <span
+class="math inline">\(K\)</span> 和 <span class="math inline">\([R |
+t]\)</span></p></li>
+</ul>
+<h3 id="平行双目视觉starstarstar">平行双目视觉⭐⭐⭐</h3>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/CV/stereo.png"
+                     
+alt="stereo" 
+                ></p>
+<ul>
+<li><p>视差（disparity）<span class="math inline">\(d = x_l -
+x_r\)</span></p></li>
+<li><p>深度 <span class="math inline">\(z = f\frac{b}{d}\)</span>，其中
+<span class="math inline">\(b\)</span>
+是基线长度（两个相机中心的距离）</p></li>
+<li><p>立体匹配（stereo matching）：在左右图像中找到对应点</p>
+<ul>
+<li>基于特征的方法：SIFT, Harris corners</li>
+<li>基于区域的方法（preferred，特征不是每个点都有）：SSD, SAD, NCC</li>
+</ul></li>
+</ul>
+<h2 id="立体双目视觉-binocular-stereo">立体双目视觉 Binocular
+Stereo</h2>
+<ul>
+<li>两相机光轴相交时视场比平行时更小</li>
+</ul>
+<p><img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/CV/epipolar.png"
+                     
+alt="epipolar" 
+                ></p>
+<ul>
+<li>本征矩阵 Essential Matrix <span class="math inline">\(E = T_{\times}
+R\)</span>，其中 <span class="math inline">\(T_{\times}\)</span> 是
+<span class="math inline">\(t\)</span> 的反对称矩阵，表示与 <span
+class="math inline">\(t\)</span> 做叉乘的线性变换</li>
+</ul>
+<blockquote>
+<p><span class="math display">\[\mathbf{a} \times \mathbf{b} =
+[\mathbf{a}]_{\times} \mathbf{b} = \begin{bmatrix}
+0 &amp; -a_3 &amp; a_2 \\
+a_3 &amp; 0 &amp; -a_1 \\
+-a_2 &amp; a_1 &amp; 0
+\end{bmatrix}
+\begin{bmatrix}
+b_1 \\
+b_2 \\
+b_3
+\end{bmatrix}\]</span></p>
+</blockquote>
+<ul>
+<li><p>基础矩阵 Fundamental Matrix <span class="math inline">\(F =
+K_r^{-T} E K_l^{-1}\)</span></p></li>
+<li><p>由 <span
+class="math inline">\(\tilde{x}_l=R\tilde{x}_r+\tilde{t}\)</span>，可以推出
+$\tilde{u}_r^T F \tilde{u}_l = 0
+$，联立至少8组匹配点（每组提供一个方程）可以解出 <span
+class="math inline">\(F\)</span>，进而解出 <span
+class="math inline">\(E\)</span>，通过 SVD 分解求出 <span
+class="math inline">\(R, t\)</span></p></li>
+<li><p>三角测量 Triangulation：四个方程求三个未知数（注意归一化） <img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/ar0nkk/imgs@main/CV/triangulation.png"
+                     
+alt="triangulation" 
+                ></p></li>
+</ul>
+<blockquote>
+<p>关于<a class="link" 
+ target="_blank" rel="noopener" href="https://docs.google.com/document/d/1MvjFALmA4xZMBs-yP3QGmkAxTaU_pWOWhmelrB2J52U/edit?usp=sharing" >立体矫正与三角测量<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>
+from Gemini</p>
+</blockquote>
+<hr />
+<h2 id="运动光流-motion--optical-flow">运动光流 Motion &amp; Optical
+Flow</h2>
+<ul>
+<li><p>基本假设：</p>
+<ul>
+<li>亮度一致（Brightness Constancy）：同一物体点在不同帧的亮度不变</li>
+<li>微小运动（Small Motion）：相邻帧之间的位移较小</li>
+<li>空间一致性（Spatial Coherence）：相邻像素点的运动是相似的</li>
+</ul></li>
+<li><p>光流方程（Optical Flow Equation）： <span
+class="math display">\[I_x u + I_y v + I_t = 0\]</span></p></li>
+<li><p>Lucas-Kanade 方法：在一个小窗口内假设光流 <span
+class="math inline">\((u, v)\)</span>
+不变，利用窗口内所有像素点的光流方程构建超定方程组，通过最小二乘法求解</p></li>
+</ul>
+<h2 id="视觉识别">视觉识别</h2>
+<ul>
+<li><p>构建视觉词典（codebook, or visual vocabulary）的方法：</p>
+<ul>
+<li>提取特征描述子（如 SIFT）</li>
+<li>使用聚类算法（如
+K-means）对描述子进行聚类，聚类中心作为视觉词典中的“词”</li>
+</ul></li>
+<li><p>大规模图像检索优化方法：</p>
+<ul>
+<li>词频-逆文档频率（TF-IDF）加权：提高稀有视觉词的权重，降低常见视觉词的权重</li>
+<li>Inverted file
+index：为每个视觉词建立一个倒排索引，记录包含该词的图像列表，提高检索效率
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">视觉词1: 图像A, 图像C</span><br><span class="line">视觉词2: 图像B, 图像C, 图像D</span><br><span class="line">...</span><br></pre></td></tr></table></figure></div>
+</li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="图像分割">图像分割</h2>
+<h3 id="基于-bottom-up">基于 Bottom-up</h3>
+<ul>
+<li><p>层次聚类（Hierarchical
+Clustering）：将视觉词按相似性进行层次化组织，形成树状结构，便于快速检索和匹配</p></li>
+<li><p>Normalized Cuts
+(⭐)：图像分割方法，将图像表示为图结构，通过最小化切割代价实现分割：
+<span class="math display">\[\text{Ncut}(A, B) = \frac{\text{cut}(A,
+B)}{\text{assoc}(A, V)} + \frac{\text{cut}(A, B)}{\text{assoc}(B,
+V)}\]</span></p>
+<p>其中 <span class="math inline">\(\text{cut}(A, B)\)</span> 是分割
+<span class="math inline">\(A\)</span> 和 <span
+class="math inline">\(B\)</span> 的边权重之和，<span
+class="math inline">\(\text{assoc}(A, V)=\sum_{u \in A, t \in V}
+w(u,t)\)</span> 是 <span class="math inline">\(A\)</span> 与整个图 <span
+class="math inline">\(V\)</span> 的关联度。</p></li>
+<li><p><span class="math inline">\(\min \text{Ncut}\)</span> 是一个
+NP-hard 问题，可以通过松弛方法近似求解：</p>
+<ul>
+<li>构造矩阵 <span class="math inline">\(W\)</span> 和 <span
+class="math inline">\(D\)</span></li>
+<li>构造归一化图拉普拉斯矩阵 <span class="math display">\[
+\mathcal{L} = D^{-\frac{1}{2}}(D - W)D^{-\frac{1}{2}}
+\]</span></li>
+<li>寻找第二小的特征向量（最小的特征值对应一个 trivial
+solution，表示将所有节点放在同一类） <span class="math display">\[
+\mathcal{L}y = \lambda_2 y
+\]</span></li>
+<li>对 (y) 进行阈值化以得到聚类
+<ul>
+<li>理想情况下，通过扫描阈值以获得最小的 N-cut 值</li>
+</ul></li>
+</ul></li>
+<li><p>像素之间的权重可以定义为： <span class="math display">\[w(i, j) =
+\exp\left(-\frac{\|F(i) - F(j)\|^2}{\sigma_F^2}\right) \cdot
+\exp\left(-\frac{\|X(i) - X(j)\|^2}{\sigma_X^2}\right) \cdot
+\mathbf{1}_{\|X(i) - X(j)\| &lt; r}\]</span></p></li>
+</ul>
+<h3 id="基于-top-down-dl">基于 Top-down (DL)</h3>
+<ul>
+<li><p>评估方法：</p>
+<ul>
+<li><p>Pixel Accuracy：正确分类的像素数占总像素数的比例</p></li>
+<li><p>⭐Mean Intersection over Union (mIoU)：每个类别的交并比的平均值:
+<span class="math display">\[\text{IoU} = \frac{1}{n_{cl}}\sum_{i}
+\frac{n_{ii}}{t_i + \sum_{j} n_{ji} - n_{ii}}\]</span></p>
+<p>其中 <span class="math inline">\(n_{ii}\)</span> 是类别 <span
+class="math inline">\(i\)</span> 被正确分类的像素数，<span
+class="math inline">\(t_i\)</span> 是类别 <span
+class="math inline">\(i\)</span> 的总像素数，<span
+class="math inline">\(n_{ji}\)</span> 是类别 <span
+class="math inline">\(j\)</span> 被错误分类为类别 <span
+class="math inline">\(i\)</span> 的像素数，，<span
+class="math inline">\(n_{cl}\)</span> 是类别总数。</p></li>
+<li><p>Dice loss：衡量预测分割与真实分割之间的相似度: <span
+class="math display">\[\text{Dice}(A, B) = \frac{2|A \cap B|}{|A| +
+|B|}\]</span></p></li>
+</ul></li>
+<li><p>FCN 利用图像分类方法做图像分割的关键步骤：将 FC 层替换为 1×1
+的卷积层（相当于内积），进而保留空间位置信息</p></li>
+<li><p>可学习的上采样：</p>
+<ul>
+<li>反卷积（Transposed
+Convolution）：通过插入零值扩展特征图，然后应用卷积核进行卷积操作，实现上采样</li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="目标检测">目标检测</h2>
+<ul>
+<li>评估指标：IoU, mAP</li>
+<li>Fast R-CNN：使用选择性搜索（Selective Search）生成候选区域（Region
+Proposals），然后对每个候选区域进行分类和边界框回归</li>
+<li>Faster R-CNN：引入区域建议网络（Region Proposal Network,
+RPN），实现端到端的目标检测</li>
+<li>RoI feature extraction：通过 RoI Pooling 或 RoI Align
+从特征图中提取固定大小的区域特征</li>
+</ul>
+
+		</div>
+
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/CV/">#CV</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/2025/11/26/log/0719/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item">719</span>
+						<span class="post-nav-item">下一篇</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">目录</div>
+		<div class="page-title">Computer Vision</div>
+		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%80%83%E5%89%8D%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.</span> <span class="nav-text">考前注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85"><span class="nav-number">2.</span> <span class="nav-text">线性代数知识补充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">成像原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B"><span class="nav-number">4.</span> <span class="nav-text">特征检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E5%8F%98%E6%8D%A2"><span class="nav-number">5.</span> <span class="nav-text">图像变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A-camera-calibration-and-photogrammetry"><span class="nav-number">6.</span> <span class="nav-text">相机标定 Camera
+Calibration and Photogrammetry</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3d-to-2d"><span class="nav-number">6.1.</span> <span class="nav-text">3D to 2D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%92%E7%82%B9%E6%A3%80%E6%B5%8B"><span class="nav-number">6.2.</span> <span class="nav-text">角点检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E8%A1%8C%E5%8F%8C%E7%9B%AE%E8%A7%86%E8%A7%89starstarstar"><span class="nav-number">6.3.</span> <span class="nav-text">平行双目视觉⭐⭐⭐</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%8B%E4%BD%93%E5%8F%8C%E7%9B%AE%E8%A7%86%E8%A7%89-binocular-stereo"><span class="nav-number">7.</span> <span class="nav-text">立体双目视觉 Binocular
+Stereo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E5%8A%A8%E5%85%89%E6%B5%81-motion--optical-flow"><span class="nav-number">8.</span> <span class="nav-text">运动光流 Motion &amp; Optical
+Flow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E8%A7%89%E8%AF%86%E5%88%AB"><span class="nav-number">9.</span> <span class="nav-text">视觉识别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2"><span class="nav-number">10.</span> <span class="nav-text">图像分割</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-bottom-up"><span class="nav-number">10.1.</span> <span class="nav-text">基于 Bottom-up</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-top-down-dl"><span class="nav-number">10.2.</span> <span class="nav-text">基于 Top-down (DL)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B"><span class="nav-number">11.</span> <span class="nav-text">目标检测</span></a></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2025</span>
+              -
+            
+            2026&nbsp;&nbsp;<i class="fa-solid fa-fire fa-beat-fade" style="--fa-beat-fade-opacity: 0.67; --fa-beat-fade-scale: 1.075; color: #fc6423"></i>&nbsp;&nbsp;<a href="/">Aronkk</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 8 篇文章
+                    </span>
+                    
+                        <span>
+                            共 6.6k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.2</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="站内搜索您需要的内容..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+
+<script src="/js/build/libs/Swup.min.js"></script>
+
+<script src="/js/build/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/build/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	
+<script src="/js/build/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/build/utils.js" type="module"></script>
+
+<script src="/js/build/main.js" type="module"></script>
+
+<script src="/js/build/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/build/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/build/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/build/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/build/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/runtime.js"></script>
+
+    
+<script src="/js/build/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/build/libs/Typed.min.js"></script>
+
+  
+<script src="/js/build/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+    
+<script src="/js/build/libs/minimasonry.min.js"></script>
+
+    
+<script src="/js/build/plugins/masonry.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/libs/anime.min.js"></script>
+
+
+
+
+
+    
+<script src="/js/build/tools/tocToggle.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/layouts/toc.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/plugins/tabs.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+<script src="/js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+<script src="/js/build/layouts/essays.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+
+	
+</body>
+
+</html>
