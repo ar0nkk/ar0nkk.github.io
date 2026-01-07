@@ -1,6 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>科研日志</title>
+    <url>/2025/07/12/log/Summer2025/</url>
+    <content><![CDATA[7-12
+Log
+
+梳理了论文 Diffusion
+Policy 的内容
+在模拟环境中跑通了 ACT 训练双爪机器人递方块的流程，细节如下：
+
+运行 record_sim_episodes.py 生成50条脚本化数据：
+ python3 record_sim_episodes.py \--task_name sim_transfer_cube_scripted \--dataset_dir data/ \--num_episodes 50
+
+训练与测试：
+ # Transfer Cube taskpython3 imitate_episodes.py \--task_name sim_transfer_cube_scripted \--ckpt_dir data/sim_ckpt/ \--policy_class ACT --kl_weight 10 --chunk_size 100 --hidden_dim 512 --batch_size 8 --dim_feedforward 3200 \--num_epochs 2000  --lr 1e-5 \--seed 0--temporal_agg
+
+测试结果如下：
+
+--temporal_agg 表示启用 temporal ensembling
+(加权平均融合)，可以观察到机器人移动更平滑，卡顿明显减少，成功率比不启用时高出2个点
+测试时只需加上 --eval，测试视频存储在
+data/sim_ckpt/
+中。观察到只要夹起方块就会被脚本视为成功，即实际成功率低于测试得到的成功率
+在生成训练数据时启用
+--onscreen_render，发现夹爪行为正常，但训练出的机器人总是倾向于夹取方块底部，导致不能正对接方块的夹爪，具体原因尚不清楚
+
+
+
+Plan
+
+到学院用4090服务器和上周采集的真实数据训练，看看效果如何
+继续学习后面的论文
+
+7-16
+Log
+
+周一到学院实验室采集了新的数据（pick_3_object）。考虑到 ACT
+模型的局限性，固定了物体的摆放位置、朝向和拾取顺序，准备先试试训练效果，成功率高再尝试不同摆放位置。总共采了100条数据
+在启智平台创建实例并保存了镜像（用于创建新实例时跳过环境搭建）并用
+ACT 训练了2000个
+epoch，在真实单臂机器人上测试发现夹爪会在物体正上方闭合导致抓取失败（这是常见的情况），可能是由数据采集和测试所用的摄像头不同或数据集质量不高导致的
+对采集的数据 pick_3_objects_0714 进行处理，并添加属性
+sim
+梳理了 ACT 的代码。其中数据填充对齐代码如下：
+  # 由于采集的机器人动作序列等数据长度是随机的，在训练前需要对齐def user_collate(datas: list, minimum_length=100):	bs = len(datas)		# 计算每个样本中非填充（有效）动作的长度（False 表示有效数据）	length_count = [(d[3] == False).sum().item() for d in datas]		# 把所有序列统一 pad 到 max_length	max_length = max(minimum_length, max(length_count))		# pad_size[i]: 第 i 个样本需要填充多少步	pad_size = [max_length - i for i in length_count]		# torch.stack()用于将多个n维张量沿着一个新的维度堆叠起来，形成一个n+1维张量	images = torch.stack([d[0] for d in datas])	qpos = torch.stack([d[1] for d in datas])	actions, is_pad = [], []	for d, l, p in zip(datas, length_count, pad_size):	curr_action = d[2][: l]	curr_pad_info = d[3][: l]	additional_pad_info = torch.ones(p, dtype=curr_pad_info.dtype, device=curr_pad_info.device) # 填充标记	pad_actions = torch.zeros((p, curr_action.shape[-1]), dtype=curr_action.dtype, device=curr_action.device) # 填充全零动作	actions.append(torch.concat([curr_action, pad_actions], dim=0))	is_pad.append(torch.concat([curr_pad_info, additional_pad_info], dim=0))	actions = torch.stack(actions)	is_pad = torch.stack(is_pad)	return images, qpos, actions, is_pad
+
+Transformer 架构如下： 详见 d2l-transformer
+
+Plan
+
+解决 aTrust vpn 的问题，在服务器上处理周一采集的数据并跑通 ACT
+尝试用 Diffusion Policy 训练一遍，在此基础上梳理代码
+
+]]></content>
+      <categories>
+        <category>log</category>
+      </categories>
+      <tags>
+        <tag>Robotics</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Computer Architecture(CS2651)</title>
     <url>/2025/03/20/notes/Computer-Architecture/</url>
     <content><![CDATA[Digital Logic
@@ -67,15 +128,15 @@ ppt 重点
 
 线性代数知识补充
 
-【引理1】 对于二次型 \(h^TA^TAh\)，当 \(h\) 是 \(A^TA\) 的最小特征值 \(\lambda_{\min}\)
-对应的特征向量时，二次型取最小值。如果 \(h\) 是单位向量，则最小值等于 \(\lambda_{\min}\)。最大值亦然。由于 \(A^TA\) 是半正定矩阵，\(\lambda_{\min}\geq 0\)。
+【引理1】 对于二次型 ，当  是  的最小特征值 
+对应的特征向量时，二次型取最小值。如果  是单位向量，则最小值等于 。最大值亦然。由于  是半正定矩阵，。
 
 CV 中的矩阵求解通常有两种形式：
 
-\(Ax=b\)，利用伪逆求解得到 \(x=A^+b\)，其中 \(A^+= (A^TA)^{-1}A^T\)
-\(Ax=0\)，本质是最小化 \(\|Ax\|^2\)，根据
-【引理1】，\(x\) 取
-\(\lambda_{\min}\)
+，利用伪逆求解得到 ，其中 
+，本质是最小化 ，根据
+【引理1】， 取
+
 对应的特征向量。
 
 
@@ -103,16 +164,16 @@ Interest Points）
 
 用于去噪，也可以写成卷积形式，因此可以和求差分写成一个算子，一阶算子称为
 Derivative of Gaussian，二阶算子称为 Laplacian
-of Gaussian，表示为 \(\nabla^2n_{\sigma}\) h或 \(\nabla^2G\)
-高斯滤波器对应极值点出现的 \(\sigma_c\)
+of Gaussian，表示为  h或 
+高斯滤波器对应极值点出现的 
 称为本征尺度，它和块的大小成正比
-为了使对应极值是全局极值（在所有 \(\sigma\) 中也是最大），可以在 Laplacian
-上乘一个 \(\sigma^2\)，避免 Laplacian
-response 随着 \(\sigma\)
+为了使对应极值是全局极值（在所有  中也是最大），可以在 Laplacian
+上乘一个 ，避免 Laplacian
+response 随着 
 增大而减小（相当于归一化）
-\(\sigma\) 越大，图像越模糊
+ 越大，图像越模糊
 
-用不同 \(\sigma\)
+用不同 
 的高斯对图像做卷积，构成尺度空间（Scale
 Space）
 Scale-invariant Feature Transform
@@ -128,10 +189,8 @@ Brightness
 
 前者是值域变换，后者是定义域变换
 两个齐次坐标（homogeneous
-coordinates）（通常写成三元组 \((x,
-y,
-z)\)）表示同一点，当且仅当其中一个齐次坐标可由另一个齐次坐标乘上一相同非零常数得取得。齐次坐标的相等用
-\(\cong\) 表示。\(z=0\) 表示无穷远点。原点表示为 \((0, 0, 1)\)
+coordinates）（通常写成三元组 ）表示同一点，当且仅当其中一个齐次坐标可由另一个齐次坐标乘上一相同非零常数得取得。齐次坐标的相等用
+ 表示。 表示无穷远点。原点表示为 
 
 Any transformation with last row [ 0 0 1 ] we call an
 affine transformation （仿射变换）
@@ -155,50 +214,28 @@ samples），对 inliers 计数，选 inliers 最多的模型
 Calibration and Photogrammetry
 3D to 2D
 
-⭐⭐⭐成像公式： \[x_i=f
-\frac{x_c}{z_c},\,\, y_i=f \frac{y_c}{z_c}\]
-内参矩阵 Intrinsic Matrix： \[
-K=\begin{bmatrix}
-f_x &amp; 0 &amp; o_x \\
-0 &amp; f_y &amp; o_y \\
-0 &amp; 0 &amp; 1
-\end{bmatrix}
-\]
-那么从相机坐标系到图像坐标系的转换可以写为 \[\tilde{u} = \begin{bmatrix} K | 0 \end{bmatrix}
-\tilde{x}_c = M_{\text{int}} \tilde{x}_c\]
-外参矩阵 Extrinsic Matrix： \[\tilde{x}_c = \begin{bmatrix} R &amp; t \\ 0
-&amp; 1 \end{bmatrix} \tilde{X}_w = M_{\text{ext}}
-\tilde{X}_w\]
-其中 \(R\) 是3×3的旋转矩阵，\(t\) 是平移向量
-综合内外参，相机投影矩阵 Camera Projection Matrix： \[P = M_{\text{int}} M_{\text{ext}} =
-\begin{bmatrix} K &amp; 0 \end{bmatrix} \begin{bmatrix} R &amp; t \\ 0
-&amp; 1 \end{bmatrix} = K [ R | t ]\]
-于是有 \(\tilde{u} = P
-\tilde{X}_w\)
+⭐⭐⭐成像公式： 
+内参矩阵 Intrinsic Matrix： 
+那么从相机坐标系到图像坐标系的转换可以写为 
+外参矩阵 Extrinsic Matrix： 
+其中  是3×3的旋转矩阵， 是平移向量
+综合内外参，相机投影矩阵 Camera Projection Matrix： 
+于是有 
 
 
 角点检测
 
-考察像素变化 \[\begin{aligned}
-E(u,v) &amp;= \sum_{x,y} [I(u+x,v+y) - I(u,v)]^2 \\
-&amp;= \sum_{x,y} \left[ I_x(u,v) x + I_y(u,v) y \right]^2 \\
-&amp;= \begin{bmatrix} x &amp; y \end{bmatrix} H \begin{bmatrix} x \\ y
-\end{bmatrix} \\
-\text{其中 } H &amp;= \sum_{x,y} \begin{bmatrix} I_x^2 &amp; I_x I_y \\
-I_x I_y &amp; I_y^2 \end{bmatrix}\text{ （对应梯度平方）是实对称矩阵}
-\end{aligned}\]
-根据 【引理1】，角点对应的矩阵 \(H\) 的最小特征值应该比较大
-联立方程，通过类似方法求出 \(P\)
-的参数后，可以通过切片 + RQ 分解求出 \(K\) 和 \([R |
-t]\)
+考察像素变化 其中（对应梯度平方）是实对称矩阵
+根据 【引理1】，角点对应的矩阵  的最小特征值应该比较大
+联立方程，通过类似方法求出 
+的参数后，可以通过切片 + RQ 分解求出  和 
 
 平行双目视觉⭐⭐⭐
 
 
-视差（disparity）\(d = x_l -
-x_r\)
-深度 \(z = f\frac{b}{d}\)，其中
-\(b\)
+视差（disparity）
+深度 ，其中
+
 是基线长度（两个相机中心的距离）
 立体匹配（stereo matching）：在左右图像中找到对应点
 
@@ -213,29 +250,16 @@ Stereo
 
 
 
-本征矩阵 Essential Matrix \(E = T_{\times}
-R\)，其中 \(T_{\times}\) 是
-\(t\) 的反对称矩阵，表示与 \(t\) 做叉乘的线性变换
+本征矩阵 Essential Matrix ，其中  是
+ 的反对称矩阵，表示与  做叉乘的线性变换
 
 
-\[\mathbf{a} \times \mathbf{b} =
-[\mathbf{a}]_{\times} \mathbf{b} = \begin{bmatrix}
-0 &amp; -a_3 &amp; a_2 \\
-a_3 &amp; 0 &amp; -a_1 \\
--a_2 &amp; a_1 &amp; 0
-\end{bmatrix}
-\begin{bmatrix}
-b_1 \\
-b_2 \\
-b_3
-\end{bmatrix}\]
 
 
-基础矩阵 Fundamental Matrix \(F =
-K_r^{-T} E K_l^{-1}\)
-由 \(\tilde{x}_l=R\tilde{x}_r+\tilde{t}\)，可以推出
-$\tilde{u}_r^T F \tilde{u}_l = 0
-$，联立至少8组匹配点（每组提供一个方程）可以解出 \(F\)，进而解出 \(E\)，通过 SVD 分解求出 \(R, t\)
+
+基础矩阵 Fundamental Matrix 
+由 ，可以推出
+，联立至少8组匹配点（每组提供一个方程）可以解出 ，进而解出 ，通过 SVD 分解求出 
 三角测量 Triangulation：四个方程求三个未知数（注意归一化） 
 
 
@@ -252,8 +276,8 @@ Flow
 微小运动（Small Motion）：相邻帧之间的位移较小
 空间一致性（Spatial Coherence）：相邻像素点的运动是相似的
 
-光流方程（Optical Flow Equation）： \[I_x u + I_y v + I_t = 0\]
-Lucas-Kanade 方法：在一个小窗口内假设光流 \((u, v)\)
+光流方程（Optical Flow Equation）： 
+Lucas-Kanade 方法：在一个小窗口内假设光流 
 不变，利用窗口内所有像素点的光流方程构建超定方程组，通过最小二乘法求解
 
 视觉识别
@@ -281,32 +305,22 @@ index：为每个视觉词建立一个倒排索引，记录包含该词的图像
 Clustering）：将视觉词按相似性进行层次化组织，形成树状结构，便于快速检索和匹配
 Normalized Cuts
 (⭐)：图像分割方法，将图像表示为图结构，通过最小化切割代价实现分割：
-\[\text{Ncut}(A, B) = \frac{\text{cut}(A,
-B)}{\text{assoc}(A, V)} + \frac{\text{cut}(A, B)}{\text{assoc}(B,
-V)}\]
-其中 \(\text{cut}(A, B)\) 是分割
-\(A\) 和 \(B\) 的边权重之和，\(\text{assoc}(A, V)=\sum_{u \in A, t \in V}
-w(u,t)\) 是 \(A\) 与整个图 \(V\) 的关联度。
-\(\min \text{Ncut}\) 是一个
+
+其中  是分割
+ 和  的边权重之和， 是  与整个图  的关联度。
+ 是一个
 NP-hard 问题，可以通过松弛方法近似求解：
 
-构造矩阵 \(W\) 和 \(D\)
-构造归一化图拉普拉斯矩阵 \[
-\mathcal{L} = D^{-\frac{1}{2}}(D - W)D^{-\frac{1}{2}}
-\]
+构造矩阵  和 
+构造归一化图拉普拉斯矩阵 
 寻找第二小的特征向量（最小的特征值对应一个 trivial
-solution，表示将所有节点放在同一类） \[
-\mathcal{L}y = \lambda_2 y
-\]
+solution，表示将所有节点放在同一类） 
 对 (y) 进行阈值化以得到聚类
 
 理想情况下，通过扫描阈值以获得最小的 N-cut 值
 
 
-像素之间的权重可以定义为： \[w(i, j) =
-\exp\left(-\frac{\|F(i) - F(j)\|^2}{\sigma_F^2}\right) \cdot
-\exp\left(-\frac{\|X(i) - X(j)\|^2}{\sigma_X^2}\right) \cdot
-\mathbf{1}_{\|X(i) - X(j)\| &lt; r}\]
+像素之间的权重可以定义为： 
 
 基于 Top-down (DL)
 
@@ -314,11 +328,9 @@ solution，表示将所有节点放在同一类） \[
 
 Pixel Accuracy：正确分类的像素数占总像素数的比例
 ⭐Mean Intersection over Union (mIoU)：每个类别的交并比的平均值:
-\[\text{IoU} = \frac{1}{n_{cl}}\sum_{i}
-\frac{n_{ii}}{t_i + \sum_{j} n_{ji} - n_{ii}}\]
-其中 \(n_{ii}\) 是类别 \(i\) 被正确分类的像素数，\(t_i\) 是类别 \(i\) 的总像素数，\(n_{ji}\) 是类别 \(j\) 被错误分类为类别 \(i\) 的像素数，，\(n_{cl}\) 是类别总数。
-Dice loss：衡量预测分割与真实分割之间的相似度: \[\text{Dice}(A, B) = \frac{2|A \cap B|}{|A| +
-|B|}\]
+
+其中  是类别  被正确分类的像素数， 是类别  的总像素数， 是类别  被错误分类为类别  的像素数，， 是类别总数。
+Dice loss：衡量预测分割与真实分割之间的相似度: 
 
 FCN 利用图像分类方法做图像分割的关键步骤：将 FC 层替换为 1×1
 的卷积层（相当于内积），进而保留空间位置信息
@@ -428,6 +440,98 @@ Chapter 3）：
       </categories>
       <tags>
         <tag>线性代数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Notes of the Missing Semester</title>
+    <url>/2025/02/25/notes/Missing-Semester/</url>
+    <content><![CDATA[
+大部分内容可以在中文讲义中查询到，本文只放一些自己认为有意思的东西。
+
+
+A = Shift-a
+
+
+vim
+指令速查
+
+Shell
+
+touch command to create or modify a
+file（碰到就更新时间戳，非常生动形象）
+!!
+表示完整的上一条命令，包括参数。当你因为权限不足执行命令失败时，可以使用
+sudo !! 再尝试一次
+同一行的多个命令可以用 ; 分隔
+Ctrl-d 退出 Shell
+
+Vim in VSCode
+解决
+windows 切换到 normal mode 时输入法为中文的问题：
+安装 im-select
+到 C:/im-select/，然后在 setting json 中添加：
+&quot;vim.autoSwitchInputMethod.enable&quot;: true,&quot;vim.autoSwitchInputMethod.defaultIM&quot;: &quot;1033&quot;, # 需要在输入法为英文时运行 im-select.exe 获得相应的输入法代码&quot;vim.autoSwitchInputMethod.obtainIMCmd&quot;: &quot;C:\\im-select\\im-select.exe&quot;, &quot;vim.autoSwitchInputMethod.switchIMCmd&quot;: &quot;C:\\im-select\\im-select.exe &#123;im&#125;&quot;
+
+删除内容而不保存到剪贴板
+
+关于寄存器 (register)：
+
+y（复制）：
+复制的内容会存入 "0（复制专用寄存器）和
+""（无名寄存器）
+c（修改）、d（删除）、x（删除字符）：
+删除/修改的内容会存入 ""（无名寄存器）和
+"1-9（数字寄存器，按操作顺序覆盖）
+例如：第一次删除的内容存入 "1，第二次删除存入
+"1（原 "1 内容移到
+"2，依此类推）
+用 :reg 调试寄存器状态
+
+
+VSCode 内置方法：
+删除整行删除光标右侧内容删除光标左侧内容Ctrl-KCtrl-DeleteCtrl-Backspace
+
+使用 black hole register
+"_
+例如使用 "_dd 舍弃 dd 的内容。
+Another trick from Stack
+Overflow:
+When you enter the line back with the p command you are
+pasting the contents of the (volatile) default register
+"", which has been overwritten by dd. But you
+still can paste from the (non volatile) yank register
+"0, which won’t be overwritten by the delete command
+dd.
+
+Note that Ctrl-v in insert mode and
+p in normal mode have different buffers.
+
+批量注释
+
+Ctrl-v 或 V 选中注释内容
+按 I 在行首插入 # 或 //
+
+其他技巧
+
+Ctrl-o 只执行一次 normal mode
+下的操作，然后返回 insert mode
+~ 切换大小写
+. 重复上一次命令
+
+Hexo
+
+git clone 失败时尝试把校园网换成手机热点
+禁用 console 打印日志：更改
+themes\redefine\scripts\events\welcome.js 文件
+
+]]></content>
+      <categories>
+        <category>Notes</category>
+      </categories>
+      <tags>
+        <tag>Shell</tag>
+        <tag>Vim</tag>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -545,100 +649,8 @@ AStar缺点：占用大量内存，无法处理动态地图
         <category>Notes</category>
       </categories>
       <tags>
-        <tag>Mobile</tag>
         <tag>Robotics</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Notes of the Missing Semester</title>
-    <url>/2025/02/25/notes/Missing-Semester/</url>
-    <content><![CDATA[
-大部分内容可以在中文讲义中查询到，本文只放一些自己认为有意思的东西。
-
-
-A = Shift-a
-
-
-vim
-指令速查
-
-Shell
-
-touch command to create or modify a
-file（碰到就更新时间戳，非常生动形象）
-!!
-表示完整的上一条命令，包括参数。当你因为权限不足执行命令失败时，可以使用
-sudo !! 再尝试一次
-同一行的多个命令可以用 ; 分隔
-Ctrl-d 退出 Shell
-
-Vim in VSCode
-解决
-windows 切换到 normal mode 时输入法为中文的问题：
-安装 im-select
-到 C:/im-select/，然后在 setting json 中添加：
-&quot;vim.autoSwitchInputMethod.enable&quot;: true,&quot;vim.autoSwitchInputMethod.defaultIM&quot;: &quot;1033&quot;, # 需要在输入法为英文时运行 im-select.exe 获得相应的输入法代码&quot;vim.autoSwitchInputMethod.obtainIMCmd&quot;: &quot;C:\\im-select\\im-select.exe&quot;, &quot;vim.autoSwitchInputMethod.switchIMCmd&quot;: &quot;C:\\im-select\\im-select.exe &#123;im&#125;&quot;
-
-删除内容而不保存到剪贴板
-
-关于寄存器 (register)：
-
-y（复制）：
-复制的内容会存入 "0（复制专用寄存器）和
-""（无名寄存器）
-c（修改）、d（删除）、x（删除字符）：
-删除/修改的内容会存入 ""（无名寄存器）和
-"1-9（数字寄存器，按操作顺序覆盖）
-例如：第一次删除的内容存入 "1，第二次删除存入
-"1（原 "1 内容移到
-"2，依此类推）
-用 :reg 调试寄存器状态
-
-
-VSCode 内置方法：
-删除整行删除光标右侧内容删除光标左侧内容Ctrl-KCtrl-DeleteCtrl-Backspace
-
-使用 black hole register
-"_
-例如使用 "_dd 舍弃 dd 的内容。
-Another trick from Stack
-Overflow:
-When you enter the line back with the p command you are
-pasting the contents of the (volatile) default register
-"", which has been overwritten by dd. But you
-still can paste from the (non volatile) yank register
-"0, which won’t be overwritten by the delete command
-dd.
-
-Note that Ctrl-v in insert mode and
-p in normal mode have different buffers.
-
-批量注释
-
-Ctrl-v 或 V 选中注释内容
-按 I 在行首插入 # 或 //
-
-其他技巧
-
-Ctrl-o 只执行一次 normal mode
-下的操作，然后返回 insert mode
-~ 切换大小写
-. 重复上一次命令
-
-Hexo
-
-git clone 失败时尝试把校园网换成手机热点
-禁用 console 打印日志：更改
-themes\redefine\scripts\events\welcome.js 文件
-
-]]></content>
-      <categories>
-        <category>Notes</category>
-      </categories>
-      <tags>
-        <tag>Shell</tag>
-        <tag>Vim</tag>
-        <tag>Hexo</tag>
+        <tag>Mobile</tag>
       </tags>
   </entry>
   <entry>
@@ -770,67 +782,6 @@ Bohr 氢原子理论
       </tags>
   </entry>
   <entry>
-    <title>科研日志</title>
-    <url>/2025/07/12/log/Summer2025/</url>
-    <content><![CDATA[7-12
-Log
-
-梳理了论文 Diffusion
-Policy 的内容
-在模拟环境中跑通了 ACT 训练双爪机器人递方块的流程，细节如下：
-
-运行 record_sim_episodes.py 生成50条脚本化数据：
- python3 record_sim_episodes.py \--task_name sim_transfer_cube_scripted \--dataset_dir data/ \--num_episodes 50
-
-训练与测试：
- # Transfer Cube taskpython3 imitate_episodes.py \--task_name sim_transfer_cube_scripted \--ckpt_dir data/sim_ckpt/ \--policy_class ACT --kl_weight 10 --chunk_size 100 --hidden_dim 512 --batch_size 8 --dim_feedforward 3200 \--num_epochs 2000  --lr 1e-5 \--seed 0--temporal_agg
-
-测试结果如下：
-
---temporal_agg 表示启用 temporal ensembling
-(加权平均融合)，可以观察到机器人移动更平滑，卡顿明显减少，成功率比不启用时高出2个点
-测试时只需加上 --eval，测试视频存储在
-data/sim_ckpt/
-中。观察到只要夹起方块就会被脚本视为成功，即实际成功率低于测试得到的成功率
-在生成训练数据时启用
---onscreen_render，发现夹爪行为正常，但训练出的机器人总是倾向于夹取方块底部，导致不能正对接方块的夹爪，具体原因尚不清楚
-
-
-
-Plan
-
-到学院用4090服务器和上周采集的真实数据训练，看看效果如何
-继续学习后面的论文
-
-7-16
-Log
-
-周一到学院实验室采集了新的数据（pick_3_object）。考虑到 ACT
-模型的局限性，固定了物体的摆放位置、朝向和拾取顺序，准备先试试训练效果，成功率高再尝试不同摆放位置。总共采了100条数据
-在启智平台创建实例并保存了镜像（用于创建新实例时跳过环境搭建）并用
-ACT 训练了2000个
-epoch，在真实单臂机器人上测试发现夹爪会在物体正上方闭合导致抓取失败（这是常见的情况），可能是由数据采集和测试所用的摄像头不同或数据集质量不高导致的
-对采集的数据 pick_3_objects_0714 进行处理，并添加属性
-sim
-梳理了 ACT 的代码。其中数据填充对齐代码如下：
-  # 由于采集的机器人动作序列等数据长度是随机的，在训练前需要对齐def user_collate(datas: list, minimum_length=100):	bs = len(datas)		# 计算每个样本中非填充（有效）动作的长度（False 表示有效数据）	length_count = [(d[3] == False).sum().item() for d in datas]		# 把所有序列统一 pad 到 max_length	max_length = max(minimum_length, max(length_count))		# pad_size[i]: 第 i 个样本需要填充多少步	pad_size = [max_length - i for i in length_count]		# torch.stack()用于将多个n维张量沿着一个新的维度堆叠起来，形成一个n+1维张量	images = torch.stack([d[0] for d in datas])	qpos = torch.stack([d[1] for d in datas])	actions, is_pad = [], []	for d, l, p in zip(datas, length_count, pad_size):	curr_action = d[2][: l]	curr_pad_info = d[3][: l]	additional_pad_info = torch.ones(p, dtype=curr_pad_info.dtype, device=curr_pad_info.device) # 填充标记	pad_actions = torch.zeros((p, curr_action.shape[-1]), dtype=curr_action.dtype, device=curr_action.device) # 填充全零动作	actions.append(torch.concat([curr_action, pad_actions], dim=0))	is_pad.append(torch.concat([curr_pad_info, additional_pad_info], dim=0))	actions = torch.stack(actions)	is_pad = torch.stack(is_pad)	return images, qpos, actions, is_pad
-
-Transformer 架构如下： 详见 d2l-transformer
-
-Plan
-
-解决 aTrust vpn 的问题，在服务器上处理周一采集的数据并跑通 ACT
-尝试用 Diffusion Policy 训练一遍，在此基础上梳理代码
-
-]]></content>
-      <categories>
-        <category>log</category>
-      </categories>
-      <tags>
-        <tag>Robotics</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>719</title>
     <url>/2025/11/26/log/0719/</url>
     <content><![CDATA[
@@ -860,24 +811,6 @@ import {initHBE} from "/js/plugins/hbe.js";
 
 See aronkk.top for more.
 
-]]></content>
-  </entry>
-  <entry>
-    <title>分类</title>
-    <url>/categories/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
-    <title>links</title>
-    <url>/links/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
-    <title>相册</title>
-    <url>/masonry/index.html</url>
-    <content><![CDATA[
 ]]></content>
   </entry>
   <entry>
@@ -938,8 +871,26 @@ Ralston；kk取自我的名字。↩︎
 ]]></content>
   </entry>
   <entry>
+    <title>links</title>
+    <url>/links/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
+    <title>分类</title>
+    <url>/categories/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
     <title>标签</title>
     <url>/tags/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
+    <title>相册</title>
+    <url>/masonry/index.html</url>
     <content><![CDATA[
 ]]></content>
   </entry>
