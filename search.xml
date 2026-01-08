@@ -1,68 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>科研日志</title>
-    <url>/2025/07/12/log/Summer2025/</url>
-    <content><![CDATA[7-12
-Log
-
-梳理了论文 Diffusion
-Policy 的内容
-在模拟环境中跑通了 ACT 训练双爪机器人递方块的流程，细节如下：
-
-运行 record_sim_episodes.py 生成50条脚本化数据：
- python3 record_sim_episodes.py \--task_name sim_transfer_cube_scripted \--dataset_dir data/ \--num_episodes 50
-
-训练与测试：
- # Transfer Cube taskpython3 imitate_episodes.py \--task_name sim_transfer_cube_scripted \--ckpt_dir data/sim_ckpt/ \--policy_class ACT --kl_weight 10 --chunk_size 100 --hidden_dim 512 --batch_size 8 --dim_feedforward 3200 \--num_epochs 2000  --lr 1e-5 \--seed 0--temporal_agg
-
-测试结果如下：
-
---temporal_agg 表示启用 temporal ensembling
-(加权平均融合)，可以观察到机器人移动更平滑，卡顿明显减少，成功率比不启用时高出2个点
-测试时只需加上 --eval，测试视频存储在
-data/sim_ckpt/
-中。观察到只要夹起方块就会被脚本视为成功，即实际成功率低于测试得到的成功率
-在生成训练数据时启用
---onscreen_render，发现夹爪行为正常，但训练出的机器人总是倾向于夹取方块底部，导致不能正对接方块的夹爪，具体原因尚不清楚
-
-
-
-Plan
-
-到学院用4090服务器和上周采集的真实数据训练，看看效果如何
-继续学习后面的论文
-
-7-16
-Log
-
-周一到学院实验室采集了新的数据（pick_3_object）。考虑到 ACT
-模型的局限性，固定了物体的摆放位置、朝向和拾取顺序，准备先试试训练效果，成功率高再尝试不同摆放位置。总共采了100条数据
-在启智平台创建实例并保存了镜像（用于创建新实例时跳过环境搭建）并用
-ACT 训练了2000个
-epoch，在真实单臂机器人上测试发现夹爪会在物体正上方闭合导致抓取失败（这是常见的情况），可能是由数据采集和测试所用的摄像头不同或数据集质量不高导致的
-对采集的数据 pick_3_objects_0714 进行处理，并添加属性
-sim
-梳理了 ACT 的代码。其中数据填充对齐代码如下：
-  # 由于采集的机器人动作序列等数据长度是随机的，在训练前需要对齐def user_collate(datas: list, minimum_length=100):	bs = len(datas)		# 计算每个样本中非填充（有效）动作的长度（False 表示有效数据）	length_count = [(d[3] == False).sum().item() for d in datas]		# 把所有序列统一 pad 到 max_length	max_length = max(minimum_length, max(length_count))		# pad_size[i]: 第 i 个样本需要填充多少步	pad_size = [max_length - i for i in length_count]		# torch.stack()用于将多个n维张量沿着一个新的维度堆叠起来，形成一个n+1维张量	images = torch.stack([d[0] for d in datas])	qpos = torch.stack([d[1] for d in datas])	actions, is_pad = [], []	for d, l, p in zip(datas, length_count, pad_size):	curr_action = d[2][: l]	curr_pad_info = d[3][: l]	additional_pad_info = torch.ones(p, dtype=curr_pad_info.dtype, device=curr_pad_info.device) # 填充标记	pad_actions = torch.zeros((p, curr_action.shape[-1]), dtype=curr_action.dtype, device=curr_action.device) # 填充全零动作	actions.append(torch.concat([curr_action, pad_actions], dim=0))	is_pad.append(torch.concat([curr_pad_info, additional_pad_info], dim=0))	actions = torch.stack(actions)	is_pad = torch.stack(is_pad)	return images, qpos, actions, is_pad
-
-Transformer 架构如下： 详见 d2l-transformer
-
-Plan
-
-解决 aTrust vpn 的问题，在服务器上处理周一采集的数据并跑通 ACT
-尝试用 Diffusion Policy 训练一遍，在此基础上梳理代码
-
-]]></content>
-      <categories>
-        <category>log</category>
-      </categories>
-      <tags>
-        <tag>Robotics</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Computer Architecture(CS2651)</title>
+    <title>Computer Architecture (CS2651)</title>
     <url>/2025/03/20/notes/Computer-Architecture/</url>
     <content><![CDATA[Digital Logic
 
@@ -112,18 +51,190 @@ HALT 和 .END）
         <category>Notes</category>
       </categories>
       <tags>
-        <tag>Computer Architecture</tag>
+        <tag>计算机体系结构</tag>
+        <tag>SJTU</tag>
       </tags>
   </entry>
   <entry>
-    <title>Computer Vision</title>
+    <title>Computer Vision (AI3619)</title>
     <url>/2026/01/07/notes/Computer-Vision/</url>
     <content><![CDATA[考前注意事项
 
 多选题注意英文单复数
-看作业和小测
-ppt 重点
+看作业、小测和 FinalExamReview
 视觉词典 k 的选择：k 大了会怎样、小了会怎样
+
+
+Summary from Gemini
+第一部分：图像形成 (Image
+Formation)
+【核心考点】
+
+透视投影公式 (Perspective Projection)：
+考查形式：
+计算题/必考。
+内容：
+从3D世界坐标到2D图像平面的映射关系（）。虽然简单，但容易出错，务必掌握推导和计算。
+消失点 (Vanishing Point)：
+考查形式： 简答或作图。
+内容：
+推导一组平行线在透视投影下汇聚于一点（消失点）的位置。
+透镜成像与性质：
+考查形式：
+多选或简答（Trade-off分析）。
+内容：
+理想透镜公式（Thin Lens Law）：。
+Trade-off（权衡）：
+孔径（Aperture）大小与景深（Depth of Field,
+DoF）、亮度（Brightness）的关系（孔径大-&gt;亮-&gt;景深浅；孔径小-&gt;暗-&gt;景深深）。
+透镜缺陷：暗角（Vignetting）、色差（Chromatic
+Aberration）、畸变（Distortion）。
+
+第二部分：特征检测 (Feature
+Detection)
+【核心考点】
+
+特征点定义：
+考查形式： 简答。
+内容： 什么是 Interest
+Point？它应该满足什么特性（如重复性、区分性）？
+边缘检测（Directional Gaussian, Laplacian of Gaussian -
+LoG）。
+SIFT (Scale-Invariant Feature
+Transform)：
+考查形式：
+深度简答/流程描述。
+内容：
+
+
+尺度不变性：为什么是尺度不变的？如何构建尺度空间（Scale
+Space）？
+尺度归一化：为什么要做 Scale Normalization？
+旋转不变性：如何实现 Rotation
+Invariance（主方向分配）？
+描述子：如何创建128维的描述子（Descriptor）？
+
+第三部分：图像变换与拼接
+(Image Transformation &amp; Stitching)
+【核心考点】
+
+几何变换类型：
+考查形式： 多选（参数自由度）
+或 填空。
+内容： 平移 (Translation)、欧式
+(Euclidean/Rigid)、相似 (Similarity)、仿射 (Affine)、投影
+(Projective/Homography)。
+重点： 每种变换的**自由度（Degrees of Freedom,
+DOFs）**是多少？（例如 Homography 是8个自由度）。
+齐次坐标 (Homogeneous Coordinates)：
+考查形式： 计算/基础概念。
+内容：
+欧式坐标与齐次坐标的互转，为什么需要齐次坐标（处理无穷远点、统一矩阵乘法）。
+RANSAC (Random Sample Consensus)：
+考查形式：
+简答/伪代码/流程。
+内容：
+如何从含有大量噪声（Outliers）的匹配中估计变换矩阵？步骤是什么？
+拼接流程：Homography估计、Warping（前向/后向）、Blending（球̣面投影等）。
+
+第四部分：相机标定 (Camera
+Calibration)
+【核心考点】
+
+坐标系变换链条：
+考查形式：
+大题/综合计算。
+内容： 世界坐标系 -&gt; 相机坐标系 -&gt;
+图像坐标系 -&gt; 像素坐标系。
+内参与外参 (Intrinsics &amp;
+Extrinsics)：
+考查形式： 计算（写出矩阵）。
+内容：
+内参矩阵：包含焦距 ()、主点
+()、倾斜因子。
+外参矩阵：旋转 () 和平移 ()。
+标定方法：
+考查形式： 简答。
+内容：
+使用棋盘格（Checkerboard）的原因，至少需要几张图？
+简单双目 (Simple Stereo)：
+考查形式： 计算。
+内容： 深度 () 与视差 () 的关系公式：。
+
+第五部分：双目立体视觉
+(Binocular Stereo Vision) —— 重点章节
+【核心考点】
+
+对极几何 (Epipolar Geometry)：
+考查形式：
+必考（计算或作图）。
+内容：
+概念：极点 (Epipole)、极线 (Epipolar Line)、极平面。
+推导：两幅图像对应点的几何关系推导。
+矩阵计算：
+考查形式： 计算/证明。
+内容：
+本质矩阵 (Essential Matrix, ) 与
+基础矩阵 (Fundamental Matrix, )
+的定义、性质、区别。
+约束公式。
+如何计算 （八点法等）。
+立体校正
+(Rectification)：简答其目的（使极线平行，简化匹配）。
+
+第六部分：光流 (Optical Flow)
+【核心考点】
+
+光流约束方程 (Optical Flow
+Constraint)：
+考查形式： 计算/推导。
+内容： 假设条件（亮度恒定 Brightness
+Consistency、小运动 Small Motion）。推导公式 。
+孔径问题 (Aperture Problem)：
+考查形式： 简答（解释现象）。
+内容： 结合理发店三色柱（Barber
+Pole）现象，解释为什么只通过局部窗口无法确定确切运动方向。
+Lucas-Kanade 算法：
+考查形式： 计算思路/简答。
+内容：
+如何利用局部窗口内运动一致性，通过最小二乘法解方程组。
+复杂运动处理（迭代法、金字塔）。
+
+第七部分：识别与分割
+(Recognition, Segmentation &amp; Detection)
+【核心考点】
+
+词袋模型 (Bag of Features/Words)：
+考查形式：
+开放式简答。
+内容：
+构建流程：特征提取 -&gt; 聚类（K-means）生成视觉词典 -&gt; 量化
+-&gt; 直方图表示。
+重点讨论： K-means 中 ** 的选择**。
+太大（过拟合、计算量大）或太小（区分度低）会带来什么影响？
+图像分割 (Segmentation)：
+考查形式： 概念辨析。
+内容：
+Bottom-up：Normalized Cut (Graph Cut)，能量函数定义。
+Top-down：语义分割 (Semantic Segmentation)。
+目标检测 (Detection)：
+考查形式： 简答/多选。
+内容：
+评估指标：mAP (mean Average
+Precision)、IoU。
+网络模型：R-CNN 系列演变。
+Loss Function：分类（Softmax）、回归（L1/Smooth
+L1）。
+
+💡 总结复习策略：
+
+死磕公式：透视投影、透镜成像、双目深度
+()、光流约束方程。这些大概率出计算题。
+理清几何：特别是对极几何（Epipolar
+Geometry）和变换矩阵（Homography,
+Intrinsic/Extrinsic）。搞清楚矩阵维度和自由度。
+准备简答：重点准备 SIFT 的原理、RANSAC 的流程、BoF
+中 K 的选择、孔径问题的解释。
 
 
 线性代数知识补充
@@ -143,15 +254,27 @@ CV 中的矩阵求解通常有两种形式：
 成像原理
 
 物体和相机镜头的距离称为深度（depth）
-景深（Depth of Field, DoF）：Range of object
-distances (𝑜 − 𝑜′) over which the image is “sufficiently well” focused.
-i.e., Range (𝑜 − 𝑜′) for which blur 𝑏 is less than pixel size.
+消失点坐标计算：
+
+设空间中一组平行线的方向向量为 ，则其在图像平面上的消失点坐标为 
+
+景深（Depth of Field,
+DoF）：在聚焦的物体前后，被认为清晰的距离范围。i.e., Range of
+object distances (𝑜 − 𝑜′) over which the image is “sufficiently well”
+focused. i.e., Range (𝑜 − 𝑜′) for which blur 𝑏 is less than pixel
+size.
+模糊圈直径  与透镜直径
+ 成正比，景深与光圈直径  成反比，与  成反比
+暗角：边缘能穿过多个凸透镜的光更少，亮度更低
+色差：不同波长的光折射率不同
+畸变：镜头缺陷
 
 
 特征检测
 
-特征的特点：repeatability, saliency（显著性）, compactness and
-efficiency, locality（能表示一块局部区域，对干扰鲁棒性强）
+特征的特点：repeatability, saliency（显著性）,
+compactness and efficiency,
+locality（能表示一块局部区域，对干扰鲁棒性强）
 满足上述条件的特征点：团状区域（Blobs as
 Interest Points）
 边缘检测模块：
@@ -164,13 +287,14 @@ Interest Points）
 
 用于去噪，也可以写成卷积形式，因此可以和求差分写成一个算子，一阶算子称为
 Derivative of Gaussian，二阶算子称为 Laplacian
-of Gaussian，表示为  h或 
+of Gaussian，表示为  或 
 高斯滤波器对应极值点出现的 
-称为本征尺度，它和块的大小成正比
+称为本征尺度（the 𝜎 at which 2nd Derivative attains its
+extreme value），它和块的大小成正比
 为了使对应极值是全局极值（在所有  中也是最大），可以在 Laplacian
-上乘一个 ，避免 Laplacian
-response 随着 
-增大而减小（相当于归一化）
+上乘一个 （归一化），避免
+Laplacian response 随着 
+增大而减小
  越大，图像越模糊
 
 用不同 
@@ -213,6 +337,7 @@ samples），对 inliers 计数，选 inliers 最多的模型
 相机标定 Camera
 Calibration and Photogrammetry
 3D to 2D
+
 
 ⭐⭐⭐成像公式： 
 内参矩阵 Intrinsic Matrix： 
@@ -356,7 +481,8 @@ RoI feature extraction：通过 RoI Pooling 或 RoI Align
         <category>Notes</category>
       </categories>
       <tags>
-        <tag>CV</tag>
+        <tag>SJTU</tag>
+        <tag>计算机视觉</tag>
       </tags>
   </entry>
   <entry>
@@ -535,7 +661,7 @@ themes\redefine\scripts\events\welcome.js 文件
       </tags>
   </entry>
   <entry>
-    <title>Mobile Robotics</title>
+    <title>Mobile Robotics (AI3702)</title>
     <url>/2025/05/12/notes/Mobile-Robotics/</url>
     <content><![CDATA[考纲分析
 Part 1
@@ -649,12 +775,12 @@ AStar缺点：占用大量内存，无法处理动态地图
         <category>Notes</category>
       </categories>
       <tags>
-        <tag>Robotics</tag>
-        <tag>Mobile</tag>
+        <tag>SJTU</tag>
+        <tag>移动机器人</tag>
       </tags>
   </entry>
   <entry>
-    <title>量子力学笔记</title>
+    <title>量子力学（PHY1253）</title>
     <url>/2025/03/17/notes/Quantum-Physics/</url>
     <content><![CDATA[Tips
 
@@ -778,7 +904,69 @@ Bohr 氢原子理论
         <category>Notes</category>
       </categories>
       <tags>
-        <tag>物理</tag>
+        <tag>SJTU</tag>
+        <tag>大学物理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>科研日志</title>
+    <url>/2025/07/12/log/Summer2025/</url>
+    <content><![CDATA[7-12
+Log
+
+梳理了论文 Diffusion
+Policy 的内容
+在模拟环境中跑通了 ACT 训练双爪机器人递方块的流程，细节如下：
+
+运行 record_sim_episodes.py 生成50条脚本化数据：
+ python3 record_sim_episodes.py \--task_name sim_transfer_cube_scripted \--dataset_dir data/ \--num_episodes 50
+
+训练与测试：
+ # Transfer Cube taskpython3 imitate_episodes.py \--task_name sim_transfer_cube_scripted \--ckpt_dir data/sim_ckpt/ \--policy_class ACT --kl_weight 10 --chunk_size 100 --hidden_dim 512 --batch_size 8 --dim_feedforward 3200 \--num_epochs 2000  --lr 1e-5 \--seed 0--temporal_agg
+
+测试结果如下：
+
+--temporal_agg 表示启用 temporal ensembling
+(加权平均融合)，可以观察到机器人移动更平滑，卡顿明显减少，成功率比不启用时高出2个点
+测试时只需加上 --eval，测试视频存储在
+data/sim_ckpt/
+中。观察到只要夹起方块就会被脚本视为成功，即实际成功率低于测试得到的成功率
+在生成训练数据时启用
+--onscreen_render，发现夹爪行为正常，但训练出的机器人总是倾向于夹取方块底部，导致不能正对接方块的夹爪，具体原因尚不清楚
+
+
+
+Plan
+
+到学院用4090服务器和上周采集的真实数据训练，看看效果如何
+继续学习后面的论文
+
+7-16
+Log
+
+周一到学院实验室采集了新的数据（pick_3_object）。考虑到 ACT
+模型的局限性，固定了物体的摆放位置、朝向和拾取顺序，准备先试试训练效果，成功率高再尝试不同摆放位置。总共采了100条数据
+在启智平台创建实例并保存了镜像（用于创建新实例时跳过环境搭建）并用
+ACT 训练了2000个
+epoch，在真实单臂机器人上测试发现夹爪会在物体正上方闭合导致抓取失败（这是常见的情况），可能是由数据采集和测试所用的摄像头不同或数据集质量不高导致的
+对采集的数据 pick_3_objects_0714 进行处理，并添加属性
+sim
+梳理了 ACT 的代码。其中数据填充对齐代码如下：
+  # 由于采集的机器人动作序列等数据长度是随机的，在训练前需要对齐def user_collate(datas: list, minimum_length=100):	bs = len(datas)		# 计算每个样本中非填充（有效）动作的长度（False 表示有效数据）	length_count = [(d[3] == False).sum().item() for d in datas]		# 把所有序列统一 pad 到 max_length	max_length = max(minimum_length, max(length_count))		# pad_size[i]: 第 i 个样本需要填充多少步	pad_size = [max_length - i for i in length_count]		# torch.stack()用于将多个n维张量沿着一个新的维度堆叠起来，形成一个n+1维张量	images = torch.stack([d[0] for d in datas])	qpos = torch.stack([d[1] for d in datas])	actions, is_pad = [], []	for d, l, p in zip(datas, length_count, pad_size):	curr_action = d[2][: l]	curr_pad_info = d[3][: l]	additional_pad_info = torch.ones(p, dtype=curr_pad_info.dtype, device=curr_pad_info.device) # 填充标记	pad_actions = torch.zeros((p, curr_action.shape[-1]), dtype=curr_action.dtype, device=curr_action.device) # 填充全零动作	actions.append(torch.concat([curr_action, pad_actions], dim=0))	is_pad.append(torch.concat([curr_pad_info, additional_pad_info], dim=0))	actions = torch.stack(actions)	is_pad = torch.stack(is_pad)	return images, qpos, actions, is_pad
+
+Transformer 架构如下： 详见 d2l-transformer
+
+Plan
+
+解决 aTrust vpn 的问题，在服务器上处理周一采集的数据并跑通 ACT
+尝试用 Diffusion Policy 训练一遍，在此基础上梳理代码
+
+]]></content>
+      <categories>
+        <category>log</category>
+      </categories>
+      <tags>
+        <tag>Robotics</tag>
       </tags>
   </entry>
   <entry>
@@ -814,6 +1002,18 @@ See aronkk.top for more.
 ]]></content>
   </entry>
   <entry>
+    <title>分类</title>
+    <url>/categories/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
+    <title>相册</title>
+    <url>/masonry/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
     <title>About</title>
     <url>/about/index.html</url>
     <content><![CDATA[
@@ -835,7 +1035,7 @@ of Linear Algebra ✅
 随机过程的概率论基础
 - CodiMD✅
 Watermelon_book✅
-CS61A_cn
+CS61A_cn✅
 CS61C
 Computer
 Networks: Top-Down (with textbook)✅
@@ -877,20 +1077,8 @@ Ralston；kk取自我的名字。↩︎
 ]]></content>
   </entry>
   <entry>
-    <title>分类</title>
-    <url>/categories/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
     <title>标签</title>
     <url>/tags/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
-    <title>相册</title>
-    <url>/masonry/index.html</url>
     <content><![CDATA[
 ]]></content>
   </entry>
