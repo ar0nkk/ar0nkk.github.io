@@ -1,67 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>科研日志</title>
-    <url>/2025/07/12/log/Summer2025/</url>
-    <content><![CDATA[7-12
-Log
-
-梳理了论文 Diffusion
-Policy 的内容
-在模拟环境中跑通了 ACT 训练双爪机器人递方块的流程，细节如下：
-
-运行 record_sim_episodes.py 生成50条脚本化数据：
- python3 record_sim_episodes.py \--task_name sim_transfer_cube_scripted \--dataset_dir data/ \--num_episodes 50
-
-训练与测试：
- # Transfer Cube taskpython3 imitate_episodes.py \--task_name sim_transfer_cube_scripted \--ckpt_dir data/sim_ckpt/ \--policy_class ACT --kl_weight 10 --chunk_size 100 --hidden_dim 512 --batch_size 8 --dim_feedforward 3200 \--num_epochs 2000  --lr 1e-5 \--seed 0--temporal_agg
-
-测试结果如下：
-
---temporal_agg 表示启用 temporal ensembling
-(加权平均融合)，可以观察到机器人移动更平滑，卡顿明显减少，成功率比不启用时高出2个点
-测试时只需加上 --eval，测试视频存储在
-data/sim_ckpt/
-中。观察到只要夹起方块就会被脚本视为成功，即实际成功率低于测试得到的成功率
-在生成训练数据时启用
---onscreen_render，发现夹爪行为正常，但训练出的机器人总是倾向于夹取方块底部，导致不能正对接方块的夹爪，具体原因尚不清楚
-
-
-
-Plan
-
-到学院用4090服务器和上周采集的真实数据训练，看看效果如何
-继续学习后面的论文
-
-7-16
-Log
-
-周一到学院实验室采集了新的数据（pick_3_object）。考虑到 ACT
-模型的局限性，固定了物体的摆放位置、朝向和拾取顺序，准备先试试训练效果，成功率高再尝试不同摆放位置。总共采了100条数据
-在启智平台创建实例并保存了镜像（用于创建新实例时跳过环境搭建）并用
-ACT 训练了2000个
-epoch，在真实单臂机器人上测试发现夹爪会在物体正上方闭合导致抓取失败（这是常见的情况），可能是由数据采集和测试所用的摄像头不同或数据集质量不高导致的
-对采集的数据 pick_3_objects_0714 进行处理，并添加属性
-sim
-梳理了 ACT 的代码。其中数据填充对齐代码如下：
-  # 由于采集的机器人动作序列等数据长度是随机的，在训练前需要对齐def user_collate(datas: list, minimum_length=100):	bs = len(datas)		# 计算每个样本中非填充（有效）动作的长度（False 表示有效数据）	length_count = [(d[3] == False).sum().item() for d in datas]		# 把所有序列统一 pad 到 max_length	max_length = max(minimum_length, max(length_count))		# pad_size[i]: 第 i 个样本需要填充多少步	pad_size = [max_length - i for i in length_count]		# torch.stack()用于将多个n维张量沿着一个新的维度堆叠起来，形成一个n+1维张量	images = torch.stack([d[0] for d in datas])	qpos = torch.stack([d[1] for d in datas])	actions, is_pad = [], []	for d, l, p in zip(datas, length_count, pad_size):	curr_action = d[2][: l]	curr_pad_info = d[3][: l]	additional_pad_info = torch.ones(p, dtype=curr_pad_info.dtype, device=curr_pad_info.device) # 填充标记	pad_actions = torch.zeros((p, curr_action.shape[-1]), dtype=curr_action.dtype, device=curr_action.device) # 填充全零动作	actions.append(torch.concat([curr_action, pad_actions], dim=0))	is_pad.append(torch.concat([curr_pad_info, additional_pad_info], dim=0))	actions = torch.stack(actions)	is_pad = torch.stack(is_pad)	return images, qpos, actions, is_pad
-
-Transformer 架构如下： 详见 d2l-transformer
-
-Plan
-
-解决 aTrust vpn 的问题，在服务器上处理周一采集的数据并跑通 ACT
-尝试用 Diffusion Policy 训练一遍，在此基础上梳理代码
-
-]]></content>
-      <categories>
-        <category>log</category>
-      </categories>
-      <tags>
-        <tag>Robotics</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Computer Architecture (CS2651)</title>
     <url>/2025/03/20/notes/Computer-Architecture/</url>
     <content><![CDATA[Digital Logic
@@ -236,7 +175,7 @@ Calibration and Photogrammetry
 根据 【引理1】，角点对应的矩阵  的最小特征值应该比较大
 联立方程，通过类似方法求出 
 的参数后，可以通过切片 + RQ 分解求出  和 
-棋盘格标定需要至少3张照片，每张4个角点
+棋盘格标定（11个未知参数）需要至少3张照片，每张4个角点，其中每张图提供2个独立方程
 
 平行双目视觉⭐⭐⭐
 
@@ -366,6 +305,89 @@ RoI feature extraction：通过 RoI Pooling 或 RoI Align
       <tags>
         <tag>SJTU</tag>
         <tag>计算机视觉</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>线性代数的几何本质</title>
+    <url>/2025/02/23/notes/Essence-of-Linear-Algebra/</url>
+    <content><![CDATA[
+⚠️
+关于部分设备打开链接显示“视频不见了”的问题：选中网址栏原地复制粘贴回车即可。目前只发现此系列视频有这个问题
+
+学习线性代数的本质后建立的几何直觉
+
+以下结论均基于二维或三维向量，省略了教科书上的标准代数定义，旨在建立可视化的几何直觉（visual
+geometric intuitions）
+
+设为一个线性变换矩阵，我们有：
+
+线性变换 
+保持网格线平行且等距分布，并保持原点不动。常见线性变换有剪切（sheer），e.g.
+；旋转（rotation），e.g. 
+
+的行列式（determinant）
+表示面积或体积的有向缩放比例，行列式为零时发生降维，所降到的维数取决于秩（rank）
+线性方程组  的求解：找到经变换  后变成  的向量 
+
+只要不降维就存在逆变换（inverse）
+
+的列表示基向量（basis） 变换后的位置
+经变换 
+后落到原点的向量组成零空间（null space or
+kernel）
+点积（dot product）
+代数与几何定义之间的联系来自于对偶性，详见11分16秒
+两个向量叉积（cross product）
+数值上等于向量张成的平行四边形有向面积
+
+三维向量叉积定义及其几何意义：
+
+
+经变换  后方向不变的向量
+ 为 
+的特征向量（eigenvector），
+的缩放比例为特征值（eigenvalue）
+
+对于三维定轴旋转变换，旋转轴上的向量为特征向量，特征值为1
+结合第6点， 
+对于二维旋转变换 ，其特征多项式为 ，它有特征向量和特征值吗？读者不妨细品。
+
+
+为正交矩阵等价于线性变换保持长度和夹角不变（仅旋转）
+线性空间：Abstractness is the price of
+generality（普适的代价是抽象）
+Cramer’s rule: 对于线性方程组 ，
+
+ 等于  与单位正交基（除去第 
+个基向量）张成的有向平行四边形面积或平行六面体体积
+变换后面积或体积等于 ，其中  表示将  的第  列换成 
+ 等于缩放比例  则有 
+
+奇异值分解（Singular Value Decomposition,
+SVD）：，其中：
+
+：左奇异向量组成的正交矩阵
+：对角矩阵，主对角线上是非负的奇异值（从大到小排序）
+：右奇异向量组成的正交矩阵的转置
+
+任何非方阵都可以表示不同维度空间之间的线性变换，SVD
+就是将这一变换分解为三个过程（详见 SVD
+Visualized, Singular Value Decomposition explained | SEE Matrix ,
+Chapter 3）：
+
+把右奇异向量（由 
+定义）旋转到标准正交基，例如拥有最大奇异值的奇异向量落在  轴，以此类推
+擦除/添加维度，并在各坐标轴方向上按奇异值拉伸/压缩
+旋转标准基与左奇异向量（由 
+定义）对齐
+
+
+]]></content>
+      <categories>
+        <category>Notes</category>
+      </categories>
+      <tags>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -580,89 +602,6 @@ AStar缺点：占用大量内存，无法处理动态地图
       </tags>
   </entry>
   <entry>
-    <title>线性代数的几何本质</title>
-    <url>/2025/02/23/notes/Essence-of-Linear-Algebra/</url>
-    <content><![CDATA[
-⚠️
-关于部分设备打开链接显示“视频不见了”的问题：选中网址栏原地复制粘贴回车即可。目前只发现此系列视频有这个问题
-
-学习线性代数的本质后建立的几何直觉
-
-以下结论均基于二维或三维向量，省略了教科书上的标准代数定义，旨在建立可视化的几何直觉（visual
-geometric intuitions）
-
-设为一个线性变换矩阵，我们有：
-
-线性变换 
-保持网格线平行且等距分布，并保持原点不动。常见线性变换有剪切（sheer），e.g.
-；旋转（rotation），e.g. 
-
-的行列式（determinant）
-表示面积或体积的有向缩放比例，行列式为零时发生降维，所降到的维数取决于秩（rank）
-线性方程组  的求解：找到经变换  后变成  的向量 
-
-只要不降维就存在逆变换（inverse）
-
-的列表示基向量（basis） 变换后的位置
-经变换 
-后落到原点的向量组成零空间（null space or
-kernel）
-点积（dot product）
-代数与几何定义之间的联系来自于对偶性，详见11分16秒
-两个向量叉积（cross product）
-数值上等于向量张成的平行四边形有向面积
-
-三维向量叉积定义及其几何意义：
-
-
-经变换  后方向不变的向量
- 为 
-的特征向量（eigenvector），
-的缩放比例为特征值（eigenvalue）
-
-对于三维定轴旋转变换，旋转轴上的向量为特征向量，特征值为1
-结合第6点， 
-对于二维旋转变换 ，其特征多项式为 ，它有特征向量和特征值吗？读者不妨细品。
-
-
-为正交矩阵等价于线性变换保持长度和夹角不变（仅旋转）
-线性空间：Abstractness is the price of
-generality（普适的代价是抽象）
-Cramer’s rule: 对于线性方程组 ，
-
- 等于  与单位正交基（除去第 
-个基向量）张成的有向平行四边形面积或平行六面体体积
-变换后面积或体积等于 ，其中  表示将  的第  列换成 
- 等于缩放比例  则有 
-
-奇异值分解（Singular Value Decomposition,
-SVD）：，其中：
-
-：左奇异向量组成的正交矩阵
-：对角矩阵，主对角线上是非负的奇异值（从大到小排序）
-：右奇异向量组成的正交矩阵的转置
-
-任何非方阵都可以表示不同维度空间之间的线性变换，SVD
-就是将这一变换分解为三个过程（详见 SVD
-Visualized, Singular Value Decomposition explained | SEE Matrix ,
-Chapter 3）：
-
-把右奇异向量（由 
-定义）旋转到标准正交基，例如拥有最大奇异值的奇异向量落在  轴，以此类推
-擦除/添加维度，并在各坐标轴方向上按奇异值拉伸/压缩
-旋转标准基与左奇异向量（由 
-定义）对齐
-
-
-]]></content>
-      <categories>
-        <category>Notes</category>
-      </categories>
-      <tags>
-        <tag>线性代数</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>量子力学（PHY1253）</title>
     <url>/2025/03/17/notes/Quantum-Physics/</url>
     <content><![CDATA[Tips
@@ -792,6 +731,67 @@ Bohr 氢原子理论
       </tags>
   </entry>
   <entry>
+    <title>科研日志</title>
+    <url>/2025/07/12/log/Summer2025/</url>
+    <content><![CDATA[7-12
+Log
+
+梳理了论文 Diffusion
+Policy 的内容
+在模拟环境中跑通了 ACT 训练双爪机器人递方块的流程，细节如下：
+
+运行 record_sim_episodes.py 生成50条脚本化数据：
+ python3 record_sim_episodes.py \--task_name sim_transfer_cube_scripted \--dataset_dir data/ \--num_episodes 50
+
+训练与测试：
+ # Transfer Cube taskpython3 imitate_episodes.py \--task_name sim_transfer_cube_scripted \--ckpt_dir data/sim_ckpt/ \--policy_class ACT --kl_weight 10 --chunk_size 100 --hidden_dim 512 --batch_size 8 --dim_feedforward 3200 \--num_epochs 2000  --lr 1e-5 \--seed 0--temporal_agg
+
+测试结果如下：
+
+--temporal_agg 表示启用 temporal ensembling
+(加权平均融合)，可以观察到机器人移动更平滑，卡顿明显减少，成功率比不启用时高出2个点
+测试时只需加上 --eval，测试视频存储在
+data/sim_ckpt/
+中。观察到只要夹起方块就会被脚本视为成功，即实际成功率低于测试得到的成功率
+在生成训练数据时启用
+--onscreen_render，发现夹爪行为正常，但训练出的机器人总是倾向于夹取方块底部，导致不能正对接方块的夹爪，具体原因尚不清楚
+
+
+
+Plan
+
+到学院用4090服务器和上周采集的真实数据训练，看看效果如何
+继续学习后面的论文
+
+7-16
+Log
+
+周一到学院实验室采集了新的数据（pick_3_object）。考虑到 ACT
+模型的局限性，固定了物体的摆放位置、朝向和拾取顺序，准备先试试训练效果，成功率高再尝试不同摆放位置。总共采了100条数据
+在启智平台创建实例并保存了镜像（用于创建新实例时跳过环境搭建）并用
+ACT 训练了2000个
+epoch，在真实单臂机器人上测试发现夹爪会在物体正上方闭合导致抓取失败（这是常见的情况），可能是由数据采集和测试所用的摄像头不同或数据集质量不高导致的
+对采集的数据 pick_3_objects_0714 进行处理，并添加属性
+sim
+梳理了 ACT 的代码。其中数据填充对齐代码如下：
+  # 由于采集的机器人动作序列等数据长度是随机的，在训练前需要对齐def user_collate(datas: list, minimum_length=100):	bs = len(datas)		# 计算每个样本中非填充（有效）动作的长度（False 表示有效数据）	length_count = [(d[3] == False).sum().item() for d in datas]		# 把所有序列统一 pad 到 max_length	max_length = max(minimum_length, max(length_count))		# pad_size[i]: 第 i 个样本需要填充多少步	pad_size = [max_length - i for i in length_count]		# torch.stack()用于将多个n维张量沿着一个新的维度堆叠起来，形成一个n+1维张量	images = torch.stack([d[0] for d in datas])	qpos = torch.stack([d[1] for d in datas])	actions, is_pad = [], []	for d, l, p in zip(datas, length_count, pad_size):	curr_action = d[2][: l]	curr_pad_info = d[3][: l]	additional_pad_info = torch.ones(p, dtype=curr_pad_info.dtype, device=curr_pad_info.device) # 填充标记	pad_actions = torch.zeros((p, curr_action.shape[-1]), dtype=curr_action.dtype, device=curr_action.device) # 填充全零动作	actions.append(torch.concat([curr_action, pad_actions], dim=0))	is_pad.append(torch.concat([curr_pad_info, additional_pad_info], dim=0))	actions = torch.stack(actions)	is_pad = torch.stack(is_pad)	return images, qpos, actions, is_pad
+
+Transformer 架构如下： 详见 d2l-transformer
+
+Plan
+
+解决 aTrust vpn 的问题，在服务器上处理周一采集的数据并跑通 ACT
+尝试用 Diffusion Policy 训练一遍，在此基础上梳理代码
+
+]]></content>
+      <categories>
+        <category>log</category>
+      </categories>
+      <tags>
+        <tag>Robotics</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>719</title>
     <url>/2025/11/26/log/0719/</url>
     <content><![CDATA[
@@ -815,12 +815,36 @@ import {initHBE} from "/js/plugins/hbe.js";
 ]]></content>
   </entry>
   <entry>
+    <title>links</title>
+    <url>/links/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
+    <title>相册</title>
+    <url>/masonry/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
+    <title>分类</title>
+    <url>/categories/index.html</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
     <title></title>
     <url>/README.html</url>
     <content><![CDATA[Welcome to Aronkk’s site!
 
 See aronkk.top for more.
 
+]]></content>
+  </entry>
+  <entry>
+    <title>标签</title>
+    <url>/tags/index.html</url>
+    <content><![CDATA[
 ]]></content>
   </entry>
   <entry>
@@ -878,30 +902,6 @@ Aron取自登山者 Aron
 Ralston；kk取自我的名字。↩︎
 
 
-]]></content>
-  </entry>
-  <entry>
-    <title>links</title>
-    <url>/links/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
-    <title>分类</title>
-    <url>/categories/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
-    <title>标签</title>
-    <url>/tags/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
-    <title>相册</title>
-    <url>/masonry/index.html</url>
-    <content><![CDATA[
 ]]></content>
   </entry>
 </search>
