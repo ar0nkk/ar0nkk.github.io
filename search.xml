@@ -707,14 +707,16 @@ ARP
 ARP 用于在同一局域网内把 IP 地址解析成 MAC 地址。若主机只知道目的
 IP，不知道目的 MAC，会广播 ARP request；目标主机单播 ARP reply。ARP
 表缓存解析结果，减少重复广播。
-复习抓手
+总结
 
 应用层：协议语义、报文格式、缓存和 DNS。
 传输层：UDP 的简单性，TCP 的可靠传输、流量控制和拥塞控制。
 网络层：IP 的 best-effort 服务、最长前缀匹配、NAT 和路由算法。
 链路层：帧、MAC 地址、ARP、多路访问和差错检测。
 
-如果只记一个主线：网络的每一层都在限定范围内解决“把数据交给谁、怎样交、错了怎么办、太多人抢怎么办”的问题。
+
+网络的每一层都在限定范围内解决“把数据交给谁、怎样交、错了怎么办、太多人抢怎么办”的问题。
+
 ]]></content>
       <categories>
         <category>Notes</category>
@@ -1055,100 +1057,6 @@ import {initHBE} from "/js/plugins/hbe.js";
     initHBE();
 
 ]]></content>
-  </entry>
-  <entry>
-    <title>TeleAI 面试作品集</title>
-    <url>/2026/05/25/notes/teleai-interview-portfolio/</url>
-    <content><![CDATA[康铁瀚
-上海交通大学电院 AI 试点班23级本科生。
-Interests
-
-具身智能
-模仿学习、强化学习
-大模型 Agent
-
-科研实习
-上海创智学院具身智能实验室科研实习（2025.6
-- 2025.7）
-方向：机器人模仿学习、具身数据、真实机器人验证
-导师：叶南阳 实习内容：
-
-调研分析 ACT 与 Diffusion Policy
-等机器人模仿学习算法，在仿真环境中完成双臂机器人模型训练；评估 ACT 中
-temporal ensembling
-的作用（减少了生成的动作卡顿并提升了任务成功率）
-针对 Aloha 单臂机器人采集 100 余条真实操作示范数据，基于 4090
-平台完成模型微调与实机验证，分析了数据采集和测试所用相机差异对实机性能的影响
-梳理并改进原项目的数据预处理模块，完善了变长动作序列的动态填充（Padding）与对齐逻辑，优化了模型训练阶段的批量数据组装流程
-
-项目经历
-移动机器人导航实验
-路径：Done/4_2025Spring/Mobile Robotics/lab 关键词：ROS,
-OccupancyGrid, A*, RViz, 坐标变换
-移动机器人课程项目，内容覆盖地图处理、坐标变换与基于图搜索的路径规划。
-
-处理 nav_msgs/OccupancyGrid
-地图，将占据栅格信息转换为可用于规划的 OpenCV 矩阵表示。
-根据地图 origin、resolution 与 yaw
-构造坐标变换，实现世界坐标系与地图栅格坐标系之间的转换。
-实现 A* 路径规划，支持 8 邻域扩展、对角距离启发函数、优先队列 open
-list 与路径回溯。
-将规划路径转换为 nav_msgs/Path 并发布到 RViz
-中可视化。
-
-RAG 智能课程助教系统
-GitHub：ar0nkk/NLP_Proj2_RAG
-关键词：RAG, LLM Agent, 向量检索, 文档解析
-面向课程资料问答的检索增强生成系统，支持多格式文档解析、向量检索与大模型回答生成。
-
-参与基础 RAG
-流程实现，包括文档处理、文本切分、向量化入库、检索与回答生成。
-支持 PDF、PPTX、DOCX、TXT 等课程资料解析，并构建基于 ChromaDB
-的向量数据库。
-基于 Chroma distance
-阈值实现相关度过滤与边界检查，减少无关上下文进入 prompt，降低幻觉风险与
-token 消耗。
-维护项目 README 与基础使用文档。
-
-Final Chase 局域网对抗游戏
-GitHub：ar0nkk/final-chase
-关键词：Unreal Engine 5, C++, 实时交互, Game AI
-一个 1v1 局域网追逃对抗游戏，用于探索实时决策与对抗行为建模。
-
-使用 UE5 与 C++ 开发核心玩法。
-基于 Epic Gameplay Ability System (GAS) 构建动作系统。
-实现局域网多人交互所需的 RPC 同步机制。
-
-学术知识图谱检索应用
-GitHub：ar0nkk/GAKG-Acemap-Search
-关键词：知识图谱, 检索排序, Agent 系统
-基于 GAKG 地学学术知识图谱与 AI Agent 增强 Acemap 搜索功能。
-
-完成核心功能实现、图数据清洗与排序算法改进。
-在 Context-Aware PageRank 策略中引入基于结构熵的 INF
-排序组件，以提升学术检索结果的参考价值与准确性。
-
-技术关键词
-
-编程：C++, Python, PyTorch, ROS, Shell, Git
-机器人：ACT, Diffusion Policy, Aloha 数据采集, imitation learning,
-temporal ensembling, ROS navigation, A*
-强化学习：TD3, PPO, DQN, Double DQN, Dueling Network, PER, C51,
-NoisyNet
-大模型系统：RAG, ChromaDB, prompt design, Agent systems, 文档解析,
-相关度过滤
-仿真与交互：UE5, C++, Gameplay Ability System, RPC
-
-]]></content>
-      <categories>
-        <category>Notes</category>
-      </categories>
-      <tags>
-        <tag>Robotics</tag>
-        <tag>Embodied AI</tag>
-        <tag>Reinforcement Learning</tag>
-        <tag>Portfolio</tag>
-      </tags>
   </entry>
   <entry>
     <title>links</title>

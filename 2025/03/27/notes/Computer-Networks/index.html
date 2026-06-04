@@ -94,7 +94,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://aronkk.top/images/redefine-og.webp">
 <meta property="article:published_time" content="2025-03-27T07:52:31.000Z">
-<meta property="article:modified_time" content="2026-06-04T08:51:36.987Z">
+<meta property="article:modified_time" content="2026-06-04T09:23:55.595Z">
 <meta property="article:author" content="Aronkk">
 <meta property="article:tag" content="SJTU">
 <meta property="article:tag" content="计算机网络">
@@ -504,7 +504,7 @@ mjx-container[display="true"] + br {
 
         <div class="statistics flex justify-around my-2.5">
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">14</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">11</div>
         <div class="label text-third-text-color text-sm">标签</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
@@ -512,7 +512,7 @@ mjx-container[display="true"] + br {
         <div class="label text-third-text-color text-sm">分类</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">10</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">9</div>
         <div class="label text-third-text-color text-sm">文章</div>
     </a>
 </div>
@@ -561,8 +561,8 @@ mjx-container[display="true"] + br {
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2026-06-04 16:51:36</span>
-            <span class="mobile">2026-06-04 16:51:36</span>
+            <span class="desktop">2026-06-04 17:23:55</span>
+            <span class="mobile">2026-06-04 17:23:55</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -846,14 +846,16 @@ Check）检测比特错误。发送方把数据多项式 <span class="math inlin
 <p>ARP 用于在同一局域网内把 IP 地址解析成 MAC 地址。若主机只知道目的
 IP，不知道目的 MAC，会广播 ARP request；目标主机单播 ARP reply。ARP
 表缓存解析结果，减少重复广播。</p>
-<h1 id="复习抓手">复习抓手</h1>
+<h1 id="总结">总结</h1>
 <ul>
 <li>应用层：协议语义、报文格式、缓存和 DNS。</li>
 <li>传输层：UDP 的简单性，TCP 的可靠传输、流量控制和拥塞控制。</li>
 <li>网络层：IP 的 best-effort 服务、最长前缀匹配、NAT 和路由算法。</li>
 <li>链路层：帧、MAC 地址、ARP、多路访问和差错检测。</li>
 </ul>
-<p>如果只记一个主线：网络的每一层都在限定范围内解决“把数据交给谁、怎样交、错了怎么办、太多人抢怎么办”的问题。</p>
+<blockquote>
+<p>网络的每一层都在限定范围内解决“把数据交给谁、怎样交、错了怎么办、太多人抢怎么办”的问题。</p>
+</blockquote>
 
 		</div>
 
@@ -916,7 +918,7 @@ IP，不知道目的 MAC，会广播 ARP request；目标主机单播 ARP reply�
 	<div class="post-toc">
 		<div class="toc-title">目录</div>
 		<div class="page-title">Computer Networks (CS3611)</div>
-		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E8%A7%88"><span class="nav-number">1.</span> <span class="nav-text">总览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="nav-number">2.</span> <span class="nav-text">应用层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#web-%E5%92%8C-http"><span class="nav-number">2.1.</span> <span class="nav-text">Web 和 HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#http-%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87"><span class="nav-number">2.1.1.</span> <span class="nav-text">HTTP 请求报文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dns"><span class="nav-number">2.2.</span> <span class="nav-text">DNS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#smtp%E7%AE%80%E5%8D%95%E9%82%AE%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.3.</span> <span class="nav-text">SMTP（简单邮件传输协议）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cdn-%E4%B8%8E%E7%BC%93%E5%AD%98"><span class="nav-number">2.4.</span> <span class="nav-text">CDN 与缓存</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="nav-number">3.</span> <span class="nav-text">传输层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#udp"><span class="nav-number">3.1.</span> <span class="nav-text">UDP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tcp"><span class="nav-number">3.2.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tcp-%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-number">3.2.1.</span> <span class="nav-text">TCP 拥塞控制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="nav-number">4.</span> <span class="nav-text">网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ip-%E4%B8%8E%E8%BD%AC%E5%8F%91"><span class="nav-number">4.1.</span> <span class="nav-text">IP 与转发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nat"><span class="nav-number">4.2.</span> <span class="nav-text">NAT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="nav-number">4.3.</span> <span class="nav-text">路由算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dijkstra-%E7%AE%97%E6%B3%95"><span class="nav-number">4.3.1.</span> <span class="nav-text">Dijkstra 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#distance-vector"><span class="nav-number">4.3.2.</span> <span class="nav-text">Distance Vector</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="nav-number">5.</span> <span class="nav-text">链路层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%AE%E9%94%99%E6%A3%80%E6%B5%8B"><span class="nav-number">5.1.</span> <span class="nav-text">差错检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE"><span class="nav-number">5.2.</span> <span class="nav-text">多路访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#arp"><span class="nav-number">5.3.</span> <span class="nav-text">ARP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%8D%E4%B9%A0%E6%8A%93%E6%89%8B"><span class="nav-number">6.</span> <span class="nav-text">复习抓手</span></a></li></ol>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E8%A7%88"><span class="nav-number">1.</span> <span class="nav-text">总览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="nav-number">2.</span> <span class="nav-text">应用层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#web-%E5%92%8C-http"><span class="nav-number">2.1.</span> <span class="nav-text">Web 和 HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#http-%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87"><span class="nav-number">2.1.1.</span> <span class="nav-text">HTTP 请求报文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dns"><span class="nav-number">2.2.</span> <span class="nav-text">DNS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#smtp%E7%AE%80%E5%8D%95%E9%82%AE%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.3.</span> <span class="nav-text">SMTP（简单邮件传输协议）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cdn-%E4%B8%8E%E7%BC%93%E5%AD%98"><span class="nav-number">2.4.</span> <span class="nav-text">CDN 与缓存</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="nav-number">3.</span> <span class="nav-text">传输层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#udp"><span class="nav-number">3.1.</span> <span class="nav-text">UDP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tcp"><span class="nav-number">3.2.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tcp-%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-number">3.2.1.</span> <span class="nav-text">TCP 拥塞控制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="nav-number">4.</span> <span class="nav-text">网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ip-%E4%B8%8E%E8%BD%AC%E5%8F%91"><span class="nav-number">4.1.</span> <span class="nav-text">IP 与转发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nat"><span class="nav-number">4.2.</span> <span class="nav-text">NAT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="nav-number">4.3.</span> <span class="nav-text">路由算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dijkstra-%E7%AE%97%E6%B3%95"><span class="nav-number">4.3.1.</span> <span class="nav-text">Dijkstra 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#distance-vector"><span class="nav-number">4.3.2.</span> <span class="nav-text">Distance Vector</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="nav-number">5.</span> <span class="nav-text">链路层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%AE%E9%94%99%E6%A3%80%E6%B5%8B"><span class="nav-number">5.1.</span> <span class="nav-text">差错检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE"><span class="nav-number">5.2.</span> <span class="nav-text">多路访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#arp"><span class="nav-number">5.3.</span> <span class="nav-text">ARP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol>
 
 	</div>
 </div>
@@ -944,11 +946,11 @@ IP，不知道目的 MAC，会广播 ARP request；目标主机单播 ARP reply�
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        共撰写了 10 篇文章
+                        共撰写了 9 篇文章
                     </span>
                     
                         <span>
-                            共 9.4k 字
+                            共 8.5k 字
                         </span>
                     
                 </p>
